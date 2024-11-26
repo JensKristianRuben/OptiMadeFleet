@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Telefonnummer</th>
+            <th>Email</th>
+            <th>Fødselsdato</th>
+            <th>Postnummer</th>
+            <th>Gade navn</th>
+            <th>Gade nummer</th>
+            <th>By</th>
+            <th>Kørekort nummer</th>
+            <th>Nummerplade</th>
+            <th>Max Kilometer</th>
+            <th>Leje Start Dato</th>
+            <th>Leje Slut Dato</th>
+            <th>Afhentningssted</th>
+            <th>Afleveringssted</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rentContract : ${rentContracts}">
+                <td th:text="${rentContract.renter_first_name}"></td>
+                <td th:text="${rentContract.renter_last_name}"></td>
+                <td th:text="${rentContract.renter_phonenumber}"></td>
+                <td th:text="${rentContract.email}"></td>
+                <td th:text="${rentContract.date_of_birth}"></td>
+                <td th:text="${rentContract.zip_code}"></td>
+                <td th:text="${rentContract.street_name}"></td>
+                <td th:text="${rentContract.street_number}"></td>
+                <td th:text="${rentContract.city_name}"></td>
+                <td th:text="${rentContract.drivers_license_number}"></td>
+                <td th:text="${rentContract.license_plate}"></td>
+                <td th:text="${rentContract.max_km}"></td>
+                <td th:text="${rentContract.rental_start_date}"></td>
+                <td th:text="${rentContract.rental_end_date}"></td>
+                <td th:text="${rentContract.pickup_location}"></td>
+                <td th:text="${rentContract.return_location}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
