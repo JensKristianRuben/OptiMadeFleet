@@ -1,0 +1,35 @@
+html, body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.outerContainer{
+    height: 800px;
+    width: 1600px;
+    display: flex;
+    flex-direction: row;
+}
+.innerContainer{
+    background-color: burlywood;
+    height: 800px;
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.leftSide{
+    background-color: #454545;
+    width: 500px;
+    height: 700px;
+}
+
+.rightSide{
+    background-color: #454545;
+    width: 700px;
+    height: 300px;
+}
