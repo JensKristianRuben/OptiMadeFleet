@@ -2,9 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Opret lejekontrakt</title>
+    <link rel="stylesheet" href="/RentContract.css">
 </head>
 <body>
 
+<div class="navBar">
+    <a href="#">KPI</a>
+    <a href="#">Skadesrapport</a>
+    <a href="#">Dataregistrering</a>
+</div>
+
+<form action="/RentContract" method="post" class="createForm">
+    <input type="text" name="renter_first_name" placeholder="fornavn" required>
+    <input type="text" name="renter_last_name" placeholder="efternavn" required>
+    <input type="tel" name="renter_phonenumber" placeholder="telfonnummer" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="date" name="date_of_birth" placeholder="Fødselsdato" required>
+    <input type="number" name="zip_code" placeholder="Postnummer" required>
+    <input type="text" name="street_name" placeholder="Gade navn" required>
+    <input type="number" name="street_number" placeholder="Gade nummer" required>
+    <input type="text" name="city_name" placeholder="By" required>
+    <input type="number" name="drivers_license_number" placeholder="Kørekort nummer" required>
+
+    <select name="license_plate" required>
+        <option value="AB12345">AB12345</option>
+    </select>
+    <input type="number" name="max_km" placeholder="Maks kilometer" required>
+
+    <input type="date" name="rental_start_date" placeholder="Start dato" required>
+    <input type="date" name="rental_end_date" placeholder="Slut dato" required>
+    <input type="text" name="pickup_location" placeholder="Afhentningssted" required>
+    <input type="text" name="return_location" placeholder="Afleveringssted" required>
+
+    <button type="submit">Opret</button>
+
+</form>
 </body>
 </html>
