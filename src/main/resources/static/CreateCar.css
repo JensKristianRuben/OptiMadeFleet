@@ -1,0 +1,26 @@
+.createDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #444444;
+    width: 1000px;
+    height: 80vh;
+    margin-top: 10vh;
+    flex-wrap: wrap;
+}
+
+.createForm{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 750px;
+    width: 450px;
+}
+
+h2{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
