@@ -1,0 +1,64 @@
+html, body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+}
+
+
+
+.outerContainer{
+    margin-top: 200px;
+    height: 800px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+.innerContainer{
+    height: 800px;
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.leftSide{
+    background-color: #454545;
+    width: 500px;
+    height: 700px;
+}
+
+.rightSide{
+    background-color: #454545;
+    width: 700px;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    gap: 20px;
+    overflow-y: auto;
+}
+.rentContractElement{
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    height: 50px;
+    width: 300px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+.rentContractElement:hover{
+    background-color: #47b2e1; /* vi skal aftale en endelig blå farve farve */
+}

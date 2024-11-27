@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dataregistrator</title>
+    <link rel="stylesheet" href="/DataRegister.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="/DataRegister">Skadesrapport</a>
+    <a class="NavBarLink" href="#">Dataregistrering</a>
+</div>
+
+<div class="outerContainer">
+    <div class="innerContainer">
+        <div class="leftSide">
+
+        </div>
+
+    </div>
+
+    <div class="innerContainer">
+        <div class="rightSide">
+            <a th:href="@{/ShowRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}" th:each="rentContract : ${rentContracts}" class="rentContractElement">
+                <span th:text="${rentContract.getLicense_plate()}"></span>
+                <span th:text="${rentContract.getRental_start_date()}"></span>
+                <span th:text="${rentContract.getRental_end_date()}"></span>
+            </a>
+        </div>
+        <div class="rightSide">
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
