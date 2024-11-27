@@ -4,14 +4,30 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, white, rgba(71, 178, 225, 0.29));
 }
 
-.saveButton{
-    width: 100px;
-    margin-bottom: 15px;
+.saveButton {
+    margin-bottom: 30px;
+    background-color: transparent;
+    height: 30px;
+    width: 200px;
+    border-radius: 20px;
+    border: solid #47b2e1;
+    color: #47b2e1;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.saveButton:hover{
+    background-color: #47b2e1;
+    color: white;
+    cursor: pointer;
+}
 
 .NavBar{
-    background-color: white;
+    background-color: transparent;
     display: flex;
     justify-content: space-around;
     align-items: center;

@@ -8,43 +8,55 @@
 </head>
 <body>
 
-<div class="createDiv">
-    <form action="/CreateCarAndCarModel" method="post" class="createForm" style="border-right: 2px solid white;">
-        <h2>Gem bil</h2>
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="/DataRegister">Skadesrapport</a>
+    <a class="NavBarLink" href="#">Dataregistrering</a>
+</div>
+
+<div class="createDivLeft">
+    <form action="/CreateCarAndCarModel" method="post" class="createForm">
+        <h2>Ny bil</h2>
         <!-- Dette er for den enkelte bil -->
-        <input type="text" name="license_plate" placeholder="Nummerplade">
-        <select name="car_model_name">
+        <input type="text" name="license_plate" placeholder="Nummerplade" required>
+        <select name="car_model_name" required>
             <option value="" hidden selected>Select model</option>
             <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}"></option>
         </select>
-        <input type="text" name="vin_number" placeholder="Stel nummer">
-        <input type="number" name="original_price" placeholder="Indkøbsprisen">
-        <input type="number" name="registration_tax_pr_month" placeholder="registrerings afgift">
-        <select name="car_status">
+        <input type="text" name="vin_number" placeholder="Stel nummer" required>
+        <input type="number" name="original_price" placeholder="Indkøbsprisen" required>
+        <input type="number" name="registration_tax_pr_month" placeholder="registrerings afgift" required>
+        <select name="car_status" required>
             <option value="" hidden selected>Status på bilen</option>
             <option value="available">Klar</option>
             <option value="rentet">Udlejet</option>
             <option value="returned">Returneret</option>
             <option value="under_repair">Under reperation</option>
         </select>
-        <input type="number" name="odometer" placeholder="Kilometertæller">
-        <select name="is_pre_sold">
+        <input type="number" name="odometer" placeholder="Kilometertæller" required>
+        <select name="is_pre_sold" required>
             <option value="" hidden selected>Er bilen forhåndssolgt?</option>
             <option value="true">Solgt</option>
             <option value="false">Ikke solgt</option>
         </select>
         <input type="number" name="sale_price" placeholder="salgspris (Kan undlades)">
-        <input type="number" name="year_of_manufactoring" placeholder="Produktionsår">
-        <input type="text" name="color" placeholder="Farve">
+        <input type="number" name="year_of_manufactoring" placeholder="Produktionsår" required>
+        <input type="text" name="color" placeholder="Farve" required>
 
         <button class="saveButton" type="submit">Gem</button>
 
     </form>
+</div>
 
-    <form action="CreateNewCarModel" method="post" class="createForm" style="border-left: 2px solid white;">
+<div class="createDivRight">
+
+    <form action="CreateNewCarModel" method="post" class="createForm">
         <!-- Dette er for modellen -->
-        <h2>Opret ny model</h2>
-        <select name="make">
+        <h2>Ny model</h2>
+        <select name="make" required>
             <option value="" hidden selected>Vælg mærke</option>
             <option value="tesla">Tesla</option>
             <option value="volkswagen">VW</option>
@@ -65,9 +77,9 @@
             <option value="polestar">polestar</option>
             <option value="fiat">Fiat</option>
         </select>
-        <input type="text" name="car_model_name" placeholder="Model navn">
-        <input type="number" name="price_a_month" placeholder="Månedlig udlejningspris" step="0.01">
-        <select name="body_type">
+        <input type="text" name="car_model_name" placeholder="Model navn" required>
+        <input type="number" name="price_a_month" placeholder="Månedlig udlejningspris" step="0.01" required>
+        <select name="body_type" required>
             <option value="" hidden selected>karrosseritype</option>
             <option value="hatchback">hatchback</option>
             <option value="suv">SUV</option>
@@ -81,24 +93,25 @@
             <option value="roadster">roadster</option>
             <option value="pickup">Pickup</option>
         </select>
-        <input type="number" name="engine_size" placeholder="Motor størrelse (Liter)" step="0.01">
-        <select name="gear_type">
+        <label>Motor størrelse (Liter) (Undlad ved elbil)</label>
+        <input type="number" name="engine_size" step="0.01" value="0">
+        <select name="gear_type" required>
             <option value="" hidden selected>Gearkasse</option>
             <option value="manual">Manuel</option>
             <option value="automatic">Automat</option>
             <option value="electric_gear">Enkelt gearkasse (Elektriske biler)</option>
         </select>
-        <select name="fuel_type">
+        <select name="fuel_type" required>
             <option value="" hidden selected>Brændstof</option>
             <option value="petrol">Benzin</option>
             <option value="diesel">Diesel</option>
             <option value="electricity">El</option>
             <option value="hybrid">Hybrid</option>
         </select>
-        <input type="number" name="seat_count" placeholder="Antal sæder">
-        <input type="number" name="door_count" placeholder="Antal døre">
-        <input type="number" name="fuel_capacity" placeholder="Benzintank størrelse (Liter)">
-        <input type="number" name="horsepower" placeholder="Hestekræfter">
+        <input type="number" name="seat_count" placeholder="Antal sæder" required>
+        <input type="number" name="door_count" placeholder="Antal døre" required>
+        <input type="number" name="fuel_capacity" placeholder="Benzintank størrelse (Liter) (Km pr. opladning ved el bil" required>
+        <input type="number" name="horsepower" placeholder="Hestekræfter" required>
 
         <button class="saveButton" type="submit">Gem</button>
     </form>
