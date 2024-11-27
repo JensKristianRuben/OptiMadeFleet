@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create car and car model</title>
+    <link rel="stylesheet" href="/CreateCar.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="createDiv">
+    <form action="/CreateCarAndCarModel" method="post" class="createForm" style="border-right: 2px solid white;">
+        <h2>Gem bil</h2>
+        <!-- Dette er for den enkelte bil -->
+        <input type="text" name="license_plate" placeholder="Nummerplade">
+        <select name="car_model_name">
+            <option value="" hidden selected>Select model</option>
+            <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}"></option>
+        </select>
+        <input type="text" name="vin_number" placeholder="Stel nummer">
+        <input type="number" name="original_price" placeholder="Indkøbsprisen">
+        <input type="number" name="registration_tax_pr_month" placeholder="registrerings afgift">
+        <select name="car_status">
+            <option value="" hidden selected>Status på bilen</option>
+            <option value="available">Klar</option>
+            <option value="rentet">Udlejet</option>
+            <option value="returned">Returneret</option>
+            <option value="under_repair">Under reperation</option>
+        </select>
+        <input type="number" name="odometer" placeholder="Kilometertæller">
+        <select name="is_pre_sold">
+            <option value="" hidden selected>Er bilen forhåndssolgt?</option>
+            <option value="true">Solgt</option>
+            <option value="false">Ikke solgt</option>
+        </select>
+        <input type="number" name="sale_price" placeholder="salgspris (Kan undlades)">
+        <input type="number" name="year_of_manufactoring" placeholder="Produktionsår">
+        <input type="text" name="color" placeholder="Farve">
+
+        <button class="saveButton" type="submit">Gem</button>
+
+    </form>
+
+    <form action="CreateNewCarModel" method="post" class="createForm" style="border-left: 2px solid white;">
+        <!-- Dette er for modellen -->
+        <h2>Opret ny model</h2>
+        <select name="make">
+            <option value="" hidden selected>Vælg mærke</option>
+            <option value="tesla">Tesla</option>
+            <option value="volkswagen">VW</option>
+            <option value="peugot">Peugot</option>
+            <option value="toyota">Toyota</option>
+            <option value="renault">Renault</option>
+            <option value="hyundai">Hyundai</option>
+            <option value="kia">Kia</option>
+            <option value="skoda">Skoda</option>
+            <option value="ford">Ford</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="mercedes_benz">Merces-benz</option>
+            <option value="bmw">BMW</option>
+            <option value="audi">Audi</option>
+            <option value="volvo">Volvo</option>
+            <option value="mazda">Mazda</option>
+            <option value="nissan">Nissan</option>
+            <option value="polestar">polestar</option>
+            <option value="fiat">Fiat</option>
+        </select>
+        <input type="text" name="car_model_name" placeholder="Model navn">
+        <input type="number" name="price_a_month" placeholder="Månedlig udlejningspris" step="0.01">
+        <select name="body_type">
+            <option value="" hidden selected>karrosseritype</option>
+            <option value="hatchback">hatchback</option>
+            <option value="suv">SUV</option>
+            <option value="sedan">Sedan</option>
+            <option value="smart">Smart</option>
+            <option value="carbriolet">Cabriolet</option>
+            <option value="station_wagon">Stationcar</option>
+            <option value="coupe">Coupé</option>
+            <option value="crossover">Crossover</option>
+            <option value="minivan">minivan</option>
+            <option value="roadster">roadster</option>
+            <option value="pickup">Pickup</option>
+        </select>
+        <input type="number" name="engine_size" placeholder="Motor størrelse (Liter)" step="0.01">
+        <select name="gear_type">
+            <option value="" hidden selected>Gearkasse</option>
+            <option value="manual">Manuel</option>
+            <option value="automatic">Automat</option>
+            <option value="electric_gear">Enkelt gearkasse (Elektriske biler)</option>
+        </select>
+        <select name="fuel_type">
+            <option value="" hidden selected>Brændstof</option>
+            <option value="petrol">Benzin</option>
+            <option value="diesel">Diesel</option>
+            <option value="electricity">El</option>
+            <option value="hybrid">Hybrid</option>
+        </select>
+        <input type="number" name="seat_count" placeholder="Antal sæder">
+        <input type="number" name="door_count" placeholder="Antal døre">
+        <input type="number" name="fuel_capacity" placeholder="Benzintank størrelse (Liter)">
+        <input type="number" name="horsepower" placeholder="Hestekræfter">
+
+        <button class="saveButton" type="submit">Gem</button>
+    </form>
+
+</div>
+
+</body>
+</html>

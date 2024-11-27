@@ -1,3 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.saveButton{
+    width: 100px;
+    margin-bottom: 15px;
+
 .NavBar{
     background-color: white;
     display: flex;
