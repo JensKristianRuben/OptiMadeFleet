@@ -33,4 +33,7 @@ public class RentContractService {
 
         return rentContract;
     }
+    public void deleteByLicensePlate(String licensePlate){
+        rentContractRepository.deleteByLicensePlate(licensePlate);
+    }
 }

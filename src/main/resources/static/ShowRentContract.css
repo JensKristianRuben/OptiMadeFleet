@@ -1,0 +1,15 @@
+html, body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.outerContainer{
+    background-color: #47b2e1;
+    height: 500px;
+    width: 700px;
+}
+.renterContainer{
+    border: 1px solid black;
+}

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class RentContractRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void createRentContract(RentContract rentContract){
+    public void createRentContract(RentContract rentContract) {
         String sqlCheckCity = "SELECT COUNT(*) FROM city WHERE zip_code = ?";
         int cityCount = jdbcTemplate.queryForObject(sqlCheckCity, Integer.class, rentContract.getZip_code());
 
@@ -32,7 +33,7 @@ public class RentContractRepository {
         String getAddressId = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
 
         int addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{rentContract.getZip_code(),
-                        rentContract.getStreet_name(), rentContract.getStreet_number()}, Integer.class
+                rentContract.getStreet_name(), rentContract.getStreet_number()}, Integer.class
         );
 
         String sqlRenter = "INSERT INTO renter (drivers_license_number, renter_first_name, renter_last_name," +
@@ -44,19 +45,19 @@ public class RentContractRepository {
         String sqlRentContract = "INSERT INTO rent_contract (drivers_license_number, license_plate, rental_start_date, " +
                 "rental_end_date, pickup_location, return_location, max_km) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sqlRentContract,rentContract.getDrivers_license_number(), rentContract.getLicense_plate(), rentContract.getRental_start_date(), rentContract.getRental_end_date(),
+        jdbcTemplate.update(sqlRentContract, rentContract.getDrivers_license_number(), rentContract.getLicense_plate(), rentContract.getRental_start_date(), rentContract.getRental_end_date(),
                 rentContract.getPickup_location(), rentContract.getReturn_location(), rentContract.getMax_km());
     }
 
-    public List<RentContract> fetchAllRentContracts(){
+    public List<RentContract> fetchAllRentContracts() {
         String getRentContractsSql = "SELECT \n" +
-                "    rent_contract.contract_id, \n" +
                 "    rent_contract.license_plate, \n" +
                 "    rent_contract.rental_start_date, \n" +
                 "    rent_contract.rental_end_date, \n" +
                 "    rent_contract.pickup_location, \n" +
                 "    rent_contract.return_location, \n" +
-                "    rent_contract.max_km,\n" +
+                "    rent_contract.max_km, " +
+                "    renter.drivers_license_number,\n" +
                 "    renter.renter_first_name,\n" +
                 "    renter.renter_last_name,\n" +
                 "    renter.renter_phonenumber,\n" +
@@ -74,6 +75,26 @@ public class RentContractRepository {
         RowMapper rowMapper = new BeanPropertyRowMapper(RentContract.class);
 
         return jdbcTemplate.query(getRentContractsSql, rowMapper);
+
+    }
+
+    @Transactional
+    public void deleteByLicensePlate(String licensePlate) {
+
+        String getDriversLicenseSql = "SELECT drivers_license_number FROM rent_contract WHERE license_plate = ?";
+        Integer driversLicenseNumber = jdbcTemplate.queryForObject(getDriversLicenseSql, Integer.class, licensePlate);
+
+        String getAddressIdSql = "SELECT address_id FROM renter WHERE drivers_license_number = ?";
+        Integer addressId = jdbcTemplate.queryForObject(getAddressIdSql, Integer.class, driversLicenseNumber);
+
+        String deleteRentContractSql = "DELETE FROM rent_contract WHERE license_plate = ?";
+        jdbcTemplate.update(deleteRentContractSql, licensePlate);
+
+        String deleteRenterSql = "DELETE FROM renter WHERE drivers_license_number = ?";
+        jdbcTemplate.update(deleteRenterSql, driversLicenseNumber);
+
+        String deleteAddressSql = "DELETE FROM address WHERE address_id = ?";
+        jdbcTemplate.update(deleteAddressSql, addressId);
 
     }
 
