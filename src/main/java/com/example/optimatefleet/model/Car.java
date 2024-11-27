@@ -23,7 +23,6 @@ public class Car {
         this.registration_tax_pr_month = registration_tax_pr_month;
         this.car_status = car_status;
         this.odometer = odometer;
-        this.damageReport = new DamageReport();
         this.is_pre_sold = is_pre_sold;
         this.sale_price = sale_price;
         this.alert_damages_not_fixed = false;
@@ -35,8 +34,8 @@ public class Car {
         this.car_status = car_Car_status;
     }
 
-    public CarStatus getCar_status(){
-        return car_status;
+    public String getCar_status(){
+        return car_status.toString();
     }
 
     public String getLicense_plate() {

@@ -13,23 +13,6 @@ public class CarModel {
     public Gear_type gear_type;
     public Fuel_type fuel_type;
 
-    @Override
-    public String toString() {
-        return "CarModel{" +
-                "car_model_name='" + car_model_name + '\'' +
-                ", average_rental_time_in_months=" + average_rental_time_in_months +
-                ", price_a_month=" + price_a_month +
-                ", engine_size=" + engine_size +
-                ", seat_count=" + seat_count +
-                ", door_count=" + door_count +
-                ", horsepower=" + horsepower +
-                ", make=" + make +
-                ", body_type=" + body_type +
-                ", gear_type=" + gear_type +
-                ", fuel_type=" + fuel_type +
-                '}';
-    }
-
     public CarModel(String car_model_name, int price_a_month, double engine_size, int seat_count, int door_count, int horsepower, Make make, Body_type body_type, Gear_type gear_type, Fuel_type fuel_type) {
         this.car_model_name = car_model_name;
         this.average_rental_time_in_months = 0;
@@ -43,7 +26,7 @@ public class CarModel {
         this.gear_type = gear_type;
         this.fuel_type = fuel_type;
     }
-
+    public CarModel()   {}
     public String getCar_model_name() {
         return car_model_name;
     }
@@ -149,7 +132,8 @@ public class CarModel {
         volvo,
         mazda,
         nissan,
-        polestar
+        polestar,
+        fiat
     };
 
     private enum Body_type{

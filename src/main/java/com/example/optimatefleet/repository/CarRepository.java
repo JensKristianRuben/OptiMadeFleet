@@ -1,16 +1,20 @@
 package com.example.optimatefleet.repository;
 
+import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.CarModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CarRepository {
     @Autowired
     private JdbcTemplate carTemplate;
 
-    public void saveNewCarModel (CarModel carModel) {
+    public void createNewCarModel (CarModel carModel) {
         String sql = "INSERT INTO car_model (car_model_name, average_rental_time_in_months, " +
                 "price_a_month, engine_size, seat_count, door_count, horsepower, make, " +
                 "body_type, gear_type, fuel_type) " +
@@ -29,5 +33,37 @@ public class CarRepository {
                 carModel.getGear_type(),
                 carModel.getFuel_type()
                 );
+    }
+
+    public void createNewCar (Car car) {
+        String sql = "INSERT INTO car (license_plate, car_model_name, vin_number, original_price, " +
+                "registration_tax_pr_month, car_status, odometer, damage_report_id, is_pre_sold, " +
+                "sale_price, alert_damages_not_fixed, year_of_manufactoring, color)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        carTemplate.update(sql,
+                car.getLicense_plate(),
+                car.getCarModel().getCar_model_name(),
+                car.getVin_number(),
+                car.getOriginal_price(),
+                car.getRegistration_tax_pr_month(),
+                car.getCar_status(),
+                car.getOdometer(),
+                null,
+                car.isIs_pre_sold(),
+                car.getSale_price(),
+                car.isAlert_damages_not_fixed(),
+                car.getYear_of_manufactoring(),
+                car.getColor()
+                );
+    }
+
+    public List<CarModel> fethAllCarModels()  {
+        return carTemplate.query("SELECT * FROM car_model", new BeanPropertyRowMapper<>(CarModel.class));
+
+    }
+
+    public CarModel fetchModelByModelName(String car_model_name) {
+        return carTemplate.queryForObject("SELECT * FROM car_model WHERE car_model_name=?",  new Object[]{car_model_name},new BeanPropertyRowMapper<>(CarModel.class));
     }
 }

@@ -2,17 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Car</title>
+    <title>Create car and car model</title>
     <link rel="stylesheet" href="/CreateCar.css">
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
 <div class="createDiv">
-    <form action="#" method="get" class="createForm" style="border-right: 2px solid white;">
+    <form action="/CreateCarAndCarModel" method="post" class="createForm" style="border-right: 2px solid white;">
         <h2>Gem bil</h2>
         <!-- Dette er for den enkelte bil -->
         <input type="text" name="license_plate" placeholder="Nummerplade">
+        <select name="car_model_name">
+            <option value="" hidden selected>Select model</option>
+            <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}"></option>
+        </select>
         <input type="text" name="vin_number" placeholder="Stel nummer">
         <input type="number" name="original_price" placeholder="Indkøbsprisen">
         <input type="number" name="registration_tax_pr_month" placeholder="registrerings afgift">
@@ -23,7 +27,7 @@
             <option value="returned">Returneret</option>
             <option value="under_repair">Under reperation</option>
         </select>
-        <input type="number" name="odomoter" placeholder="Kilometertæller">
+        <input type="number" name="odometer" placeholder="Kilometertæller">
         <select name="is_pre_sold">
             <option value="" hidden selected>Er bilen forhåndssolgt?</option>
             <option value="true">Solgt</option>
@@ -37,7 +41,7 @@
 
     </form>
 
-    <form action="/SaveNewCarModel" method="post" class="createForm" style="border-left: 2px solid white;">
+    <form action="CreateNewCarModel" method="post" class="createForm" style="border-left: 2px solid white;">
         <!-- Dette er for modellen -->
         <h2>Opret ny model</h2>
         <select name="make">
@@ -59,9 +63,10 @@
             <option value="mazda">Mazda</option>
             <option value="nissan">Nissan</option>
             <option value="polestar">polestar</option>
+            <option value="fiat">Fiat</option>
         </select>
         <input type="text" name="car_model_name" placeholder="Model navn">
-        <input type="number" name="price_a_month" placeholder="Månedlig udlejningspris">
+        <input type="number" name="price_a_month" placeholder="Månedlig udlejningspris" step="0.01">
         <select name="body_type">
             <option value="" hidden selected>karrosseritype</option>
             <option value="hatchback">hatchback</option>
@@ -76,7 +81,7 @@
             <option value="roadster">roadster</option>
             <option value="pickup">Pickup</option>
         </select>
-        <input type="number" name="engine_size" placeholder="Motor størrelse (Liter)">
+        <input type="number" name="engine_size" placeholder="Motor størrelse (Liter)" step="0.01">
         <select name="gear_type">
             <option value="" hidden selected>Gearkasse</option>
             <option value="manual">Manuel</option>
