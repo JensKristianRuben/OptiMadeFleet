@@ -21,4 +21,16 @@ public class RentContractService {
 
         return rentContractRepository.fetchAllRentContracts();
     }
+
+    public RentContract findByLicensePlate(String licensePlate){
+        List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
+        RentContract rentContract = null;
+        for (RentContract element : rentContractList){
+            if (element.getLicense_plate().equals(licensePlate)){
+                rentContract = element;
+            }
+        }
+
+        return rentContract;
+    }
 }

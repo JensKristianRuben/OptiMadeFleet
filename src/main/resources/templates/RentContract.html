@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>Opret lejekontrakt</title>
     <link rel="stylesheet" href="/RentContract.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
-<div class="navBar">
-    <a href="#">KPI</a>
-    <a href="#">Skadesrapport</a>
-    <a href="#">Dataregistrering</a>
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="#">Skadesrapport</a>
+    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
 
 <form action="/RentContract" method="post" class="createForm">
@@ -25,9 +29,7 @@
     <input type="text" name="city_name" placeholder="By" required>
     <input type="number" name="drivers_license_number" placeholder="Kørekort nummer" required>
 
-    <select name="license_plate" required>
-        <option value="AB12345">AB12345</option>
-    </select>
+    <input type="text" name="license_plate" placeholder="Nummerplade" required>
     <input type="number" name="max_km" placeholder="Maks kilometer" required>
 
     <input type="date" name="rental_start_date" placeholder="Start dato" required>

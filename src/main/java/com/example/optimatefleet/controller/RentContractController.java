@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class RentContractController {
     @PostMapping("/RentContract")
     public String createRentContract(@ModelAttribute RentContract rentContract){
         rentContractService.createRentContract(rentContract);
-        return "RentContract";
+        return "redirect:/DataRegister";
     }
 
     @GetMapping("/DataRegister")
@@ -34,5 +35,11 @@ public class RentContractController {
         List<RentContract> rentContractList = rentContractService.showAllRentContracts();
         model.addAttribute("rentContracts", rentContractList);
         return "DataRegister";
+    }
+    @GetMapping("/ShowRentContract/{licensePlate}")
+    public String showRentContract(@PathVariable String licensePlate, Model model){
+        RentContract rentContract = rentContractService.findByLicensePlate(licensePlate);
+        model.addAttribute("rentContract", rentContract);
+        return "ShowRentContract";
     }
 }
