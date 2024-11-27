@@ -31,7 +31,7 @@ public class RentContractController {
     }
 
     @GetMapping("/DataRegister")
-    public String showAllRentalContracts(Model model){
+    public String showAllRentalContractsCarsAndPreSaleContract(Model model){
         List<RentContract> rentContractList = rentContractService.showAllRentContracts();
         model.addAttribute("rentContracts", rentContractList);
         return "DataRegister";
@@ -41,5 +41,10 @@ public class RentContractController {
         RentContract rentContract = rentContractService.findByLicensePlate(licensePlate);
         model.addAttribute("rentContract", rentContract);
         return "ShowRentContract";
+    }
+    @PostMapping("/deleteRentContract/{licensePlate}")
+    public String deleteRentContract(@PathVariable String licensePlate) {
+        rentContractService.deleteByLicensePlate(licensePlate);
+        return "redirect:/DataRegister";
     }
 }
