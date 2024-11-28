@@ -25,4 +25,20 @@ public class CarService {
     public List<CarModel> fethAllCarModels()  {
         return carRepository.fethAllCarModels();
     }
+
+    //Bil statusen skal sættes her. Der skal itereres igennem listen af biler, bilen skal findes ud fra nummerplade
+    //når bilen er fundet skal den returneres og til carRepository og updateres i databasen.
+//    public Car updateCarStatusToRented(String licensePlate){
+//        List<Car> listOfCars = carRepository.fetchAllCars();
+//        Car car = null;
+//        for (Car element : listOfCars){
+//            if (element.getLicense_plate().equals(licensePlate)){
+//               car = element;
+//                car.setCar_status(Car.CarStatus.rentet);
+//                break;
+//            }
+//        }
+//        return car;
+//    }
+
 }

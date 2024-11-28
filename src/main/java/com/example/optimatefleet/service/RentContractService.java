@@ -22,7 +22,7 @@ public class RentContractService {
         return rentContractRepository.fetchAllRentContracts();
     }
 
-    public RentContract findByLicensePlate(String licensePlate){
+    public RentContract findContractByLicensePlate(String licensePlate){
         List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
         RentContract rentContract = null;
         for (RentContract element : rentContractList){
