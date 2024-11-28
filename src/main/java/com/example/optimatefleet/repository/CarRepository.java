@@ -60,10 +60,24 @@ public class CarRepository {
 
     public List<CarModel> fethAllCarModels()  {
         return carTemplate.query("SELECT * FROM car_model", new BeanPropertyRowMapper<>(CarModel.class));
-
     }
 
     public CarModel fetchModelByModelName(String car_model_name) {
         return carTemplate.queryForObject("SELECT * FROM car_model WHERE car_model_name=?",  new Object[]{car_model_name},new BeanPropertyRowMapper<>(CarModel.class));
+    }
+
+    public List<Car> fetchAllCars() {
+        //Tag med til eksamen? - Kompleks kode
+        List<Car> carsList = carTemplate.query("SELECT * FROM car", new BeanPropertyRowMapper<>(Car.class));
+        List<CarModel> carModelList = fethAllCarModels();
+
+        for(Car car : carsList){
+            for(CarModel carModel : carModelList){
+                if(car.getCar_model_name().equals(carModel.getCar_model_name())){
+                    car.setCarModel(carModel);
+                }
+            }
+        }
+        return carsList;
     }
 }

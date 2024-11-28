@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit car</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/EditCar.css">
+
+</head>
+<body>
+<div class="NavBar">
+  <a class="NavBarLink" href="#">
+    <img src="/images/logo.png">
+  </a>
+  <a class="NavBarLink" href="#">KPI</a>
+  <a class="NavBarLink" href="#">Skadesrapport</a>
+  <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+</div>
+<div class="outerContainer">
+  <form>
+
+    <div class="renterContainer">
+      <h3>Information om lejer</h3>
+      <div>
+        <label for="renterFirstName">Fornavn:</label>
+        <input type="text" id="renterFirstName" name="renter_first_Name"
+               th:value="${rentContract.renter_first_name}">
+      </div>
+      <div>
+        <label for="renterLastName">Efternavn:</label>
+        <input type="text" id="renterLastName" name="renter_last_name"
+               th:value="${rentContract.renter_last_name}">
+      </div>
+      <div>
+        <label for="phoneNumber">Telefonnummer:</label>
+        <input type="text" id="phoneNumber" name="renter_phonenumber"
+               th:value="${rentContract.renter_phonenumber}">
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"
+               th:value="${rentContract.email}">
+      </div>
+      <div>
+        <label for="dateOfBirth">Fødselsdato:</label>
+        <input type="date" id="dateOfBirth" name="date_of_birth"
+               th:value="${rentContract.date_of_birth}">
+      </div>
+      <div>
+        <label for="zipCode">Postnummer:</label>
+        <input type="text" id="zipCode" name="zip_code"
+               th:value="${rentContract.zip_code}">
+      </div>
+      <div>
+        <label for="streetName">Gade navn:</label>
+        <input type="text" id="streetName" name="street_name"
+               th:value="${rentContract.street_name}">
+      </div>
+      <div>
+        <label for="streetNumber">Gade nummer:</label>
+        <input type="number" id="streetNumber" name="street_number"
+               th:value="${rentContract.street_number}">
+      </div>
+      <div>
+        <label for="cityName">By:</label>
+        <input type="text" id="cityName" name="city_name"
+               th:value="${rentContract.city_name}">
+      </div>
+      <div>
+        <button type="submit">Gem ændringer</button>
+      </div>
+    </div>
+
+    <div class="RentInfoContainer">
+      <h3>Infomation om lejeaftale</h3>
+      <label for="rentalStartDate">Leje start dato:</label>
+      <input type="date" id="rentalStartDate" name="rental_start_date"
+             th:value="${rentContract.rental_start_date}">
+      <label for="rentalEndDate">Leje slut dato:</label>
+      <input type="date" id="rentalEndDate" name="rental_end_date"
+             th:value="${rentContract.rental_end_date}">
+    </div>
+
+
+    <form th:action="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
+          method="post">
+      <button type="submit">Slet</button>
+    </form>
+
+  </form>
+  <div>
+    <a href="/DataRegister">Back to all contracts</a>
+  </div>
+</div>
+
+</body>
+</html>
