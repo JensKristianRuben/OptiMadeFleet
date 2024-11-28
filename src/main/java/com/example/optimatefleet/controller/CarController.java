@@ -31,9 +31,16 @@ public class CarController {
 
     @PostMapping("CreateNewCarModel")
     public String saveNewCarModel (@ModelAttribute CarModel carModel)    {
-        System.out.println(carModel);
         carService.createNewCarModel(carModel);
 
         return "redirect:/CreateCarAndCarModel";
+    }
+
+    @GetMapping("EditCar")
+    public String EditCar (Model model)    {
+        //Husk at map dataregister html siden til denne controller
+        model.addAttribute("car", carService.findCarByLicensePlate("ck60751"));
+
+        return "EditCar";
     }
 }

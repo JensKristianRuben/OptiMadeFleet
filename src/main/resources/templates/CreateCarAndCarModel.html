@@ -13,8 +13,8 @@
         <img src="/images/logo.png">
     </a>
     <a class="NavBarLink" href="#">KPI</a>
-    <a class="NavBarLink" href="/DataRegister">Skadesrapport</a>
-    <a class="NavBarLink" href="#">Dataregistrering</a>
+    <a class="NavBarLink" href="#">Skadesrapport</a>
+    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
 
 <div class="createDivLeft">
@@ -29,6 +29,7 @@
             <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}"></option>
         </select>
         <label>Stel nummer</label>
+<!--        Et stel nummer er 17 cifrer, skal ændres til en string i hele systemet-->
         <input type="text" name="vin_number" placeholder="Stel nummer" required>
         <label>Indkøbsprisen</label>
         <input type="number" name="original_price" placeholder="Indkøbsprisen" required>
@@ -51,6 +52,7 @@
             <option value="false">Ikke solgt</option>
         </select>
         <label>Salgspris (Kan undlades)</label>
+<!--        Skal kunnes nulles-->
         <input type="number" name="sale_price" placeholder="Salgspris (Kan undlades)">
         <label>Produktionsår</label>
         <input type="number" name="year_of_manufactoring" placeholder="Produktionsår" required>

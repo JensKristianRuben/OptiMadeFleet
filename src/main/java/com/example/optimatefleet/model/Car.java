@@ -2,7 +2,9 @@ package com.example.optimatefleet.model;
 
 public class Car {
     private String license_plate;
+    String car_model_name;                  // Is only to match data when fetching from DB
     CarModel carModel;
+    //Stel nummer er 17 cifret og skal laves til en String
     private String vin_number;
     private double original_price;
     private double registration_tax_pr_month;
@@ -10,13 +12,15 @@ public class Car {
     private int odometer;
     private DamageReport damageReport;
     private boolean is_pre_sold;
+    //Sale price skal kunne nulles
     private int sale_price;
     private boolean alert_damages_not_fixed;
     private int year_of_manufactoring;
     private String color;
 
-    public Car(String license_plate, CarModel carModel, String vin_number, double original_price, double registration_tax_pr_month, CarStatus car_status, int odometer, boolean is_pre_sold, int sale_price, int year_of_manufactoring, String color) {
+    public Car(String license_plate, String car_model_name,CarModel carModel, String vin_number, double original_price, double registration_tax_pr_month, CarStatus car_status, int odometer, boolean is_pre_sold, int sale_price, int year_of_manufactoring, String color) {
         this.license_plate = license_plate;
+        this.car_model_name = car_model_name;
         this.carModel = carModel;
         this.vin_number = vin_number;
         this.original_price = original_price;
@@ -28,6 +32,16 @@ public class Car {
         this.alert_damages_not_fixed = false;
         this.year_of_manufactoring = year_of_manufactoring;
         this.color = color;
+    }
+
+    public Car ()   {}
+
+    public String getCar_model_name() {
+        return car_model_name;
+    }
+
+    public void setCar_model_name(String car_model_name) {
+        this.car_model_name = car_model_name;
     }
 
     public void setCar_status(CarStatus car_Car_status){
@@ -139,6 +153,26 @@ public class Car {
         rentet,
         returned,
         under_repair
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "license_plate='" + license_plate + '\'' +
+                ", car_model_name='" + car_model_name + '\'' +
+                ", carModel=" + carModel +
+                ", vin_number='" + vin_number + '\'' +
+                ", original_price=" + original_price +
+                ", registration_tax_pr_month=" + registration_tax_pr_month +
+                ", car_status=" + car_status +
+                ", odometer=" + odometer +
+                ", damageReport=" + damageReport +
+                ", is_pre_sold=" + is_pre_sold +
+                ", sale_price=" + sale_price +
+                ", alert_damages_not_fixed=" + alert_damages_not_fixed +
+                ", year_of_manufactoring=" + year_of_manufactoring +
+                ", color='" + color + '\'' +
+                '}';
     }
 }
 
