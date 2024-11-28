@@ -1,6 +1,7 @@
 package com.example.optimatefleet.controller;
 
 import com.example.optimatefleet.model.RentContract;
+import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.RentContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,15 +18,19 @@ public class RentContractController {
 
     @Autowired
     RentContractService rentContractService;
+    @Autowired
+    CarService carService;
 
     @GetMapping("/RentContract")
     public String createRentContract(){
-        return "RentContract";
+        return "CreateRentContract";
     }
 
     @PostMapping("/RentContract")
     public String createRentContract(@ModelAttribute RentContract rentContract){
         rentContractService.createRentContract(rentContract);
+        //ændre bil status skal kaldes her
+//        carService.updateCarStatusToRented(rentContract.getLicense_plate());
         return "redirect:/DataRegister";
     }
 
@@ -38,9 +42,9 @@ public class RentContractController {
     }
     @GetMapping("/ShowRentContract/{licensePlate}")
     public String showRentContract(@PathVariable String licensePlate, Model model){
-        RentContract rentContract = rentContractService.findByLicensePlate(licensePlate);
+        RentContract rentContract = rentContractService.findContractByLicensePlate(licensePlate);
         model.addAttribute("rentContract", rentContract);
-        return "ShowRentContract";
+        return "EditRentContract";
     }
     @PostMapping("/deleteRentContract/{licensePlate}")
     public String deleteRentContract(@PathVariable String licensePlate) {
