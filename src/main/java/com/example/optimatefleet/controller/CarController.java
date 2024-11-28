@@ -26,7 +26,7 @@ public class CarController {
     public String createCar (@ModelAttribute Car car, @RequestParam("car_model_name") String car_model_name)  {
         carService.createNewCar(car, car_model_name);
         //Skal måske redirecte til dataregister siden?
-        return "redirect:/";
+        return "DataRegister";
     }
 
     @PostMapping("CreateNewCarModel")
