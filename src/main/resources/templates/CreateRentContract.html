@@ -18,27 +18,69 @@
 </div>
 
 <form action="/RentContract" method="post" class="createForm">
-    <input type="text" name="renter_first_name" placeholder="fornavn" required>
-    <input type="text" name="renter_last_name" placeholder="efternavn" required>
-    <input type="tel" name="renter_phonenumber" placeholder="telfonnummer" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="date" name="date_of_birth" placeholder="Fødselsdato" required>
-    <input type="number" name="zip_code" placeholder="Postnummer" required>
-    <input type="text" name="street_name" placeholder="Gade navn" required>
-    <input type="number" name="street_number" placeholder="Gade nummer" required>
-    <input type="text" name="city_name" placeholder="By" required>
-    <input type="number" name="drivers_license_number" placeholder="Kørekort nummer" required>
+    <div class="renterContainer">
+        <label for="renterFirstName">Fornavn</label>
+        <input id="renterFirstName" type="text" name="renter_first_name" placeholder="Fornavn" required>
 
-    <input type="text" name="license_plate" placeholder="Nummerplade" required>
-    <input type="number" name="max_km" placeholder="Maks kilometer" required>
+        <label for="renterLastName">Efternavn</label>
+        <input id="renterLastName" type="text" name="renter_last_name" placeholder="Efternavn" required>
 
-    <input type="date" name="rental_start_date" placeholder="Start dato" required>
-    <input type="date" name="rental_end_date" placeholder="Slut dato" required>
-    <input type="text" name="pickup_location" placeholder="Afhentningssted" required>
-    <input type="text" name="return_location" placeholder="Afleveringssted" required>
+        <label for="renterPhoneNumber">Telefonnummer</label>
+        <input id="renterPhoneNumber" type="tel" name="renter_phonenumber" placeholder="Telefonnummer" required>
 
-    <button type="submit">Opret</button>
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" placeholder="Email" required>
+
+        <label for="dateOfBirth">Fødselsdato</label>
+        <input id="dateOfBirth" type="date" name="date_of_birth" placeholder="Fødselsdato" required>
+
+        <label for="zipCode">Postnummer</label>
+        <input id="zipCode" type="number" name="zip_code" placeholder="Postnummer" required>
+
+        <label for="streetName">Gadenavn</label>
+        <input id="streetName" type="text" name="street_name" placeholder="Gadenavn" required>
+
+        <label for="streetNumber">Gadenummer</label>
+        <input id="streetNumber" type="number" name="street_number" placeholder="Gadenummer" required>
+
+        <label for="cityName">By</label>
+        <input id="cityName" type="text" name="city_name" placeholder="By" required>
+
+        <label for="driversLicenseNumber">Kørekortnummer</label>
+        <input id="driversLicenseNumber" type="number" name="drivers_license_number" placeholder="Kørekortnummer"
+               required>
+
+    </div>
+
+    <div class="carContainer">
+        <label for="licensePlate">Vælg bil</label>
+        <select id="licensePlate" name="license_plate" required>
+            <option value="" hidden selected>Vælg bil</option>
+            <option th:each="car : ${cars}"
+                    th:value="${car.getLicense_plate}"
+                    th:text="${car.carModel.getMake()} + ' ' + ${car.carModel.getCar_model_name()} + ' - ' + ${car.getLicense_plate()}">
+            </option>
+        </select>
+
+        <label for="maxKm">Maks kilometer</label>
+        <input id="maxKm" type="number" name="max_km" placeholder="Maks kilometer" required>
+
+        <label for="rentalStartDate">Start dato</label>
+        <input id="rentalStartDate" type="date" name="rental_start_date" placeholder="Start dato" required>
+
+        <label for="rentalEndDate">Slut dato</label>
+        <input id="rentalEndDate" type="date" name="rental_end_date" placeholder="Slut dato" required>
+
+        <label for="pickupLocation">Afhentningssted</label>
+        <input id="pickupLocation" type="text" name="pickup_location" placeholder="Afhentningssted" required>
+
+        <label for="returnLocation">Afleveringssted</label>
+        <input id="returnLocation" type="text" name="return_location" placeholder="Afleveringssted" required>
+    </div>
+
+    <button class="saveButton" type="submit">Opret</button>
 
 </form>
+
 </body>
 </html>

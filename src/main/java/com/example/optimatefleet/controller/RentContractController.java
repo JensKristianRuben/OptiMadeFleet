@@ -21,33 +21,37 @@ public class RentContractController {
     @Autowired
     CarService carService;
 
-    @GetMapping("/RentContract")
-    public String createRentContract(){
+    @GetMapping("/CreateRentContract")
+    public String createRentContract(Model model) {
+        model.addAttribute("cars", carService.fecthAllCarWithAvailableStatus());
         return "CreateRentContract";
     }
 
     @PostMapping("/RentContract")
-    public String createRentContract(@ModelAttribute RentContract rentContract){
+    public String createRentContract(@ModelAttribute RentContract rentContract) {
         rentContractService.createRentContract(rentContract);
-        //ændre bil status skal kaldes her
-//        carService.updateCarStatusToRented(rentContract.getLicense_plate());
+        carService.updateCarStatusToRented(rentContract.getLicense_plate());
+        System.out.println(rentContract);
         return "redirect:/DataRegister";
     }
 
     @GetMapping("/DataRegister")
-    public String showAllRentalContractsCarsAndPreSaleContract(Model model){
+    public String showAllRentalContractsCarsAndPreSaleContract(Model model) {
         List<RentContract> rentContractList = rentContractService.showAllRentContracts();
         model.addAttribute("rentContracts", rentContractList);
         return "DataRegister";
     }
+
     @GetMapping("/ShowRentContract/{licensePlate}")
-    public String showRentContract(@PathVariable String licensePlate, Model model){
+    public String showRentContract(@PathVariable String licensePlate, Model model) {
         RentContract rentContract = rentContractService.findContractByLicensePlate(licensePlate);
         model.addAttribute("rentContract", rentContract);
         return "EditRentContract";
     }
+
     @PostMapping("/deleteRentContract/{licensePlate}")
     public String deleteRentContract(@PathVariable String licensePlate) {
+        System.out.println(licensePlate);
         rentContractService.deleteByLicensePlate(licensePlate);
         return "redirect:/DataRegister";
     }

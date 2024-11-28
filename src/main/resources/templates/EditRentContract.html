@@ -17,7 +17,7 @@
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
 <div class="outerContainer">
-    <form>
+    <form action="#">
 
         <div class="renterContainer">
             <h3>Information om lejer</h3>
@@ -75,21 +75,20 @@
             <h3>Infomation om lejeaftale</h3>
             <label for="rentalStartDate">Leje start dato:</label>
             <input type="date" id="rentalStartDate" name="rental_start_date"
-                    th:value="${rentContract.rental_start_date}">
+                   th:value="${rentContract.rental_start_date}">
             <label for="rentalEndDate">Leje slut dato:</label>
             <input type="date" id="rentalEndDate" name="rental_end_date"
                    th:value="${rentContract.rental_end_date}">
         </div>
 
 
-        <form th:action="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
-              method="post">
-            <button type="submit">Slet</button>
-        </form>
-
+    </form>
+    <form th:action="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
+          method="post">
+        <button type="submit">Slet</button>
     </form>
     <div>
-        <a href="/DataRegister">Back to all contracts</a>
+        <a href="/DataRegister">Tilbage til dataregister</a>
     </div>
 </div>
 

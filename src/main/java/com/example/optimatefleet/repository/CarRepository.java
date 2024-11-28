@@ -80,4 +80,11 @@ public class CarRepository {
         }
         return carsList;
     }
+    //Opdaterer bilen status som udlejet
+    public void updateCarStatusToRented(Car car){
+        String updateSql = "UPDATE car SET car_status = ? WHERE license_plate = ?";
+
+        carTemplate.update(updateSql, car.getCar_status(), car.getLicense_plate());
+
+    }
 }
