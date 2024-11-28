@@ -50,7 +50,14 @@ input{
 }
 
 select{
+    color: #999999;
     width: 86%;
     height: 30px;
     border-radius: 5px;
+}
+
+label{
+    color: #999999;
+    align-self: flex-start;
+    margin-left: 32px;
 }
