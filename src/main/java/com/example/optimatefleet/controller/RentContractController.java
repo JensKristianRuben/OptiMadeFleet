@@ -55,4 +55,10 @@ public class RentContractController {
         rentContractService.deleteByLicensePlate(licensePlate);
         return "redirect:/DataRegister";
     }
+
+    @PostMapping("/updateRentContract")
+    public String updateRentContract(@ModelAttribute RentContract rentContract){
+        rentContractService.updateRentContract(rentContract);
+        return "redirect:/DataRegister";
+    }
 }
