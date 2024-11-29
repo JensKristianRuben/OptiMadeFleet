@@ -61,7 +61,6 @@ public class CarService {
 
     public Car findCarByLicensePlate(String licensePlate) {
         List<Car> carsList = carRepository.fetchAllCars();
-        System.out.println(carsList);
         Car car = null;
 
         for (Car element : carsList) {

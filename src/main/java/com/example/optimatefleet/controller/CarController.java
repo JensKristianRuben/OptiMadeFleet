@@ -39,7 +39,7 @@ public class CarController {
     public String EditCar (Model model)    {
         //Husk at map dataregister html siden til denne controller
         model.addAttribute("car", carService.findCarByLicensePlate("ck60751"));
-
+        model.addAttribute("car_models", carService.fethAllCarModels());
         return "EditCar";
     }
 }
