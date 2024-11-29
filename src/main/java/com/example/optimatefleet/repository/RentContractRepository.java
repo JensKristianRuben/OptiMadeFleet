@@ -78,7 +78,7 @@ public class RentContractRepository {
 
     }
 
-    @Transactional
+    @Transactional //usikkert om det gør noget uden konfiq
     public void deleteByLicensePlate(String licensePlate) {
 
         String getDriversLicenseSql = "SELECT drivers_license_number FROM rent_contract WHERE license_plate = ?";
@@ -95,6 +95,50 @@ public class RentContractRepository {
 
         String deleteAddressSql = "DELETE FROM address WHERE address_id = ?";
         jdbcTemplate.update(deleteAddressSql, addressId);
+
+    }
+
+    public void updateRentContract(RentContract rentContract){
+        String updateCity = "UPDATE city SET city_name = ? WHERE zip_code = ?";
+
+        jdbcTemplate.update(updateCity,
+                rentContract.getCity_name(),
+                rentContract.getZip_code());
+
+        String updateAddress = "UPDATE address SET street_name = ?, street_number = ? WHERE zip_code = ?";
+
+        jdbcTemplate.update(updateAddress,
+                rentContract.getStreet_name(),
+                rentContract.getStreet_number(),
+                rentContract.getZip_code());
+
+        String updateRenter = "UPDATE renter SET renter_first_name = ?, renter_last_name = ?, renter_phonenumber = ?, " +
+                "    email = ?, " +
+                "    date_of_birth = ? " +
+                "WHERE drivers_license_number = ?";
+
+        jdbcTemplate.update(updateRenter,
+                rentContract.getRenter_first_name(),
+                rentContract.getRenter_last_name(),
+                rentContract.getRenter_phonenumber(),
+                rentContract.getEmail(),
+                rentContract.getDate_of_birth(),
+                rentContract.getDrivers_license_number());
+
+        String updateRentContract = "UPDATE rent_contract SET license_plate = ?, max_km = ?, rental_start_date = ?, " +
+                "    rental_end_date = ?, " +
+                "    pickup_location = ?, " +
+                "    return_location = ? " +
+                "WHERE drivers_license_number = ?";
+
+        jdbcTemplate.update(updateRentContract,
+                rentContract.getLicense_plate(),
+                rentContract.getMax_km(),
+                rentContract.getRental_start_date(),
+                rentContract.getRental_end_date(),
+                rentContract.getPickup_location(),
+                rentContract.getReturn_location(),
+                rentContract.getDrivers_license_number());
 
     }
 

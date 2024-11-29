@@ -36,4 +36,7 @@ public class RentContractService {
     public void deleteByLicensePlate(String licensePlate){
         rentContractRepository.deleteByLicensePlate(licensePlate);
     }
+    public void updateRentContract(RentContract rentContract){
+        rentContractRepository.updateRentContract(rentContract);
+    }
 }

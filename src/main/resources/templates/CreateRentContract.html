@@ -5,6 +5,8 @@
     <title>Opret lejekontrakt</title>
     <link rel="stylesheet" href="/RentContract.css">
     <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 
@@ -19,43 +21,52 @@
 
 <form action="/RentContract" method="post" class="createForm">
     <div class="renterContainer">
-        <label for="renterFirstName">Fornavn</label>
-        <input id="renterFirstName" type="text" name="renter_first_name" placeholder="Fornavn" required>
+        <h3>Kundeinformation</h3>
 
-        <label for="renterLastName">Efternavn</label>
-        <input id="renterLastName" type="text" name="renter_last_name" placeholder="Efternavn" required>
+            <label for="renterFirstName">Fornavn</label>
+            <input id="renterFirstName" type="text" name="renter_first_name" required>
 
-        <label for="renterPhoneNumber">Telefonnummer</label>
-        <input id="renterPhoneNumber" type="tel" name="renter_phonenumber" placeholder="Telefonnummer" required>
+            <label for="renterLastName">Efternavn</label>
+            <input id="renterLastName" type="text" name="renter_last_name" required>
 
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" placeholder="Email" required>
+            <label for="streetName">Addresse</label>
+            <input id="streetName" type="text" name="street_name" required>
 
-        <label for="dateOfBirth">Fødselsdato</label>
-        <input id="dateOfBirth" type="date" name="date_of_birth" placeholder="Fødselsdato" required>
+            <label for="streetNumber">Gadenummer</label>
+            <input id="streetNumber" type="number" name="street_number" required>
 
-        <label for="zipCode">Postnummer</label>
-        <input id="zipCode" type="number" name="zip_code" placeholder="Postnummer" required>
 
-        <label for="streetName">Gadenavn</label>
-        <input id="streetName" type="text" name="street_name" placeholder="Gadenavn" required>
 
-        <label for="streetNumber">Gadenummer</label>
-        <input id="streetNumber" type="number" name="street_number" placeholder="Gadenummer" required>
+            <label for="zipCode">Postnummer</label>
+            <input id="zipCode" type="number" name="zip_code" required>
 
-        <label for="cityName">By</label>
-        <input id="cityName" type="text" name="city_name" placeholder="By" required>
 
-        <label for="driversLicenseNumber">Kørekortnummer</label>
-        <input id="driversLicenseNumber" type="number" name="drivers_license_number" placeholder="Kørekortnummer"
-               required>
+            <label for="cityName">By</label>
+            <input id="cityName" type="text" name="city_name" required>
+
+
+
+            <label for="renterPhoneNumber">Telefonnummer</label>
+            <input id="renterPhoneNumber" type="tel" name="renter_phonenumber" required>
+
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required>
+
+
+
+            <label for="dateOfBirth">Fødselsdato</label>
+            <input id="dateOfBirth" type="date" name="date_of_birth" required>
+
+            <label for="driversLicenseNumber">Kørekortnummer</label>
+            <input id="driversLicenseNumber" type="number" name="drivers_license_number" required>
 
     </div>
-
     <div class="carContainer">
+        <h3>Bilinformation</h3>
+
         <label for="licensePlate">Vælg bil</label>
         <select id="licensePlate" name="license_plate" required>
-            <option value="" hidden selected>Vælg bil</option>
+            <option value="" hidden selected></option>
             <option th:each="car : ${cars}"
                     th:value="${car.getLicense_plate}"
                     th:text="${car.carModel.getMake()} + ' ' + ${car.carModel.getCar_model_name()} + ' - ' + ${car.getLicense_plate()}">
@@ -63,22 +74,26 @@
         </select>
 
         <label for="maxKm">Maks kilometer</label>
-        <input id="maxKm" type="number" name="max_km" placeholder="Maks kilometer" required>
+        <input id="maxKm" type="number" name="max_km" required>
+
+        <h3>Kontraktinformation</h3>
 
         <label for="rentalStartDate">Start dato</label>
-        <input id="rentalStartDate" type="date" name="rental_start_date" placeholder="Start dato" required>
+        <input id="rentalStartDate" type="date" name="rental_start_date" required>
 
         <label for="rentalEndDate">Slut dato</label>
-        <input id="rentalEndDate" type="date" name="rental_end_date" placeholder="Slut dato" required>
+        <input id="rentalEndDate" type="date" name="rental_end_date" required>
 
         <label for="pickupLocation">Afhentningssted</label>
-        <input id="pickupLocation" type="text" name="pickup_location" placeholder="Afhentningssted" required>
+        <input id="pickupLocation" type="text" name="pickup_location" required>
 
         <label for="returnLocation">Afleveringssted</label>
-        <input id="returnLocation" type="text" name="return_location" placeholder="Afleveringssted" required>
+        <input id="returnLocation" type="text" name="return_location" required>
+
+        <button class="saveButton" type="submit">Opret</button>
     </div>
 
-    <button class="saveButton" type="submit">Opret</button>
+
 
 </form>
 

@@ -1,79 +1,84 @@
-
-.navBar{
-    background-color: #454545;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    top: 0;
+body{
+    font-size: 12px;
 }
-
 .createForm{
     margin-top: 50px;
-    width: 700px;
-    height: 530px;
-    flex-wrap: wrap;
-    background-color: #444444;
+    background-color: #454545;
+    width: 800px;
+    height: 550px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 3%;
+    padding: 10px;
+}
+.renterContainer{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 530px;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-content: center;
-    gap: 20px;
-    border-radius: 2%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+
+}
+.carContainer{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 530px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
 }
 
-input{
-    width: 150px;
-    height: 25px;
-    border-radius: 5px;
-    border: 1px solid #666;
-    background-color: white;
-    color: #666;
-    font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-select{
-    color: #999999;
-    width: 200px;
-    height: 30px;
-    border-radius: 5px;
-}
 label{
     color: #999999;
     align-self: flex-start;
-    margin-left: 32px;
 }
-.renterContainer{
-    height: 480px;
-    width: 400px;
-    margin-top: 50px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+input{
+    width: 70%;
+    height: 25px;
+    background-color: transparent;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    color: white;
 }
-.carContainer{
-    height: 480px;
-    width: 250px;
-    margin-top: 50px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+input:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
 }
-.contractContainer{
-    height: 480px;
-    width: 250px;
-    margin-top: 50px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    background-color: #47b2e1;
+select{
+    width: 70%;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    background-color: transparent;
+    color: white;
+}
+
+select:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+option{
+    color: black;
+}
+button{
+    margin-top: 30px;
+    margin-left: 50px;
+}
+h3{
+    font-size: 20px;
+    color: white;
 }

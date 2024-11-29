@@ -1,15 +1,11 @@
-html, body{
-    height: 100vh;
+.saveButton{
+    margin-bottom: 0;
+}
+p{
+    color: white;
+}
+.button-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.outerContainer{
-    background-color: #47b2e1;
-    height: 500px;
-    width: 700px;
-}
-.renterContainer{
-    border: 1px solid black;
+    gap: 10px; /* Lægger lidt afstand mellem knapperne */
+    justify-content: flex-start; /* Hvis du ønsker knapperne venstrejusteret */
 }

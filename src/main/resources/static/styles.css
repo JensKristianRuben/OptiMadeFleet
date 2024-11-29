@@ -6,6 +6,7 @@ body{
     align-items: center;
     height: 100vh;
     background: linear-gradient(to bottom right, white, rgba(71, 178, 225, 0.29));
+    font-family: Montserrat, Arial, serif;
 }
 
 .saveButton {
@@ -59,6 +60,5 @@ body{
 .NavBarLink{
     text-decoration: none;
     font-size: 25px;
-    font-family: "Montserrat", Arial;
     color: #47b2e1;
 }
