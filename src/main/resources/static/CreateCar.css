@@ -46,18 +46,47 @@ h2{
 input{
     width: 85%;
     height: 25px;
-    border-radius: 5px;
+    background-color: transparent;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    color: white;
+
+}
+
+input:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
 }
 
 select{
-    color: #999999;
     width: 86%;
-    height: 30px;
-    border-radius: 5px;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    background-color: transparent;
+    color: white;
+}
+
+select:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
 }
 
 label{
     color: #999999;
     align-self: flex-start;
     margin-left: 32px;
+}
+
+option{
+    color: black;
 }

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit car</title>
-  <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/EditCar.css">
-
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
 <div class="NavBar">
   <a class="NavBarLink" href="#">
     <img src="/images/logo.png">
@@ -16,82 +16,87 @@
   <a class="NavBarLink" href="#">Skadesrapport</a>
   <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
-<div class="outerContainer">
-  <form>
 
-    <div class="renterContainer">
-      <h3>Information om lejer</h3>
-      <div>
-        <label for="renterFirstName">Fornavn:</label>
-        <input type="text" id="renterFirstName" name="renter_first_Name"
-               th:value="${rentContract.renter_first_name}">
-      </div>
-      <div>
-        <label for="renterLastName">Efternavn:</label>
-        <input type="text" id="renterLastName" name="renter_last_name"
-               th:value="${rentContract.renter_last_name}">
-      </div>
-      <div>
-        <label for="phoneNumber">Telefonnummer:</label>
-        <input type="text" id="phoneNumber" name="renter_phonenumber"
-               th:value="${rentContract.renter_phonenumber}">
-      </div>
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"
-               th:value="${rentContract.email}">
-      </div>
-      <div>
-        <label for="dateOfBirth">Fødselsdato:</label>
-        <input type="date" id="dateOfBirth" name="date_of_birth"
-               th:value="${rentContract.date_of_birth}">
-      </div>
-      <div>
-        <label for="zipCode">Postnummer:</label>
-        <input type="text" id="zipCode" name="zip_code"
-               th:value="${rentContract.zip_code}">
-      </div>
-      <div>
-        <label for="streetName">Gade navn:</label>
-        <input type="text" id="streetName" name="street_name"
-               th:value="${rentContract.street_name}">
-      </div>
-      <div>
-        <label for="streetNumber">Gade nummer:</label>
-        <input type="number" id="streetNumber" name="street_number"
-               th:value="${rentContract.street_number}">
-      </div>
-      <div>
-        <label for="cityName">By:</label>
-        <input type="text" id="cityName" name="city_name"
-               th:value="${rentContract.city_name}">
-      </div>
-      <div>
-        <button type="submit">Gem ændringer</button>
-      </div>
-    </div>
+<div class="createDiv">
+  <form action="/UpdateCar" method="post" class="createForm">
+    <h2>Bil</h2>
+    <!-- Dette er for den enkelte bil -->
+    <label>License plate</label>
+    <input type="text" name="license_plate" th:value="${car.license_plate}" required>
+    <label>Choose model</label>
+    <select name="car_model_name" required>
+      <option value="" hidden selected>Select model</option>
+      <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}" th:selected="${car_model.car_model_name == car.car_model_name}"></option>
+    </select>
+    <label>Stel nummer</label>
+    <!--        Et stel nummer er 17 cifrer, skal ændres til en string i hele systemet-->
+    <input type="text" name="vin_number" th:value="${car.vin_number}" required>
+    <label>Indkøbsprisen</label>
+    <input type="number" name="original_price" th:value="${car.original_price}" required>
+    <label>Registrerings afgift</label>
+    <input type="number" name="registration_tax_pr_month" th:value="${car.registration_tax_pr_month}" required>
+    <label>Bilens status</label>
+    <select name="car_status" required>
+<!--      Husk at ret så der ikke står typen i klassen men faktisk hvad der skal stå. f.eks. "klar"-->
+      <option value="available" th:selected="${car.getCar_status() == 'available'}">Klar</option>
+      <option value="rentet" th:selected="${car.getCar_status() == 'rentet'}">Udlejet</option>
+      <option value="returned" th:selected="${car.getCar_status() == 'returned'}">Returneret</option>
+      <option value="under_repair" th:selected="${car.getCar_status() == 'under_repair'}">Under reperation</option>
+    </select>
+    <label>Kørte km.</label>
+    <input type="number" name="odometer" th:value="${car.odometer}" required>
+    <label>Er bilen solgt på forhånd?</label>
+    <select name="is_pre_sold" required>
+      <option value="true" th:selected="${car.is_pre_sold} == 'true'">Solgt</option>
+      <option value="false" th:selected="${car.is_pre_sold == 'false'}">Ikke solgt</option>
+    </select>
+    <label>Salgspris (Kan undlades)</label>
+    <!--        Skal kunnes nulles-->
+    <input type="number" name="sale_price" th:value="${car.sale_price}">
+    <label>Produktionsår</label>
+    <input type="number" name="year_of_manufactoring" th:value="${car.year_of_manufactoring}" required>
+    <label>Farve</label>
+    <input type="text" name="color" th:value="${car.color}" required>
 
-    <div class="RentInfoContainer">
-      <h3>Infomation om lejeaftale</h3>
-      <label for="rentalStartDate">Leje start dato:</label>
-      <input type="date" id="rentalStartDate" name="rental_start_date"
-             th:value="${rentContract.rental_start_date}">
-      <label for="rentalEndDate">Leje slut dato:</label>
-      <input type="date" id="rentalEndDate" name="rental_end_date"
-             th:value="${rentContract.rental_end_date}">
-    </div>
-
-
-    <form th:action="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
-          method="post">
-      <button type="submit">Slet</button>
-    </form>
-
+    <button class="saveButton" type="submit" style="margin-left: 220px;">Gem ændringer</button>
   </form>
-  <div>
-    <a href="/DataRegister">Back to all contracts</a>
+
+  <div class="createForm">
+    <!-- Dette er for modellen -->
+    <h2>Model</h2>
+    <label>Mærke</label>
+    <p th:text="${car.carModel.getMake()}"></p>
+    <label>Model</label>
+    <p th:text="${car.carModel.car_model_name}"></p>
+    <label>Den månedlige udlejningspris</label>
+    <p th:text="${car.carModel.price_a_month}"></p>
+    <label>Karrosseri</label>
+    <p th:text="${car.carModel.body_type}"></p>
+    <label>Motor størrelse (Liter) (Undlad ved elbil)</label>
+    <p th:text="${car.carModel.engine_size}"></p>
+    <label>Gearkasse</label>
+    <p th:text="${car.carModel.gear_type}"></p>
+    <label>Brændstof</label>
+    <p th:text="${car.carModel.fuel_type}"></p>
+    <label>Antal sæder</label>
+    <p th:text="${car.carModel.seat_count}"></p>
+    <label>Antal døre</label>
+    <p th:text="${car.carModel.door_count}"></p>
+    <label>Hestekræfter</label>
+    <p th:text="${car.carModel.horsepower}"></p>
+
+    <form th:action="@{/DeleteCarFromDB/{license_plate}(license_plate = ${car.license_plate})}" method="post" onsubmit="return confirmDeletion()">
+        <button class="deleteButton" type="submit" style="margin-right: 220px;" >Slet bil</button>
+    </form>
   </div>
+
 </div>
+
+<script>
+    function confirmDeletion()  {
+        return confirm ("Are you sure you wanna delete?")
+    }
+</script>
 
 </body>
 </html>

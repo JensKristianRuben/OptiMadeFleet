@@ -22,42 +22,42 @@
         <h2>Ny bil</h2>
         <!-- Dette er for den enkelte bil -->
         <label>License plate</label>
-        <input type="text" name="license_plate" placeholder="Nummerplade" required>
+        <input type="text" name="license_plate"  required>
         <label>Choose model</label>
         <select name="car_model_name" required>
-            <option value="" hidden selected>Select model</option>
+            <option value="" hidden selected></option>
             <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}"></option>
         </select>
         <label>Stel nummer</label>
 <!--        Et stel nummer er 17 cifrer, skal ændres til en string i hele systemet-->
-        <input type="text" name="vin_number" placeholder="Stel nummer" required>
+        <input type="text" name="vin_number" required>
         <label>Indkøbsprisen</label>
-        <input type="number" name="original_price" placeholder="Indkøbsprisen" required>
+        <input type="number" name="original_price" required>
         <label>Registrerings afgift</label>
-        <input type="number" name="registration_tax_pr_month" placeholder="registrerings afgift" required>
+        <input type="number" name="registration_tax_pr_month" required>
         <label>Bilens status</label>
         <select name="car_status" required>
-            <option value="" hidden selected>Status på bilen</option>
+            <option value="" hidden selected></option>
             <option value="available">Klar</option>
             <option value="rentet">Udlejet</option>
             <option value="returned">Returneret</option>
             <option value="under_repair">Under reperation</option>
         </select>
         <label>Kørte km.</label>
-        <input type="number" name="odometer" placeholder="Kørte km." required>
+        <input type="number" name="odometer"  required>
         <label>Er bilen solgt på forhånd?</label>
         <select name="is_pre_sold" required>
-            <option value="" hidden selected>Er bilen solgt forhånd?</option>
+            <option value="" hidden selected></option>
             <option value="true">Solgt</option>
             <option value="false">Ikke solgt</option>
         </select>
         <label>Salgspris (Kan undlades)</label>
 <!--        Skal kunnes nulles-->
-        <input type="number" name="sale_price" placeholder="Salgspris (Kan undlades)">
+        <input type="number" name="sale_price">
         <label>Produktionsår</label>
-        <input type="number" name="year_of_manufactoring" placeholder="Produktionsår" required>
+        <input type="number" name="year_of_manufactoring" required>
         <label>Farve</label>
-        <input type="text" name="color" placeholder="Farve" required>
+        <input type="text" name="color" required>
 
         <button class="saveButton" type="submit">Gem</button>
     </form>
@@ -69,7 +69,7 @@
         <h2>Ny model</h2>
         <label>Vælg mærke</label>
         <select name="make" required>
-            <option value="" hidden selected>Vælg mærke</option>
+            <option value="" hidden selected></option>
             <option value="tesla">Tesla</option>
             <option value="volkswagen">VW</option>
             <option value="peugot">Peugot</option>
@@ -90,12 +90,12 @@
             <option value="fiat">Fiat</option>
         </select>
         <label>Model navn</label>
-        <input type="text" name="car_model_name" placeholder="Model navn" required>
+        <input type="text" name="car_model_name" required>
         <label>Den månedlige udlejningspris</label>
-        <input type="number" name="price_a_month" placeholder="Den månedlige udlejningspris" step="0.01" required>
+        <input type="number" name="price_a_month"  step="0.01" required>
         <label>Karrosseri</label>
         <select name="body_type" required>
-            <option value="" hidden selected>karrosseri</option>
+            <option value="" hidden selected></option>
             <option value="hatchback">hatchback</option>
             <option value="suv">SUV</option>
             <option value="sedan">Sedan</option>
@@ -112,7 +112,7 @@
         <input type="number" name="engine_size" step="0.01" value="0">
         <label>Gearkasse</label>
         <select name="gear_type" required>
-            <option value="" hidden selected>Gearkasse</option>
+            <option value="" hidden selected></option>
             <option value="manual">Manuel</option>
             <option value="automatic">Automat</option>
             <option value="electric_gear">Enkelt gearkasse (Elektriske biler)</option>
@@ -120,20 +120,18 @@
         </select>
         <label>Brændstof</label>
         <select name="fuel_type" required>
-            <option value="" hidden selected>Brændstof</option>
+            <option value="" hidden selected></option>
             <option value="petrol">Benzin</option>
             <option value="diesel">Diesel</option>
             <option value="electricity">El</option>
             <option value="hybrid">Hybrid</option>
         </select>
         <label>Antal sæder</label>
-        <input type="number" name="seat_count" placeholder="Antal sæder" required>
+        <input type="number" name="seat_count" required>
         <label>Antal døre</label>
-        <input type="number" name="door_count" placeholder="Antal døre" required>
-        <label>Benzintankens størrelse (Liter)(Km. pr. opladning ved elbil)</label>
-        <input type="number" name="fuel_capacity" placeholder="Benzintank størrelse (Liter) (Km. pr. opladning ved el bil" required>
+        <input type="number" name="door_count" required>
         <label>Hestekræfter</label>
-        <input type="number" name="horsepower" placeholder="Hestekræfter" required>
+        <input type="number" name="horsepower" required>
 
         <button class="saveButton" type="submit">Gem</button>
     </form>

@@ -87,4 +87,34 @@ public class CarRepository {
         carTemplate.update(updateSql, car.getCar_status(), car.getLicense_plate());
 
     }
+
+    public void updateCar (Car car) {
+        String sql = "UPDATE car SET license_plate = ?, car_model_name = ?, vin_number = ?, original_price = ?, " +
+                "registration_tax_pr_month = ?, car_status = ?, odometer = ?, damage_report_id = ?, is_pre_sold = ?, " +
+                "sale_price = ?, alert_damages_not_fixed = ?, year_of_manufactoring = ?, color = ? " +
+                "WHERE license_plate = ?";
+
+        carTemplate.update(sql,
+                car.getLicense_plate(),
+                car.getCar_model_name(),
+                car.getVin_number(),
+                car.getOriginal_price(),
+                car.getRegistration_tax_pr_month(),
+                car.getCar_status(),
+                car.getOdometer(),
+                null,
+                car.isIs_pre_sold(),
+                car.getSale_price(),
+                car.isAlert_damages_not_fixed(),
+                car.getYear_of_manufactoring(),
+                car.getColor(),
+                car.getLicense_plate());
+    }
+
+    public void DeleteCarFromDB(String license_plate) {
+        String sql = "DELETE FROM car WHERE license_plate = ?";
+
+        carTemplate.update(sql, license_plate);
+    }
+
 }

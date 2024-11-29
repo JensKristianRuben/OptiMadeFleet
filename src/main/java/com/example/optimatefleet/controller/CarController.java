@@ -6,10 +6,7 @@ import com.example.optimatefleet.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CarController {
@@ -38,8 +35,20 @@ public class CarController {
     @GetMapping("EditCar")
     public String EditCar (Model model)    {
         //Husk at map dataregister html siden til denne controller
-        model.addAttribute("car", carService.findCarByLicensePlate("ck60751"));
-
+        model.addAttribute("car", carService.findCarByLicensePlate("JKL789"));
+        model.addAttribute("car_models", carService.fethAllCarModels());
         return "EditCar";
+    }
+
+    @PostMapping("UpdateCar")
+    public String updateCar (@ModelAttribute Car car)    {
+        carService.updateCar(car);
+        return "redirect:/DataRegister";
+    }
+
+    @PostMapping("DeleteCarFromDB/{license_plate}")
+    public String deleteCarFromDB (@PathVariable String license_plate)    {
+        carService.DeleteCarFromDB(license_plate);
+        return "redirect:/DataRegister";
     }
 }

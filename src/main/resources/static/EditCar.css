@@ -1,0 +1,86 @@
+.createDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #444444;
+    width: 1000px;
+    height: 80vh;
+    margin-top: 10vh;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px #323232;
+}
+
+.createForm{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 750px;
+    width: 450px;
+}
+
+h2{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+input{
+    width: 85%;
+    height: 25px;
+    background-color: transparent;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    color: white;
+
+}
+
+input:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+select{
+    width: 86%;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    background-color: transparent;
+    color: white;
+}
+
+select:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+label{
+    color: #999999;
+    align-self: flex-start;
+    margin-left: 32px;
+}
+
+p{
+    display: inline-block;
+    align-self: flex-start;
+    margin-left: 30px;
+    margin-top:0;
+    color: white;
+    width: 90%;
+    padding: 0;
+}
+
+option{
+    color: black;
+}
