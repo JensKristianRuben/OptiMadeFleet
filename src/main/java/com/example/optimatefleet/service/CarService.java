@@ -2,7 +2,6 @@ package com.example.optimatefleet.service;
 
 import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.CarModel;
-import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +68,14 @@ public class CarService {
             }
         }
         return car;
+    }
+
+    public void updateCar (Car car) {
+        carRepository.updateCar(car);
+    }
+
+    public void DeleteCarFromDB(String license_plate) {
+        carRepository.DeleteCarFromDB(license_plate);
     }
 }
 

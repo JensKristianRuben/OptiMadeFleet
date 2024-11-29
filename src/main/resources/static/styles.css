@@ -26,6 +26,25 @@ body{
     cursor: pointer;
 }
 
+.deleteButton {
+    margin-bottom: 30px;
+    background-color: transparent;
+    height: 30px;
+    width: 200px;
+    border-radius: 20px;
+    border: solid #e15347;
+    color: #e15347;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.deleteButton:hover{
+    background-color: #e15347;
+    color: white;
+    cursor: pointer;
+}
+
+
 .NavBar{
     background-color: transparent;
     display: flex;
