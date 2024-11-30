@@ -20,19 +20,31 @@
 
 <div class="outerContainer">
     <div class="innerContainer">
+        <div class="headerContainer">
+            <h3>Biler</h3>
+            <a class="createCarHeader" href="/CreateCarAndCarModel">+</a>
+        </div>
         <div class="leftSide">
 
         </div>
 
     </div>
-
     <div class="innerContainer">
+        <div class="headerContainer">
+            <h3>Lejeaftaler</h3>
+            <a class="createHeader" href="/CreateRentContract">+</a>
+        </div>
         <div class="rightSide">
-            <a th:href="@{/ShowRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}" th:each="rentContract : ${rentContracts}" class="rentContractElement">
+            <a th:href="@{/ShowRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
+               th:each="rentContract : ${rentContracts}" class="rentContractElement">
                 <span th:text="${rentContract.getLicense_plate()}"></span>
                 <span th:text="${rentContract.getRental_start_date()}"></span>
                 <span th:text="${rentContract.getRental_end_date()}"></span>
             </a>
+        </div>
+        <div class="headerContainer">
+            <h3>Forhåndsaftaler</h3>
+            <a class="createHeader" href="#">+</a>
         </div>
         <div class="rightSide">
 

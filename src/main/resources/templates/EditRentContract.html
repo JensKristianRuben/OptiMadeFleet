@@ -18,7 +18,7 @@
     <a class="NavBarLink" href="#">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
-<form action="/updateRentContract" class="createForm" method="post">
+<form class="createForm" method="post">
 
     <div class="renterContainer">
         <h3>Kundeinformation</h3>
@@ -97,24 +97,21 @@
         <input id="returnLocation" type="text" name="return_location" required
                th:value="${rentContract.getReturn_location()}">
 
-        <div class="buttonContainer">
-            <button class="saveButton" type="submit">Opdater</button>
+        <button class="saveButton" type="submit" formaction="/updateRentContract">Opdater</button>
+        <button class="deleteButton" type="submit" th:formaction="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}">Slet</button>
 
-        </div>
     </div>
 
 
 </form>
 
-<form th:action="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
-      method="post" onsubmit="return confirmDelete();">
-    <button class="DeleteButton" type="submit">Slet</button>
-    <script>
-        function confirmDelete() {
-            return confirm("Er du sikker på, at du vil slette denne lejekontrakt?");
-        }
-    </script>
-</form>
+
+<script>
+    function confirmDelete() {
+        return confirm("Er du sikker på, at du vil slette denne lejekontrakt?");
+    }
+</script>
+
 </body>
 </html>
 
