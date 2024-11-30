@@ -5,13 +5,9 @@ html, body{
     align-items: center;
     height: 100vh;
     width: 100%;
-
 }
-
-
-
 .outerContainer{
-    margin-top: 200px;
+    margin-top: 50px;
     height: 800px;
     width: 90%;
     display: flex;
@@ -30,6 +26,8 @@ html, body{
     background-color: #454545;
     width: 500px;
     height: 700px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.1);
 }
 
 .rightSide{
@@ -43,6 +41,8 @@ html, body{
     align-content: flex-start;
     gap: 20px;
     overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.1);
 }
 .rentContractElement{
     border: 1px solid black;
@@ -51,6 +51,7 @@ html, body{
     height: 50px;
     width: 300px;
     text-decoration: none;
+    font-weight: bold;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
@@ -62,3 +63,48 @@ html, body{
 .rentContractElement:hover{
     background-color: #47b2e1; /* vi skal aftale en endelig blå farve farve */
 }
+.headerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+h3{
+    margin-top: 60px;
+}
+.createCarHeader{
+    background-color: #454545;
+    text-decoration: none;
+    height: 35px;
+    width: 50px;
+    font-size: 20px;
+    margin-left: 350px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.2s;
+}
+.createHeader{
+    background-color: #454545;
+    text-decoration: none;
+    height: 35px;
+    width: 50px;
+    font-size: 20px;
+    margin-left: 500px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.2s;
+}
+.createCarHeader:hover, .createHeader:hover {
+    background-color: #47b2e1;
+    box-shadow: 0 4px 10px rgba(71, 178, 225, 0.5);
+    transform: scale(1.02);
+}
+

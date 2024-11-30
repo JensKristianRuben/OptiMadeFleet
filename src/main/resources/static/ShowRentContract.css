@@ -1,11 +1,17 @@
-.saveButton{
-    margin-bottom: 0;
-}
 p{
     color: white;
 }
-.button-container {
-    display: flex;
-    gap: 10px; /* Lægger lidt afstand mellem knapperne */
-    justify-content: flex-start; /* Hvis du ønsker knapperne venstrejusteret */
+button{
+    margin-top: 1px;
+    margin-left: 1px;
+}
+.saveButton {
+    margin-bottom: 0 ;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+.deleteButton{
+    margin-bottom: 0;
+    margin-left: 35px;
+    margin-top: 20px;
 }
