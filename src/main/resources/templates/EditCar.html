@@ -47,8 +47,8 @@
     <input type="number" name="odometer" th:value="${car.odometer}" required>
     <label>Er bilen solgt på forhånd?</label>
     <select name="is_pre_sold" required>
-      <option value="true" th:selected="${car.is_pre_sold} == 'true'">Solgt</option>
-      <option value="false" th:selected="${car.is_pre_sold == 'false'}">Ikke solgt</option>
+      <option value="true" th:selected="${car.is_pre_sold} == true">Solgt</option>
+      <option value="false" th:selected="${car.is_pre_sold == false}">Ikke solgt</option>
     </select>
     <label>Salgspris (Kan undlades)</label>
     <!--        Skal kunnes nulles-->

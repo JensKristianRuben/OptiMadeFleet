@@ -133,38 +133,38 @@ public class CarModel {
     }
 
     private enum Make{
-        tesla,
-        volkswagen,
-        peugot,
-        toyota,
-        renault,
-        hyundai,
-        kia,
-        skoda,
-        ford,
-        mercedes,
-        mercedes_benz,
-        bmw,
-        audi,
-        volvo,
-        mazda,
-        nissan,
-        polestar,
-        fiat
+        Tesla,
+        Volkswagen,
+        Peugot,
+        Toyota,
+        Renault,
+        Hyundai,
+        Kia,
+        Skoda,
+        Ford,
+        Mercedes,
+        Mercedes_Benz,
+        Bmw,
+        Audi,
+        Volvo,
+        Mazda,
+        Nissan,
+        Polestar,
+        Fiat
     };
 
     private enum Body_type{
-        hatchback,
-        suv,
-        sedan,
-        smart,
-        cabriolet,
-        station_wagon,
-        coupe,
-        crossover,
-        minivan,
-        roadster,
-        pickup
+        Hatchback,
+        SUV,
+        Sedan,
+        Smart,
+        Cabriolet,
+        Station_wagon,
+        Coupe,
+        Crossover,
+        Minivan,
+        Roadster,
+        Pickup
     };
 
     private enum Gear_type{

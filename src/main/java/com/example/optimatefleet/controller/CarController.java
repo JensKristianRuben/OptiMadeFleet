@@ -14,41 +14,43 @@ public class CarController {
     private CarService carService;
 
     @GetMapping("CreateCarAndCarModel")
-    public String createCar (Model model)  {
-        model.addAttribute("car_models",carService.fethAllCarModels());
+    public String createCar(Model model) {
+        model.addAttribute("car_models", carService.fethAllCarModels());
         return "CreateCarAndCarModel";
     }
 
     @PostMapping("CreateCarAndCarModel")
-    public String createCar (@ModelAttribute Car car, @RequestParam("car_model_name") String car_model_name)  {
+    public String createCar(@ModelAttribute Car car, @RequestParam("car_model_name") String car_model_name) {
         carService.createNewCar(car, car_model_name);
         return "redirect:/DataRegister";
     }
 
     @PostMapping("CreateNewCarModel")
-    public String saveNewCarModel (@ModelAttribute CarModel carModel)    {
+    public String saveNewCarModel(@ModelAttribute CarModel carModel) {
         carService.createNewCarModel(carModel);
 
         return "redirect:/CreateCarAndCarModel";
     }
 
-    @GetMapping("EditCar")
-    public String EditCar (Model model)    {
+    @GetMapping("UpdateCarAndCarModel/{license_plate}") 
+    public String updateCarAndCarModel(Model model, @PathVariable String license_plate) {
         //Husk at map dataregister html siden til denne controller
-        model.addAttribute("car", carService.findCarByLicensePlate("JKL789"));
+        model.addAttribute("car", carService.findCarByLicensePlate(license_plate));
         model.addAttribute("car_models", carService.fethAllCarModels());
         return "EditCar";
     }
 
     @PostMapping("UpdateCar")
-    public String updateCar (@ModelAttribute Car car)    {
+    public String updateCar(@ModelAttribute Car car) {
+        System.out.println(car);
         carService.updateCar(car);
         return "redirect:/DataRegister";
     }
 
     @PostMapping("DeleteCarFromDB/{license_plate}")
-    public String deleteCarFromDB (@PathVariable String license_plate)    {
+    public String deleteCarFromDB(@PathVariable String license_plate) {
         carService.DeleteCarFromDB(license_plate);
         return "redirect:/DataRegister";
     }
+
 }

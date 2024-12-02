@@ -1,5 +1,6 @@
 package com.example.optimatefleet.controller;
 
+import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.RentContractService;
@@ -31,15 +32,7 @@ public class RentContractController {
     public String createRentContract(@ModelAttribute RentContract rentContract) {
         rentContractService.createRentContract(rentContract);
         carService.updateCarStatusToRented(rentContract.getLicense_plate());
-        System.out.println(rentContract);
         return "redirect:/DataRegister";
-    }
-
-    @GetMapping("/DataRegister")
-    public String showAllRentalContractsCarsAndPreSaleContract(Model model) {
-        List<RentContract> rentContractList = rentContractService.showAllRentContracts();
-        model.addAttribute("rentContracts", rentContractList);
-        return "DataRegister";
     }
 
     @GetMapping("/ShowRentContract/{licensePlate}")

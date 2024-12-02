@@ -20,17 +20,40 @@
 
 <div class="outerContainer">
     <div class="innerContainer">
-        <div class="headerContainer">
-            <h3>Biler</h3>
+        <div class="headerLeftContainer">
+            <div class="headerLeftDiv">
+                <h3>Biler</h3>
+                <form action="/DataRegister" method="get">
+                    <select class="selectSortDropdown" name="sortBy" onchange="this.form.submit()">
+                        <option value="allCars" th:selected="${sortBy == 'allCars'}">Alle biler</option>
+                        <option value="available" th:selected="${sortBy == 'available'}">Klar</option>
+                        <option value="rented"  th:selected="${sortBy == 'rented'}">Udlejet</option>
+                        <option value="returned"  th:selected="${sortBy == 'returned'}">Returneret</option>
+                        <option value="under_repair"  th:selected="${sortBy == 'under_repair'}">Under reperation</option>
+                    </select>
+                </form>
+            </div>
             <a class="createCarHeader" href="/CreateCarAndCarModel">+</a>
         </div>
         <div class="leftSide">
-
+                <a th:href="@{/UpdateCarAndCarModel/{licensePlate}(licensePlate=${car.license_plate})}"
+                   th:each="car : ${carsList}" class="carElement">
+                    <div>
+                        <span th:text="${car.license_plate}"></span>
+                        <span th:text="${car.carModel.make}"></span>
+                        <span th:text="${car.car_model_name}"></span>
+                        <span th:text="${car.year_of_manufactoring}"></span>
+                        <span th:text="${car.color}"></span>
+                    </div>
+                        <span th:text="${car.getCar_statusString()}"></span>
+                        <span th:text="${car.isIs_pre_soldString()}"></span>
+                        <span th:text="${car.carModel.price_a_month} + ' kr.'"></span>
+                </a>
         </div>
 
     </div>
     <div class="innerContainer">
-        <div class="headerContainer">
+        <div class="headerRightContainer">
             <h3>Lejeaftaler</h3>
             <a class="createHeader" href="/CreateRentContract">+</a>
         </div>
@@ -42,7 +65,7 @@
                 <span th:text="${rentContract.getRental_end_date()}"></span>
             </a>
         </div>
-        <div class="headerContainer">
+        <div class="headerRightContainer">
             <h3>Forhåndsaftaler</h3>
             <a class="createHeader" href="#">+</a>
         </div>
