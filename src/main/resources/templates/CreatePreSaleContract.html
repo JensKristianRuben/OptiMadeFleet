@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret forhåndsaftale</title>
+    <link rel="stylesheet" href="/RentContract.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="#">Skadesrapport</a>
+    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+</div>
+
+<form action="/#" method="post" class="createForm">
+    <label for="companyName">Virksomhedsnavn: </label>
+    <input type="text" id="companyName" name="company_name" required>
+
+    <label for="cvr">CVR: </label>
+    <input type="number" id="cvr" name="cvr" required>
+
+    <label for="phoneNumber">Telefonnummer: </label>
+    <input type="text" id="phoneNumber" name="company_phonenumber" required>
+
+    <label for="email">Email: </label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="zipCode">Postnummer: </label>
+    <input type="number" id="zipCode" name="zip_code" required>
+
+    <label for="streetName">Adresse: </label>
+    <input type="text" id="streetName" name="street_name">
+
+    <label for="streetNumber">Nr: </label>
+    <input type="number" id="streetNumber" name="street_number">
+
+    <label for="cityName">By: </label>
+    <input type="text" id="cityName" name="city_name">
+
+    <label for="licensePlate">Nummerplade: </label>
+    <select id="licensePlate" name="license_plate" required>
+        <option value="" hidden selected></option>
+        <option th:each="car : ${cars}"
+                th:value="${car.getLicense_plate}"
+                th:text="${car.carModel.getMake()} + ' ' + ${car.carModel.getCar_model_name()} + ' - ' + ${car.getLicense_plate()}">
+        </option>
+    </select>
+
+    <label for="deliveryLocation">Leveringssted: </label>
+    <input type="text" id="deliveryLocation" name="delivery_location">
+
+    <label for="price">Pris: </label>
+    <input type="number" id="price" name="price">
+
+    <label for="maxKm">Max kørte km: </label>
+    <input type="number" id="maxKm" name="max_km">
+
+
+    <button class="saveButton" type="submit">Opret</button>
+</form>
+
+</body>
+</html>

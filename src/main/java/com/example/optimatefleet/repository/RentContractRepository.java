@@ -43,10 +43,10 @@ public class RentContractRepository {
                 addressID, rentContract.getRenter_phonenumber(), rentContract.getEmail(), rentContract.getDate_of_birth());
 
         String sqlRentContract = "INSERT INTO rent_contract (drivers_license_number, license_plate, rental_start_date, " +
-                "rental_end_date, pickup_location, return_location, max_km) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                "rental_end_date, pickup_location, return_location, max_km, rent_contract_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sqlRentContract, rentContract.getDrivers_license_number(), rentContract.getLicense_plate(), rentContract.getRental_start_date(), rentContract.getRental_end_date(),
-                rentContract.getPickup_location(), rentContract.getReturn_location(), rentContract.getMax_km());
+                rentContract.getPickup_location(), rentContract.getReturn_location(), rentContract.getMax_km(), rentContract.getRent_contract_type());
     }
 
     public List<RentContract> fetchAllRentContracts() {
@@ -57,6 +57,7 @@ public class RentContractRepository {
                 "    rent_contract.pickup_location, \n" +
                 "    rent_contract.return_location, \n" +
                 "    rent_contract.max_km, " +
+                "    rent_contract.rent_contract_type, " +
                 "    renter.drivers_license_number,\n" +
                 "    renter.renter_first_name,\n" +
                 "    renter.renter_last_name,\n" +
@@ -128,7 +129,8 @@ public class RentContractRepository {
         String updateRentContract = "UPDATE rent_contract SET license_plate = ?, max_km = ?, rental_start_date = ?, " +
                 "    rental_end_date = ?, " +
                 "    pickup_location = ?, " +
-                "    return_location = ? " +
+                "    return_location = ?, " +
+                "    rent_contract_type = ? " +
                 "WHERE drivers_license_number = ?";
 
         jdbcTemplate.update(updateRentContract,
@@ -138,6 +140,7 @@ public class RentContractRepository {
                 rentContract.getRental_end_date(),
                 rentContract.getPickup_location(),
                 rentContract.getReturn_location(),
+                rentContract.getRent_contract_type(),
                 rentContract.getDrivers_license_number());
 
     }

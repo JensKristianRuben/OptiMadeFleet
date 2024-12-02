@@ -80,6 +80,12 @@
                th:value="${rentContract.getMax_km()}">
 
         <h3>Kontraktinformation</h3>
+        <label for="rentContractType">Abonnomentstype</label>
+        <select id="rentContractType" name="rent_contract_type">
+            <option value="" hidden selected></option>
+            <option value="unlimited" th:Selected="${rentContract.getRent_contract_type() == 'unlimited'}" >Unlimited</option>
+            <option value="limited" th:Selected="${rentContract.getRent_contract_type() == 'limited'}">Limited</option>
+        </select>
 
         <label for="rentalStartDate">Start dato</label>
         <input id="rentalStartDate" type="date" name="rental_start_date" required

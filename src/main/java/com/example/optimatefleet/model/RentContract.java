@@ -25,7 +25,10 @@ public class RentContract {
     private String pickup_location;
     private String return_location;
 
-    public RentContract(){
+
+    private String rent_contract_type;
+
+    public RentContract() {
 
     }
 
@@ -155,6 +158,14 @@ public class RentContract {
 
     public void setReturn_location(String return_location) {
         this.return_location = return_location;
+    }
+
+    public String getRent_contract_type() {
+        return rent_contract_type;
+    }
+
+    public void setRent_contract_type(String rent_contract_type) {
+        this.rent_contract_type = rent_contract_type;
     }
 
     @Override
