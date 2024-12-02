@@ -52,6 +52,20 @@ public class Car {
         return car_status.toString();
     }
 
+    public String getCar_statusString() {
+        if(car_status == CarStatus.available){
+            return "Klar";
+        }if(car_status == CarStatus.rentet){
+            return "Udlejet";
+        }if(car_status == CarStatus.returned){
+            return "Returneret";
+        }if(car_status == CarStatus.under_repair){
+            return "Under reperation";
+        }else {
+            return "Ingen status";
+        }
+    }
+
     public String getLicense_plate() {
         return license_plate;
     }
@@ -110,6 +124,14 @@ public class Car {
 
     public boolean isIs_pre_sold() {
         return is_pre_sold;
+    }
+
+    public String isIs_pre_soldString() {
+        if(is_pre_sold){
+            return "Solgt";
+        }else{
+            return "Ikke solgt";
+        }
     }
 
     public void setIs_pre_sold(boolean is_pre_sold) {

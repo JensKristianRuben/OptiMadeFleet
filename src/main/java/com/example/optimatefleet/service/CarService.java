@@ -31,7 +31,7 @@ public class CarService {
     }
 
     //Bruger listen af bilen og tjekker hvilke biler der er ledige og tilføjer dem til en ny liste.
-    public List<Car> fecthAllCarWithAvailableStatus(){
+    public List<Car> fecthAllCarWithAvailableStatus(){ //rename til "cars"
         List<Car> listOfCars = fetchAllCars();
         List<Car> allAvailableCars = new ArrayList<>();
         System.out.println(listOfCars);
@@ -76,6 +76,47 @@ public class CarService {
 
     public void DeleteCarFromDB(String license_plate) {
         carRepository.DeleteCarFromDB(license_plate);
+    }
+
+    public List<Car> fetchAllCarsAndSortByParam(String sortBy){
+        List<Car> listOfCars = carRepository.fetchAllCars();
+
+        switch (sortBy) {
+            case "available":
+                List<Car> allAvailableCars = new ArrayList<>();
+                for (Car element : listOfCars){
+                    if (element.getCar_status().equals("available")){
+                        allAvailableCars.add(element);
+                    }
+                }
+                return allAvailableCars;
+            case "rented":
+                List<Car> allRentedCars = new ArrayList<>();
+                for (Car element : listOfCars){
+                    if (element.getCar_status().equals("rented")){
+                        allRentedCars.add(element);
+                    }
+                }
+                return allRentedCars;
+            case "returned":
+                List<Car> allReturnedCars = new ArrayList<>();
+                for (Car element : listOfCars){
+                    if (element.getCar_status().equals("returned")){
+                        allReturnedCars.add(element);
+                    }
+                }
+                return allReturnedCars;
+            case "under_repair":
+                List<Car> allUnder_repairCars = new ArrayList<>();
+                for (Car element : listOfCars){
+                    if (element.getCar_status().equals("under_repair")){
+                        allUnder_repairCars.add(element);
+                    }
+                }
+                return allUnder_repairCars;
+            default:
+                return listOfCars;
+        }
     }
 }
 

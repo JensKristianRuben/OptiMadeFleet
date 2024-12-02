@@ -62,7 +62,7 @@ public class CarRepository {
         return carTemplate.query("SELECT * FROM car_model", new BeanPropertyRowMapper<>(CarModel.class));
     }
 
-    public CarModel fetchModelByModelName(String car_model_name) {
+    public CarModel fetchModelByModelName(String car_model_name) { //Skal laves om så det sker i servicelaget
         return carTemplate.queryForObject("SELECT * FROM car_model WHERE car_model_name=?",  new Object[]{car_model_name},new BeanPropertyRowMapper<>(CarModel.class));
     }
 
@@ -89,6 +89,7 @@ public class CarRepository {
     }
 
     public void updateCar (Car car) {
+        System.out.println(car);
         String sql = "UPDATE car SET license_plate = ?, car_model_name = ?, vin_number = ?, original_price = ?, " +
                 "registration_tax_pr_month = ?, car_status = ?, odometer = ?, damage_report_id = ?, is_pre_sold = ?, " +
                 "sale_price = ?, alert_damages_not_fixed = ?, year_of_manufactoring = ?, color = ? " +
