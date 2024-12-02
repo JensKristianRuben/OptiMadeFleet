@@ -77,6 +77,12 @@
         <input id="maxKm" type="number" name="max_km" required>
 
         <h3>Kontraktinformation</h3>
+        <label for="rentContractType">Abonnomentstype</label>
+        <select id="rentContractType" name="rent_contract_type">
+            <option value="" hidden selected></option>
+            <option value="unlimited">Unlimited</option>
+            <option value="limited">Limited</option>
+        </select>
 
         <label for="rentalStartDate">Start dato</label>
         <input id="rentalStartDate" type="date" name="rental_start_date" required>
