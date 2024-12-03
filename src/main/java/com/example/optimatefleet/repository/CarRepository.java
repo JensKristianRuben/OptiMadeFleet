@@ -91,7 +91,7 @@ public class CarRepository {
     public void updateCar (Car car) {
         System.out.println(car);
         String sql = "UPDATE car SET license_plate = ?, car_model_name = ?, vin_number = ?, original_price = ?, " +
-                "registration_tax_pr_month = ?, car_status = ?, odometer = ?, damage_report_id = ?, is_pre_sold = ?, " +
+                "registration_tax_pr_month = ?, car_status = ?, odometer = ?, is_pre_sold = ?, " +
                 "sale_price = ?, alert_damages_not_fixed = ?, year_of_manufactoring = ?, color = ? " +
                 "WHERE license_plate = ?";
 
@@ -103,7 +103,6 @@ public class CarRepository {
                 car.getRegistration_tax_pr_month(),
                 car.getCar_status(),
                 car.getOdometer(),
-                null,
                 car.isIs_pre_sold(),
                 car.getSale_price(),
                 car.isAlert_damages_not_fixed(),

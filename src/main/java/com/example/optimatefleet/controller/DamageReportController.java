@@ -55,7 +55,7 @@ public class DamageReportController {
 
         System.out.println(car); //tjek om car er oprettet
 
-        //Gem bil metode
+
         //gem damagereport metode der gemmer damages også
         //Skal genere en skadesrapport?
         //Skal ændre i prisen på forhåndsaftalen alt efter hvor meget skaderne koster (skader-prisen)
