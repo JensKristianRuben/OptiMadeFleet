@@ -31,7 +31,7 @@ public class CarService {
     }
 
     //Bruger listen af bilen og tjekker hvilke biler der er ledige og tilføjer dem til en ny liste.
-    public List<Car> fecthAllCarWithAvailableStatus(){ //rename til "cars"
+    public List<Car> fecthAllCarWithAvailableStatus(){ //rename til "cars" og stavefejl i "fetch"
         List<Car> listOfCars = fetchAllCars();
         List<Car> allAvailableCars = new ArrayList<>();
         System.out.println(listOfCars);

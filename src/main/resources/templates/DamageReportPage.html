@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Damage report page</title>
+    <link rel="stylesheet" href="/damageReportPage.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="DamageReportPage">Skadesrapport</a>
+    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+</div>
+
+<div class="outerContainer">
+    <div class="innerContainer">
+        <div class="headerLeftContainer">
+            <div class="headerLeftDiv">
+                <h3>Biler</h3>
+                <form action="/DataRegister" method="get">
+                    <select class="selectSortDropdown" name="sortBy" onchange="this.form.submit()">
+                        <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="leftSide">
+            <a th:href="@{/DamageReportPagePost/{licensePlate}(licensePlate=${car.license_plate})}"
+               th:each="car : ${carsList}" class="carElement">
+                <div>
+                    <span th:text="${car.license_plate}"></span>
+                    <span th:text="${car.carModel.make}"></span>
+                    <span th:text="${car.car_model_name}"></span>
+                    <span th:text="${car.year_of_manufactoring}"></span>
+                    <span th:text="${car.color}"></span>
+                </div>
+                <span th:text="${car.getCar_statusString()}"></span>
+                <span th:text="${car.isIs_pre_soldString()}"></span>
+                <span th:text="${car.carModel.price_a_month} + ' kr.'"></span>
+            </a>
+        </div>
+    </div>
+    <div class="innerContainer">
+        <div class="headerLeftContainer">
+            <div class="headerLeftDiv">
+                <h3>Skadesrapportering</h3>
+            </div>
+        </div>
+        <div class="rightSide">
+            <div th:if="${carToGetDamageReport != null}" class="rightSideDiv">
+                <div class="carElementJustForShow">
+                    <span th:text="${carToGetDamageReport.license_plate}"></span>
+                    <span th:text="${carToGetDamageReport.carModel.make}"></span>
+                    <span th:text="${carToGetDamageReport.car_model_name}"></span>
+                    <span th:text="${carToGetDamageReport.year_of_manufactoring}"></span>
+                    <span th:text="${carToGetDamageReport.color}"></span>
+                </div>
+                <form action="/saveDamageReport" method="post"
+                      style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; width: 100%">
+                    <input hidden="hidden" type="text" name="license_plate" th:value="${carToGetDamageReport.license_plate}">
+                    <div class="damageReportDiv">
+                        <div>
+                            <label>Skade</label>
+                            <input type="text" name="damage1" th:value="${damage1 != null ? damage1 : 'Ingen skade'}">
+                        </div>
+                        <div>
+                            <label>Pris</label>
+                            <input type="text" name="price1" th:value="${price1 != null ? price1 : '0'}">
+                        </div>
+                    </div>
+                    <div class="damageReportDiv">
+                        <div>
+                            <label>Skade</label>
+                            <input type="text" name="damage2" th:value="${damage2 != null ? damage2 : 'Ingen skade'}">
+                        </div>
+                        <div>
+                            <label>Pris</label>
+                            <input type="text" name="price2" th:value="${price2 != null ? price2 : '0'}">
+                        </div>
+                    </div>
+                    <div class="damageReportDiv">
+                        <div>
+                            <label>Skade</label>
+                            <input type="text" name="damage3" th:value="${damage3 != null ? damage3 : 'Ingen skade'}">
+                        </div>
+                        <div>
+                            <label>Pris</label>
+                            <input type="text" name="price3" th:value="${price3 != null ? price3 : '0'}">
+                        </div>
+                    </div>
+                    <div class="damageReportDiv">
+                        <div>
+                            <label>Skade</label>
+                            <input type="text" name="damage4" th:value="${damage4 != null ? damage4 : 'Ingen skade'}">
+                        </div>
+                        <div>
+                            <label>Pris</label>
+                            <input type="text" name="price4" th:value="${price4 != null ? price4 : '0'}">
+                        </div>
+                    </div>
+                    <div class="damageReportDiv">
+                        <div>
+                            <label>Skade</label>
+                            <input type="text" name="damage5" th:value="${damage5 != null ? damage5 : 'Ingen skade'}">
+                        </div>
+                        <div>
+                            <label>Pris</label>
+                            <input type="text" name="price5" th:value="${price5 != null ? price5 : '0'}">
+                        </div>
+                    </div>
+                    <div class="damageReportDiv" >
+                        <div>
+                            <label>Overkørte km.</label>
+                            <input type="number" name="mileageOverLimit" th:value="${mileageOverLimit != null ? mileageOverLimit : 0}">
+                        </div>
+                        <div>
+                            <button class="saveButton" style="margin-top: 20px;">Gem</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

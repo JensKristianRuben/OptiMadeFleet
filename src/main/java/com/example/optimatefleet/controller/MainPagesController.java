@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -32,5 +34,24 @@ public class MainPagesController {
         model.addAttribute("rentContracts", rentContractList);
         model.addAttribute("preSaleContracts", preSaleContracts);
         return "DataRegister";
+    }
+
+    @GetMapping("DamageReportPage")
+    public String damageReportPage(Model model) {
+        List<Car> carsList = carService.fetchAllCarsAndSortByParam("returned");
+        model.addAttribute("returned");
+        model.addAttribute("carsList", carsList);
+
+        return "DamageReportPage";
+    }
+
+    @GetMapping("DamageReportPagePost/{license_plate}")
+    public String damageReportPage(Model model, @PathVariable String license_plate) {
+        List<Car> carsList = carService.fetchAllCarsAndSortByParam("returned");
+        model.addAttribute("carToGetDamageReport", carService.findCarByLicensePlate(license_plate));
+        model.addAttribute("returned");
+        model.addAttribute("carsList", carsList);
+
+        return "DamageReportPage";
     }
 }
