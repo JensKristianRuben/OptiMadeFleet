@@ -67,10 +67,15 @@
         </div>
         <div class="headerRightContainer">
             <h3>Forhåndsaftaler</h3>
-            <a class="createHeader" href="#">+</a>
+            <a class="createHeader" href="/CreatePreSaleContract">+</a>
         </div>
         <div class="rightSide">
-
+        <a th:href="@{/updatePreSaleContract/{licensePlate}(licensePlate=${preSaleContract.getLicense_plate()})}"
+        th:each="preSaleContract : ${preSaleContracts}" class="rentContractElement">
+            <span th:text="${preSaleContract.getCompany_name()}"></span>
+            <span th:text="${preSaleContract.getLicense_plate()}"></span>
+            <span th:text="${preSaleContract.getPrice()}"></span>
+        </a>
         </div>
 
     </div>

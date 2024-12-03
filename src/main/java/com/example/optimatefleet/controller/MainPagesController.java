@@ -1,8 +1,10 @@
 package com.example.optimatefleet.controller;
 
 import com.example.optimatefleet.model.Car;
+import com.example.optimatefleet.model.PreSaleContract;
 import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
+import com.example.optimatefleet.service.PreSaleContractService;
 import com.example.optimatefleet.service.RentContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +19,18 @@ public class MainPagesController {
     CarService carService;
     @Autowired
     RentContractService rentContractService;
+    @Autowired
+    PreSaleContractService preSaleContractService;
 
     @GetMapping("/DataRegister")
     public String dataRegisterPage(Model model, @RequestParam(defaultValue = "allCars") String sortBy) {
         List<RentContract> rentContractList = rentContractService.showAllRentContracts();
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
+        List<PreSaleContract> preSaleContracts = preSaleContractService.fetchAllPreSaleContracts();
         model.addAttribute("sortBy",sortBy);
         model.addAttribute("carsList", carsList);
         model.addAttribute("rentContracts", rentContractList);
+        model.addAttribute("preSaleContracts", preSaleContracts);
         return "DataRegister";
     }
 }

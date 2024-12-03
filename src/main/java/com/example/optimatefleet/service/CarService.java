@@ -130,5 +130,40 @@ public class CarService {
                 return listOfCars;
         }
     }
+
+    public void updateCarStatusToSold(String licensePlate){
+        List<Car> listOfCars = fetchAllCars();
+        Car car = null;
+        for (Car element : listOfCars){
+            if (element.getLicense_plate().equals(licensePlate)){
+                car = element;
+                car.setIs_pre_sold(true);
+            }
+        }
+        carRepository.updateCar(car);
+    }
+    public void updateCarStatusToNotSold(String licensePlate){
+        List<Car> listOfCars = fetchAllCars();
+        Car car = null;
+        for (Car element : listOfCars){
+            if (element.getLicense_plate().equals(licensePlate)){
+                car = element;
+                car.setIs_pre_sold(false);
+            }
+        }
+        carRepository.updateCar(car);
+    }
+    public void updateCarStatusToDelivered(String licensePlate){
+        List<Car> listOfCars = carRepository.fetchAllCars();
+        Car car = null;
+        for (Car element : listOfCars) {
+            if (element.getLicense_plate().equals(licensePlate)) {
+                car = element;
+                car.setCar_status(Car.CarStatus.delivered);
+                break;
+            }
+        }
+        carRepository.updateCarStatusToRented(car);
+    }
 }
 

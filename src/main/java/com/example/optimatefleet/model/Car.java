@@ -18,7 +18,7 @@ public class Car {
     private int year_of_manufactoring;
     private String color;
 
-    public Car(String license_plate, String car_model_name,CarModel carModel, String vin_number, double original_price, double registration_tax_pr_month, CarStatus car_status, int odometer, boolean is_pre_sold, int sale_price, int year_of_manufactoring, String color) {
+    public Car(String license_plate, String car_model_name, CarModel carModel, String vin_number, double original_price, double registration_tax_pr_month, CarStatus car_status, int odometer, boolean is_pre_sold, int sale_price, int year_of_manufactoring, String color) {
         this.license_plate = license_plate;
         this.car_model_name = car_model_name;
         this.carModel = carModel;
@@ -34,7 +34,8 @@ public class Car {
         this.color = color;
     }
 
-    public Car ()   {}
+    public Car() {
+    }
 
     public String getCar_model_name() {
         return car_model_name;
@@ -44,24 +45,30 @@ public class Car {
         this.car_model_name = car_model_name;
     }
 
-    public void setCar_status(CarStatus car_Car_status){
+    public void setCar_status(CarStatus car_Car_status) {
         this.car_status = car_Car_status;
     }
 
-    public String getCar_status(){
+    public String getCar_status() {
         return car_status.toString();
     }
 
     public String getCar_statusString() {
-        if(car_status == CarStatus.available){
+        if (car_status == CarStatus.available) {
             return "Klar";
-        }if(car_status == CarStatus.rentet){
+        }
+        if (car_status == CarStatus.rentet) {
             return "Udlejet";
-        }if(car_status == CarStatus.returned){
+        }
+        if (car_status == CarStatus.returned) {
             return "Returneret";
-        }if(car_status == CarStatus.under_repair){
+        }
+        if (car_status == CarStatus.under_repair) {
             return "Under reperation";
-        }else {
+        }
+        if (car_status == CarStatus.delivered) {
+            return "Leveret";
+        } else {
             return "Ingen status";
         }
     }
@@ -127,9 +134,9 @@ public class Car {
     }
 
     public String isIs_pre_soldString() {
-        if(is_pre_sold){
+        if (is_pre_sold) {
             return "Solgt";
-        }else{
+        } else {
             return "Ikke solgt";
         }
     }
@@ -174,7 +181,8 @@ public class Car {
         available,
         rentet,
         returned,
-        under_repair
+        under_repair,
+        delivered
     }
 
     @Override
