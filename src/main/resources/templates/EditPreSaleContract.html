@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opdater Forhåndsaftale</title>
+    <link rel="stylesheet" href="/RentContract.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/ShowRentContract.css">
+
+
+</head>
+<body>
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="#">Skadesrapport</a>
+    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+</div>
+<form class="createForm" method="post">
+
+    <div class="renterContainer">
+        <h3>køberinformation</h3>
+
+        <label for="companyName">Virksomhedsnavn: </label>
+        <input id="companyName" type="text" name="company_name" required
+               th:value="${preSaleContract.getCompany_name()}">
+
+        <label for="cvr">CVR: </label>
+        <input id="cvr" type="number" name="cvr" required
+               th:value="${preSaleContract.getCvr()}">
+
+        <label for="companyPhonenumber">Telefonnummer: </label>
+        <input id="companyPhonenumber" type="text" name="company_phonenumber" required
+               th:value="${preSaleContract.getCompany_phonenumber()}">
+
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required
+               th:value="${preSaleContract.getEmail()}">
+
+
+        <label for="streetName">Adresse</label>
+        <input id="streetName" type="text" name="street_name" required
+               th:value="${preSaleContract.getStreet_name()}">
+
+
+        <label for="streetNumber">nr: </label>
+        <input id="streetNumber" type="number" name="street_number" required
+               th:value="${preSaleContract.getStreet_number()}">
+
+
+        <label for="zipCode">Postnummer: </label>
+        <input id="zipCode" type="number" name="zip_code" required
+               th:value="${preSaleContract.getZip_code()}">
+
+        <label for="cityName">By: </label>
+        <input id="cityName" type="text" name="city_name" required
+               th:value="${preSaleContract.getCity_name()}">
+
+    </div>
+
+    <div class="carContainer">
+        <h3>Bilinformation</h3>
+
+        <label for="licensePlate">Bil: </label>
+        <p id="licensePlate" th:text="${preSaleContract.getLicense_plate()}"></p>
+        <input name="license_plate" th:value="${preSaleContract.getLicense_plate()}" hidden>
+
+        <label for="maxKm">Maks kilometer</label>
+        <input id="maxKm" type="number" name="max_km" required
+               th:value="${preSaleContract.getMax_km()}">
+
+        <label for="price">Pris: </label>
+        <input id="price" type="number" name="price"
+            th:value="${preSaleContract.getPrice()}">
+
+
+        <button class="saveButton" type="submit" formaction="/updatePreSaleContract">Opdater</button>
+        <label for="deleteReason">Årsag til sletning:</label>
+        <select id="deleteReason" name="deleteReason" >
+            <option value="" hidden selected>Vælg årsag</option>
+            <option value="mistake">Fejloprettet</option>
+            <option value="sold">Salg af bil</option>
+        </select>
+        <button class="deleteButton" type="submit" th:formaction="@{/deletePreSaleContract/{licensePlate}(licensePlate=${preSaleContract.license_plate})}" onclick="confirmDelete()">Slet</button>
+
+    </div>
+</form>
+<script>
+    function confirmDelete() {
+        return confirm("Er du sikker på, at du vil slette denne forhåndsaftale?");
+    }
+</script>
+
+</body>
+</html>
