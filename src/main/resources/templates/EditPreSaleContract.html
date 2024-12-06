@@ -71,12 +71,16 @@
         <input id="maxKm" type="number" name="max_km" required
                th:value="${preSaleContract.getMax_km()}">
 
-        <label for="damage_price">Pris: </label>
-        <input id="damage_price" type="number" name="damage_price"
+        <label for="delivery_location">Leveringssted</label>
+        <input id="delivery_location" type="text" name="delivery_location" required
+            th:value="${preSaleContract.getDelivery_location()}">
+
+        <label for="price">Pris: </label>
+        <input id="price" type="number" name="price"
             th:value="${preSaleContract.getPrice()}">
 
 
-        <button class="saveButton" type="submit" formaction="/updatePreSaleContract">Opdater</button>
+        <button class="saveButton" type="submit" formaction="/UpdatePreSaleContract">Opdater</button>
         <label for="deleteReason">Årsag til sletning:</label>
         <select id="deleteReason" name="deleteReason" >
             <option value="" hidden selected>Vælg årsag</option>
