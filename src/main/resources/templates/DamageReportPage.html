@@ -119,7 +119,7 @@
                     <div class="damageReportDiv" >
                         <div>
                             <label>Overkørte km.</label>
-                            <input type="number" name="mileage_over_limit" th:value="${mileage_over_limit != null ? mileage_over_limit : 0}">
+                            <input type="number" name="mileage_over_limit" th:value="${mileage_over_limit != null ? mileage_over_limit : 0}" max="2147483647" title="Må maximalt være 10 cifre">
                         </div>
                         <div>
                             <button class="saveButton" style="margin-top: 20px;">Gem</button>
