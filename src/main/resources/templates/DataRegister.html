@@ -74,7 +74,7 @@
         th:each="preSaleContract : ${preSaleContracts}" class="rentContractElement">
             <span th:text="${preSaleContract.getCompany_name()}"></span>
             <span th:text="${preSaleContract.getLicense_plate()}"></span>
-            <span th:text="${preSaleContract.getPrice()}"></span>
+            <span th:text="${preSaleContract.getPrice() + ' kr.'}"></span>
         </a>
         </div>
 
