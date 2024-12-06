@@ -43,14 +43,4 @@ public class MainPagesController {
 
         return "DamageReportPage";
     }
-
-    @GetMapping("DamageReportPagePost/{license_plate}/{sortBy}")
-    public String damageReportPagePost(Model model, @PathVariable String license_plate, @PathVariable String sortBy) {
-        List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
-        model.addAttribute("carToGetDamageReport", carService.findCarByLicensePlate(license_plate));
-        model.addAttribute(sortBy);
-        model.addAttribute("carsList", carsList);
-
-        return "DamageReportPage";
-    }
 }
