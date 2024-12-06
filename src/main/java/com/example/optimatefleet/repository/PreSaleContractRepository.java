@@ -23,15 +23,25 @@ public class PreSaleContractRepository {
             jdbcTemplate.update(sqlCity, preSaleContract.getZip_code(), preSaleContract.getCity_name());
         }
 
-        String sqlAddress = "INSERT INTO address(zip_code, street_name, street_number) VALUES (?, ?, ?)";
+        String sqlCheckAddress = "SELECT COUNT(*) FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
+        int addressCount = jdbcTemplate.queryForObject(sqlCheckAddress, Integer.class,
+                preSaleContract.getZip_code(), preSaleContract.getStreet_name(), preSaleContract.getStreet_number());
 
-        jdbcTemplate.update(sqlAddress, preSaleContract.getZip_code(), preSaleContract.getStreet_name(), preSaleContract.getStreet_number());
+        int addressID;
+        if (addressCount == 0) {
 
-        String getAddressId = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
+            String sqlAddress = "INSERT INTO address(zip_code, street_name, street_number) VALUES (?, ?, ?)";
+            jdbcTemplate.update(sqlAddress, preSaleContract.getZip_code(), preSaleContract.getStreet_name(), preSaleContract.getStreet_number());
 
-        int addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{preSaleContract.getZip_code(),
-                preSaleContract.getStreet_name(), preSaleContract.getStreet_number()}, Integer.class
-        );
+            String getAddressId = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
+            addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{preSaleContract.getZip_code(),
+                    preSaleContract.getStreet_name(), preSaleContract.getStreet_number()}, Integer.class);
+        } else {
+            String getAddressId = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
+            addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{preSaleContract.getZip_code(),
+                    preSaleContract.getStreet_name(), preSaleContract.getStreet_number()}, Integer.class);
+        }
+
 
         String sqlBuyer = "INSERT INTO buyer(cvr, company_name, company_phonenumber, email, address_id) VALUES (?, ?, ?, ?, ?)";
 

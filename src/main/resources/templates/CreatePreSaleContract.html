@@ -15,7 +15,7 @@
         <img src="/images/logo.png">
     </a>
     <a class="NavBarLink" href="#">KPI</a>
-    <a class="NavBarLink" href="#">Skadesrapport</a>
+    <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
 
@@ -27,27 +27,27 @@
             <input type="text" id="companyName" name="company_name" required>
 
             <label for="cvr">CVR: </label>
-            <input type="number" id="cvr" name="cvr" required>
+            <input type="number" id="cvr" name="cvr" min="10000000" max="99999999" required>
 
             <label for="phoneNumber">Telefonnummer: </label>
-            <input type="text" id="phoneNumber" name="company_phonenumber" required>
+            <input type="text" id="phoneNumber" name="company_phonenumber" pattern="^[0-9]{8}$" maxlength="8" required>
 
             <label for="email">Email: </label>
             <input type="email" id="email" name="email" required>
 
             <label for="zipCode">Postnummer: </label>
-            <input type="number" id="zipCode" name="zip_code" required>
+            <input type="number" id="zipCode" name="zip_code" max="9990" min="1000" required>
 
             <label for="streetName">Adresse: </label>
-            <input type="text" id="streetName" name="street_name">
+            <input type="text" id="streetName" name="street_name" required>
         </div>
 
         <div class="innerContainer">
             <label for="streetNumber">Nr: </label>
-            <input type="number" id="streetNumber" name="street_number">
+            <input type="number" id="streetNumber" name="street_number" max="999" min="1" required>
 
             <label for="cityName">By: </label>
-            <input type="text" id="cityName" name="city_name">
+            <input type="text" id="cityName" name="city_name" required>
 
             <label for="licensePlate">Nummerplade: </label>
             <select id="licensePlate" name="license_plate" required>
@@ -58,13 +58,13 @@
             </select>
 
             <label for="deliveryLocation">Leveringssted: </label>
-            <input type="text" id="deliveryLocation" name="delivery_location">
+            <input type="text" id="deliveryLocation" name="delivery_location" required>
 
             <label for="damage_price">Pris: </label>
-            <input type="number" id="damage_price" name="damage_price">
+            <input type="number" id="damage_price" name="damage_price" min="0" max="2147483647" required>
 
             <label for="maxKm">Max kørte km: </label>
-            <input type="number" id="maxKm" name="max_km">
+            <input type="number" id="maxKm" name="max_km" min="0" max="2147483647" required>
         </div>
     </div>
     <div class="buttonContainer">

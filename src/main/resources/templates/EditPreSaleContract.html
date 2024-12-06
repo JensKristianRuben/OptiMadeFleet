@@ -15,7 +15,7 @@
         <img src="/images/logo.png">
     </a>
     <a class="NavBarLink" href="#">KPI</a>
-    <a class="NavBarLink" href="#">Skadesrapport</a>
+    <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
 <form class="createForm" method="post">
@@ -28,11 +28,11 @@
                th:value="${preSaleContract.getCompany_name()}">
 
         <label for="cvr">CVR: </label>
-        <input id="cvr" type="number" name="cvr" required
+        <input id="cvr" type="number" name="cvr" min="10000000" max="99999999" required
                th:value="${preSaleContract.getCvr()}">
 
         <label for="companyPhonenumber">Telefonnummer: </label>
-        <input id="companyPhonenumber" type="text" name="company_phonenumber" required
+        <input id="companyPhonenumber" type="text" name="company_phonenumber" pattern="^[0-9]{8}$" maxlength="8" required
                th:value="${preSaleContract.getCompany_phonenumber()}">
 
         <label for="email">Email</label>
@@ -51,7 +51,7 @@
 
 
         <label for="zipCode">Postnummer: </label>
-        <input id="zipCode" type="number" name="zip_code" required
+        <input id="zipCode" type="number" name="zip_code" max="9990" min="1000" required
                th:value="${preSaleContract.getZip_code()}">
 
         <label for="cityName">By: </label>
@@ -68,7 +68,7 @@
         <input name="license_plate" th:value="${preSaleContract.getLicense_plate()}" hidden>
 
         <label for="maxKm">Maks kilometer</label>
-        <input id="maxKm" type="number" name="max_km" required
+        <input id="maxKm" type="number" name="max_km" min="0" max="2147483647" required
                th:value="${preSaleContract.getMax_km()}">
 
         <label for="delivery_location">Leveringssted</label>
@@ -76,7 +76,7 @@
             th:value="${preSaleContract.getDelivery_location()}">
 
         <label for="price">Pris: </label>
-        <input id="price" type="number" name="price"
+        <input id="price" type="number" name="price" min="0" max="2147483647"
             th:value="${preSaleContract.getPrice()}">
 
 
