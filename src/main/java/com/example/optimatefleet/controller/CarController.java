@@ -21,8 +21,13 @@ public class CarController {
 
     @PostMapping("CreateCarAndCarModel")
     public String createCar(@ModelAttribute Car car, @RequestParam("car_model_name") String car_model_name) {
-        carService.createNewCar(car, car_model_name);
-        return "redirect:/DataRegister";
+
+        if(carService.findCarByLicensePlate(car.getLicense_plate()) != null){
+            return "redirect:/CreateCarAndCarModel";
+        }else {
+            carService.createNewCar(car, car_model_name);
+            return "redirect:/DataRegister";
+        }
     }
 
     @PostMapping("CreateNewCarModel")
