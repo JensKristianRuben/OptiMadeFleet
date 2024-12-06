@@ -18,19 +18,13 @@ public class RentContract {
     private int drivers_license_number;
     private String license_plate;
     private int max_km;
-
     private LocalDate rental_start_date;
-
     private LocalDate rental_end_date;
     private String pickup_location;
     private String return_location;
-
-
     private String rent_contract_type;
 
-    public RentContract() {
-
-    }
+    public RentContract() {}
 
     public String getRenter_first_name() {
         return renter_first_name;

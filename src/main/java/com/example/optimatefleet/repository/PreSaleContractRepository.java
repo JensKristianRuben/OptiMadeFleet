@@ -80,4 +80,17 @@ public class PreSaleContractRepository {
         String deleteAddressSql = "DELETE FROM address WHERE address_id = ?";
         jdbcTemplate.update(deleteAddressSql, addressId);
     }
+
+    public void updatePreSaleContract(PreSaleContract preSaleContract){
+        String sql = "UPDATE pre_sale_contract SET cvr = ?, delivery_location = ?, license_plate = ?, price = ?, max_km = ? WHERE license_plate = ?";
+
+        jdbcTemplate.update(sql,
+                preSaleContract.getCvr(),
+                preSaleContract.getDelivery_location(),
+                preSaleContract.getLicense_plate(),
+                preSaleContract.getPrice(),
+                preSaleContract.getMax_km(),
+                preSaleContract.getLicense_plate()
+                );
+    }
 }

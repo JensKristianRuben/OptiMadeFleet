@@ -1,0 +1,179 @@
+.outerContainer{
+    margin-top: 50px;
+    height: 800px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+.innerContainer{
+    height: 800px;
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.leftSide{
+    background-color: #454545;
+    width: 500px;
+    height: 700px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    gap: 20px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.rightSide{
+    background-color: #454545;
+    width: 500px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin-right: 200px;
+    gap: 20px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.1);
+}
+.rentContractElement{
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    height: 50px;
+    width: 300px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+.rentContractElement:hover{
+    background-color: #47b2e1; /* vi skal aftale en endelig blå farve farve */
+}
+
+.headerRightContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.headerLeftContainer{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.headerLeftDiv{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+h3{
+    margin-top: 60px;
+}
+
+.carElement{
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    height: 150px;
+    width: 400px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 40px;
+    padding-top: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+.carElement:hover{
+    background-color: #47b2e1; /* vi skal aftale en endelig blå farve farve */
+}
+
+.carElementJustForShow{
+    width: 85%;
+    height: 25px;
+    background-color: transparent;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    color: white;
+}
+
+.selectSortDropdown{
+    margin-top: 63px;
+    margin-left: 10px;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    background-color: transparent;
+    color: black;
+}
+
+.selectSortDropdown:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+.rightSideDiv{
+    width: 80%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+.damageReportDiv{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+input{
+    width: 185px;
+    height: 25px;
+    background-color: transparent;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    color: white;
+}
+
+input:focus{
+    outline: none;
+    border-bottom: solid #9a9a9a;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+label{
+    color: #999999;
+    align-self: flex-start;
+}

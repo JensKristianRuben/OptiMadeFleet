@@ -31,7 +31,7 @@ public class CarService {
     }
 
     //Bruger listen af bilen og tjekker hvilke biler der er ledige og tilføjer dem til en ny liste.
-    public List<Car> fecthAllCarWithAvailableStatus(){ //rename til "cars"
+    public List<Car> fecthAllCarWithAvailableStatus(){ //rename til "cars" og stavefejl i "fetch"
         List<Car> listOfCars = fetchAllCars();
         List<Car> allAvailableCars = new ArrayList<>();
         System.out.println(listOfCars);
@@ -66,7 +66,7 @@ public class CarService {
                 break;
             }
         }
-        carRepository.updateCarStatusToRented(car);
+        carRepository.updateCar(car);
     }
 
 
@@ -118,10 +118,10 @@ public class CarService {
                     }
                 }
                 return allReturnedCars;
-            case "under_repair":
+            case "ready_for_invoice":
                 List<Car> allUnder_repairCars = new ArrayList<>();
                 for (Car element : listOfCars){
-                    if (element.getCar_status().equals("under_repair")){
+                    if (element.getCar_status().equals("ready_for_invoice")){
                         allUnder_repairCars.add(element);
                     }
                 }
@@ -163,7 +163,20 @@ public class CarService {
                 break;
             }
         }
-        carRepository.updateCarStatusToRented(car);
+        carRepository.updateCar(car);
+    }
+
+    public void updateCarStatusToReady_for_invoice(String licensePlate){
+        List<Car> listOfCars = carRepository.fetchAllCars();
+        Car car = null;
+        for (Car element : listOfCars) {
+            if (element.getLicense_plate().equals(licensePlate)) {
+                car = element;
+                car.setCar_status(Car.CarStatus.ready_for_invoice);
+                break;
+            }
+        }
+        carRepository.updateCar(car);
     }
 }
 

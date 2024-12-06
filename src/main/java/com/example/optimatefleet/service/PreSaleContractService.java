@@ -11,6 +11,7 @@ import java.util.List;
 public class PreSaleContractService {
     @Autowired
     PreSaleContractRepository preSaleContractRepository;
+
     public void createPreSaleContract(PreSaleContract preSaleContract){
         preSaleContractRepository.createPreSaleContract(preSaleContract);
     }
@@ -31,5 +32,9 @@ public class PreSaleContractService {
 
     public void deletePreSaleContract(String licensePlate){
         preSaleContractRepository.deletePreSaleContract(licensePlate);
+    }
+
+    public void updatePreSaleContract(PreSaleContract preSaleContract){
+        preSaleContractRepository.updatePreSaleContract(preSaleContract);
     }
 }
