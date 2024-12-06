@@ -23,15 +23,16 @@
         <div class="headerLeftContainer">
             <div class="headerLeftDiv">
                 <h3>Biler</h3>
-                <form action="/DataRegister" method="get">
+                <form action="/DamageReportPage" method="get">
                     <select class="selectSortDropdown" name="sortBy" onchange="this.form.submit()">
                         <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
+                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til fakturering</option>
                     </select>
                 </form>
             </div>
         </div>
         <div class="leftSide">
-            <a th:href="@{/DamageReportPagePost/{licensePlate}(licensePlate=${car.license_plate})}"
+            <a th:href="@{/DamageReportPagePost/{licensePlate}/{sortBy}(licensePlate=${car.license_plate}, sortBy=${sortBy})}"
                th:each="car : ${carsList}" class="carElement">
                 <div>
                     <span th:text="${car.license_plate}"></span>
@@ -53,6 +54,7 @@
             </div>
         </div>
         <div class="rightSide">
+<!--            Der skal laves 2 if statements alt efter hvilken status bilen har-->
             <div th:if="${carToGetDamageReport != null}" class="rightSideDiv">
                 <div class="carElementJustForShow">
                     <span th:text="${carToGetDamageReport.license_plate}"></span>
@@ -67,7 +69,7 @@
                     <div class="damageReportDiv">
                         <div>
                             <label>Skade</label>
-                            <input type="text" name="damage1" th:value="${damage1 != null ? damage1 : 'Ingen skade'}">
+                            <input type="text" name="damage1">
                         </div>
                         <div>
                             <label>Pris</label>
@@ -77,7 +79,7 @@
                     <div class="damageReportDiv">
                         <div>
                             <label>Skade</label>
-                            <input type="text" name="damage2" th:value="${damage2 != null ? damage2 : 'Ingen skade'}">
+                            <input type="text" name="damage2">
                         </div>
                         <div>
                             <label>Pris</label>
@@ -87,7 +89,7 @@
                     <div class="damageReportDiv">
                         <div>
                             <label>Skade</label>
-                            <input type="text" name="damage3" th:value="${damage3 != null ? damage3 : 'Ingen skade'}">
+                            <input type="text" name="damage3">
                         </div>
                         <div>
                             <label>Pris</label>
@@ -97,7 +99,7 @@
                     <div class="damageReportDiv">
                         <div>
                             <label>Skade</label>
-                            <input type="text" name="damage4" th:value="${damage4 != null ? damage4 : 'Ingen skade'}">
+                            <input type="text" name="damage4">
                         </div>
                         <div>
                             <label>Pris</label>
@@ -107,7 +109,7 @@
                     <div class="damageReportDiv">
                         <div>
                             <label>Skade</label>
-                            <input type="text" name="damage5" th:value="${damage5 != null ? damage5 : 'Ingen skade'}">
+                            <input type="text" name="damage5">
                         </div>
                         <div>
                             <label>Pris</label>
@@ -117,7 +119,7 @@
                     <div class="damageReportDiv" >
                         <div>
                             <label>Overkørte km.</label>
-                            <input type="number" name="mileageOverLimit" th:value="${mileageOverLimit != null ? mileageOverLimit : 0}">
+                            <input type="number" name="mileage_over_limit" th:value="${mileage_over_limit != null ? mileage_over_limit : 0}">
                         </div>
                         <div>
                             <button class="saveButton" style="margin-top: 20px;">Gem</button>

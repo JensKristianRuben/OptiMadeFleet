@@ -4,7 +4,6 @@ public class Car {
     private String license_plate;
     String car_model_name;                  // Is only to match data when fetching from DB
     CarModel carModel;
-    //Stel nummer er 17 cifret og skal laves til en String
     private String vin_number;
     private double original_price;
     private double registration_tax_pr_month;
@@ -63,8 +62,9 @@ public class Car {
         if (car_status == CarStatus.returned) {
             return "Returneret";
         }
-        if (car_status == CarStatus.under_repair) {
-            return "Under reperation";
+        //Hedder under repair, burde have et andet navn.
+        if (car_status == CarStatus.ready_for_invoice) {
+            return "Klar til fakturering";
         }
         if (car_status == CarStatus.delivered) {
             return "Leveret";
@@ -181,7 +181,7 @@ public class Car {
         available,
         rentet,
         returned,
-        under_repair,
+        ready_for_invoice,
         delivered
     }
 

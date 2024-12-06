@@ -13,7 +13,7 @@ public class PreSaleContract {
     private String city_name;
     private String license_plate;
     private String delivery_location;
-    private int price;
+    private double price;
     private int max_km;
 
     public PreSaleContract() {
@@ -99,11 +99,11 @@ public class PreSaleContract {
         this.delivery_location = delivery_location;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

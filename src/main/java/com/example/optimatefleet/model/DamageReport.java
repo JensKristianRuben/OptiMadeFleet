@@ -1,15 +1,28 @@
 package com.example.optimatefleet.model;
 
-import com.example.optimatefleet.service.CarService;
-
-import java.util.List;
-
 public class DamageReport {
     private String license_plate;
-    private List<Damage> listOfDamages;
-    private int mileageOverLimit;
+    private String damage_desciption;
+    private int damage_price;
+    private int mileage_over_limit;
 
     public DamageReport(){}
+
+    public String getDamage_desciption() {
+        return damage_desciption;
+    }
+
+    public void setDamage_desciption(String damage_desciption) {
+        this.damage_desciption = damage_desciption;
+    }
+
+    public int getDamage_price() {
+        return damage_price;
+    }
+
+    public void setDamage_price(int damage_price) {
+        this.damage_price = damage_price;
+    }
 
     public String getLicense_plate() {
         return license_plate;
@@ -19,28 +32,22 @@ public class DamageReport {
         this.license_plate = license_plate;
     }
 
-    public List<Damage> getListOfDamages() {
-        return listOfDamages;
+
+    public int getMileage_over_limit() {
+        return mileage_over_limit;
     }
 
-    public void setListOfDamages(List<Damage> listOfDamages) {
-        this.listOfDamages = listOfDamages;
-    }
-
-    public int getMileageOverLimit() {
-        return mileageOverLimit;
-    }
-
-    public void setMileageOverLimit(int mileageOverLimit) {
-        this.mileageOverLimit = mileageOverLimit;
+    public void setMileage_over_limit(int mileage_over_limit) {
+        this.mileage_over_limit = mileage_over_limit;
     }
 
     @Override
     public String toString() {
         return "DamageReport{" +
                 "license_plate='" + license_plate + '\'' +
-                ", listOfDamages=" + listOfDamages +
-                ", mileageOverLimit=" + mileageOverLimit +
+                ", damage_desciption='" + damage_desciption + '\'' +
+                ", damage_price=" + damage_price +
+                ", mileage_over_limit=" + mileage_over_limit +
                 '}';
     }
 }

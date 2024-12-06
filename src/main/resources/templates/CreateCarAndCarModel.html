@@ -35,22 +35,10 @@
         <input type="number" name="original_price" required>
         <label>Registrerings afgift (Månedlig)</label>
         <input type="number" name="registration_tax_pr_month" required>
-        <label>Bilens status</label>
-        <select name="car_status" required>
-            <option value="" hidden selected></option>
-            <option value="available">Klar</option>
-            <option value="rentet">Udlejet</option>
-            <option value="returned">Returneret</option>
-            <option value="under_repair">Under reperation</option>
-        </select>
+        <input name="car_status" value="available" hidden>
         <label>Kørte km.</label>
         <input type="number" name="odometer"  required>
-        <label>Er bilen solgt på forhånd?</label>
-        <select name="is_pre_sold" required>
-            <option value="" hidden selected></option>
-            <option value="true">Solgt</option>
-            <option value="false">Ikke solgt</option>
-        </select>
+        <input name="is_pre_sold" value="false" hidden>
         <label>Salgspris (Kan undlades)</label>
 <!--        Skal kunnes nulles-->
         <input type="number" name="sale_price">
