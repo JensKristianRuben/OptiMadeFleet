@@ -22,29 +22,29 @@
     <h2>Bil</h2>
     <!-- Dette er for den enkelte bil -->
     <label>License plate</label>
-    <input type="text" name="license_plate" th:value="${car.license_plate}" required>
+    <input type="text" name="license_plate" th:value="${car.license_plate}" pattern="^[a-zA-Z]{2}\d{5}$"
+           title="Skal have 2 bogstaver efterfulgt af 5 tal (AB12345)" required>
     <label>Choose model</label>
     <select name="car_model_name" required>
       <option value="" hidden selected>Select model</option>
       <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}" th:selected="${car_model.car_model_name == car.car_model_name}"></option>
     </select>
     <label>Stel nummer</label>
-    <!--        Et stel nummer er 17 cifrer, skal ændres til en string i hele systemet-->
-    <input type="text" name="vin_number" th:value="${car.vin_number}" required>
+    <input type="text" name="vin_number" th:value="${car.vin_number}" pattern="^\d{17}$" title="Skal være 17 tal" required>
     <label>Indkøbsprisen</label>
-    <input type="number" name="original_price" th:value="${car.original_price}" required>
+    <input type="number" name="original_price" th:value="${car.original_price}" max="2147483647" required>
     <label>Registrerings afgift</label>
-    <input type="number" name="registration_tax_pr_month" th:value="${car.registration_tax_pr_month}" required>
+    <input type="number" name="registration_tax_pr_month" th:value="${car.registration_tax_pr_month}" max="2147483647" required>
     <label>Bilens status</label>
     <select name="car_status" required>
 <!--      Husk at ret så der ikke står typen i klassen men faktisk hvad der skal stå. f.eks. "klar"-->
       <option value="available" th:selected="${car.getCar_status() == 'available'}">Klar</option>
       <option value="rentet" th:selected="${car.getCar_status() == 'rentet'}">Udlejet</option>
       <option value="returned" th:selected="${car.getCar_status() == 'returned'}">Returneret</option>
-      <option value="under_repair" th:selected="${car.getCar_status() == 'under_repair'}">Under reperation</option>
+      <option value="ready_for_invoice" th:selected="${car.getCar_status() == 'ready_for_invoice'}">Klar til fakturering</option>
     </select>
     <label>Kørte km.</label>
-    <input type="number" name="odometer" th:value="${car.odometer}" required>
+    <input type="number" name="odometer" th:value="${car.odometer}" max="2147483647" required>
     <label>Er bilen solgt på forhånd?</label>
     <select name="is_pre_sold" required>
       <option value="true" th:selected="${car.is_pre_sold} == true">Solgt</option>
@@ -54,9 +54,9 @@
     <!--        Skal kunnes nulles-->
     <input type="number" name="sale_price" th:value="${car.sale_price}">
     <label>Produktionsår</label>
-    <input type="number" name="year_of_manufactoring" th:value="${car.year_of_manufactoring}" required>
+    <input type="number" name="year_of_manufactoring" th:value="${car.year_of_manufactoring}" min="1886" max="9999" title="Skal være 4 cifret (YYYY)" required>
     <label>Farve</label>
-    <input type="text" name="color" th:value="${car.color}" required>
+    <input type="text" name="color" th:value="${car.color}" pattern="^[a-zA-Z]$" title="Må kun være bogstaver (Sort)" required>
 
     <button class="saveButton" type="submit" style="margin-left: 220px;">Gem ændringer</button>
   </form>
