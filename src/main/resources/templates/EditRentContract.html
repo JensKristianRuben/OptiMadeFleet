@@ -15,7 +15,7 @@
         <img src="/images/logo.png">
     </a>
     <a class="NavBarLink" href="#">KPI</a>
-    <a class="NavBarLink" href="DamageReportPage">Skadesrapport</a>
+    <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
 <form class="createForm" method="post">
@@ -36,12 +36,12 @@
                th:value="${rentContract.getStreet_name()}">
 
         <label for="streetNumber">Gadenummer</label>
-        <input id="streetNumber" type="number" name="street_number" required
+        <input id="streetNumber" type="number" name="street_number" max="999" min="1" required
                th:value="${rentContract.getStreet_number()}">
 
 
         <label for="zipCode">Postnummer</label>
-        <input id="zipCode" type="number" name="zip_code" required
+        <input id="zipCode" type="number" name="zip_code" max="9990" min="1000" required
                th:value="${rentContract.getZip_code()}">
 
 
@@ -51,7 +51,7 @@
 
 
         <label for="renterPhoneNumber">Telefonnummer</label>
-        <input id="renterPhoneNumber" type="tel" name="renter_phonenumber" required
+        <input id="renterPhoneNumber" type="text" name="renter_phonenumber" pattern="^[0-9]{8}$" maxlength="8" required
                th:value="${rentContract.getRenter_phonenumber()}">
 
         <label for="email">Email</label>
@@ -64,7 +64,7 @@
                th:value="${rentContract.getDate_of_birth()}">
 
         <label for="driversLicenseNumber">Kørekortnummer</label>
-        <input id="driversLicenseNumber" type="number" name="drivers_license_number" required
+        <input id="driversLicenseNumber" type="number" name="drivers_license_number" min="10000000" max="99999999" required
                th:value="${rentContract.getDrivers_license_number()}">
     </div>
 
@@ -76,7 +76,7 @@
         <input name="license_plate" th:value="${rentContract.getLicense_plate()}" hidden>
 
         <label for="maxKm">Maks kilometer</label>
-        <input id="maxKm" type="number" name="max_km" required
+        <input id="maxKm" type="number" name="max_km" min="0" max="2147483647" required
                th:value="${rentContract.getMax_km()}">
 
         <h3>Kontraktinformation</h3>
@@ -88,11 +88,11 @@
         </select>
 
         <label for="rentalStartDate">Start dato</label>
-        <input id="rentalStartDate" type="date" name="rental_start_date" required
+        <input id="rentalStartDate" type="date" name="rental_start_date" min="2000-01-01" max="2300-12-31" required
                th:value="${rentContract.getRental_start_date()}">
 
         <label for="rentalEndDate">Slut dato</label>
-        <input id="rentalEndDate" type="date" name="rental_end_date" required
+        <input id="rentalEndDate" type="date" name="rental_end_date" min="2000-01-01" max="2300-12-31" required
                th:value="${rentContract.getRental_end_date()}">
 
         <label for="pickupLocation">Afhentningssted</label>
@@ -104,7 +104,8 @@
                th:value="${rentContract.getReturn_location()}">
 
         <button class="saveButton" type="submit" formaction="/updateRentContract">Opdater</button>
-        <button class="deleteButton" type="submit" th:formaction="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}">Slet</button>
+        <button class="deleteButton" type="submit" th:formaction="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
+            onclick="confirmDelete()">Slet</button>
 
     </div>
 

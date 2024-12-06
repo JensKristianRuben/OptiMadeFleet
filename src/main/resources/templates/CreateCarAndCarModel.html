@@ -21,9 +21,9 @@
     <form action="/CreateCarAndCarModel" method="post" class="createForm">
         <h2>Ny bil</h2>
         <!-- Dette er for den enkelte bil -->
-        <label>License plate</label>
+        <label>Nummerplade</label>
         <input type="text" name="license_plate"  required>
-        <label>Choose model</label>
+        <label>Vælg model</label>
         <select name="car_model_name" required>
             <option value="" hidden selected></option>
             <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}"></option>
