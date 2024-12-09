@@ -34,7 +34,9 @@
     <label>Indkøbsprisen</label>
     <input type="number" name="original_price" th:value="${car.original_price}" max="2147483647" required>
     <label>Registrerings afgift</label>
-    <input type="number" name="registration_tax_pr_month" th:value="${car.registration_tax_pr_month}" max="2147483647" required>
+    <input type="number" name="registration_tax" th:value="${car.registration_tax}" max="2147483647" readonly>
+      <label>Fuld pris</label>
+      <input type="number" name="full_price" th:value="${car.registration_tax} + ${car.original_price}" max="2147483647" readonly>
     <label>Bilens status</label>
     <select name="car_status" required>
 <!--      Husk at ret så der ikke står typen i klassen men faktisk hvad der skal stå. f.eks. "klar"-->
