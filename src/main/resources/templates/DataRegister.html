@@ -47,7 +47,7 @@
                     </div>
                         <span th:text="${car.getCar_statusString()}"></span>
                         <span th:text="${car.isIs_pre_soldString()}"></span>
-                        <span th:text="${car.carModel.price_a_month} + ' kr.'"></span>
+                        <span th:text="${car.calculateMonthlyPrice()} + ' kr.'"></span>
                 </a>
         </div>
 

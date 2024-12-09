@@ -210,7 +210,7 @@ public class Car {
     }
 
     public double calculateMonthlyPrice()    {
-        return original_price + calculateMonthlyRegistrationTax();
+        return Math.round((original_price + calculateMonthlyRegistrationTax()) * Constants.MONTHLY_EARNINGS_PERCENT * 100) / 100.0;
     }
 
     @Override

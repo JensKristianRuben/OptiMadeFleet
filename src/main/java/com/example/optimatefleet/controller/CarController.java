@@ -21,12 +21,8 @@ public class CarController {
 
     @PostMapping("CreateCarAndCarModel")
     public String createCar(@ModelAttribute Car car, @RequestParam("car_model_name") String car_model_name) {
+        car.setRegistration_tax(car.calculateMonthlyRegistrationTax());
 
-        System.out.println(car.calculateMonthlyRegistrationTax(50000));
-        System.out.println(car.calculateMonthlyRegistrationTax(150000));
-        System.out.println(car.calculateMonthlyRegistrationTax(250000));
-
-        car.setRegistration_tax(car.calculateMonthlyRegistrationTax(car.getOriginal_price()));
         if(carService.findCarByLicensePlate(car.getLicense_plate()) != null){
             return "redirect:/CreateCarAndCarModel";
         }else {

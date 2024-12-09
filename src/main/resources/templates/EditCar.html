@@ -58,7 +58,7 @@
     <label>Produktionsår</label>
     <input type="number" name="year_of_manufactoring" th:value="${car.year_of_manufactoring}" min="1886" max="9999" title="Skal være 4 cifret (YYYY)" required>
     <label>Farve</label>
-    <input type="text" name="color" th:value="${car.color}" pattern="^[a-zA-Z]$" title="Må kun være bogstaver (Sort)" required>
+    <input type="text" name="color" th:value="${car.color}" pattern="^[a-z A-Z æøå ÆØÅ]+$" title="Må kun være bogstaver (Sort)" required>
 
     <button class="saveButton" type="submit" style="margin-left: 220px;">Gem ændringer</button>
   </form>
@@ -70,8 +70,6 @@
     <p th:text="${car.carModel.getMake()}"></p>
     <label>Model</label>
     <p th:text="${car.carModel.car_model_name}"></p>
-    <label>Den månedlige udlejningspris</label>
-    <p th:text="${car.carModel.price_a_month}"></p>
     <label>Karrosseri</label>
     <p th:text="${car.carModel.body_type}"></p>
     <label>Motor størrelse (Liter) (Undlad ved elbil)</label>

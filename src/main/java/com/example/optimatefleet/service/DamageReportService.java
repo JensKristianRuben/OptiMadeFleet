@@ -2,11 +2,11 @@ package com.example.optimatefleet.service;
 
 import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.DamageReport;
-import com.example.optimatefleet.model.PreSaleContract;
 import com.example.optimatefleet.repository.DamageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -31,7 +31,7 @@ public class DamageReportService {
 
         DamageReport damageReport = new DamageReport();
         damageReport.setLicense_plate(license_plate);
-        damageReport.setDamage_desciption(description.toString());
+        damageReport.setDescription(description.toString());
         damageReport.setDamage_price(totalPrice);
         damageReport.setMileage_over_limit(mileage_over_limit);
 
@@ -46,4 +46,16 @@ public class DamageReportService {
         return mileage_over_limit * 0.75;
     }
 
+    public DamageReport findDamageReportByID(String license_plate)    {
+        List<DamageReport> damageReportList = damageReportRepository.listOfDamageReports(license_plate);
+        DamageReport damageReportToReturn = null;
+
+        for(DamageReport damageReport : damageReportList) {
+            if(damageReport.getLicense_plate().equals(license_plate)) {
+                damageReportToReturn = damageReport;
+            }
+        }
+
+        return damageReportToReturn;
+    }
 }
