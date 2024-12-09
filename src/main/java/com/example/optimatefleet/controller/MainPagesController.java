@@ -50,11 +50,23 @@ public class MainPagesController {
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         int allCarsCount = carService.fetchAllCars().size();
         int rentedCarsCount = carService.fetchAllCarsAndSortByParam("rentet").size();
+        int soldCarsCount = carService.fetchAllCarsAndSortByParam("dilevered").size();
+        int monthlyContractIncome = rentContractService.calculateMonthlyIncome();
+        int preSoldCars = carService.fetchAllCarsWithSoldStatus().size();
+        int notPreSoldCars = carService.fetchAllCarsWithNotSoldStatus().size();
+        int soldCarsSum = preSaleContractService.soldCarsIncome();
+
+
 
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("carsList", carsList);
         model.addAttribute("allCarsCount", allCarsCount);
         model.addAttribute("rentedCarsCount", rentedCarsCount);
+        model.addAttribute("soldCarsCount", soldCarsCount);
+        model.addAttribute("preSoldCars", preSoldCars);
+        model.addAttribute("notPreSoldCars", notPreSoldCars);
+        model.addAttribute("monthlyContractIncome", monthlyContractIncome);
+        model.addAttribute("soldCarsSum", soldCarsSum);
         return "KPI";
     }
 }

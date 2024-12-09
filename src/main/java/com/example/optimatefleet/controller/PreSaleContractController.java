@@ -27,6 +27,7 @@ public class PreSaleContractController {
 
     @PostMapping("/CreatePreSaleContract")
     public String createPreSaleContract(@ModelAttribute PreSaleContract preSaleContract) {
+        preSaleContract.setCar_Delivered(false);
         preSaleContractService.createPreSaleContract(preSaleContract);
         carService.updateCarStatusToSold(preSaleContract.getLicense_plate());
         return "redirect:/DataRegister";
@@ -46,7 +47,7 @@ public class PreSaleContractController {
             carService.updateCarStatusToNotSold(licensePlate);
             return "redirect:/DataRegister";
         } else if ("sold".equals(deleteReason)) { // skal slette kontrakten og sætte bilen status til leveret
-            preSaleContractService.deletePreSaleContract(licensePlate);
+            preSaleContractService.updatePreSaleContractToDilevered(licensePlate);
             carService.updateCarStatusToDelivered(licensePlate);
             return "redirect:/DataRegister";
         } else {

@@ -1,7 +1,5 @@
 package com.example.optimatefleet.model;
 
-import java.time.LocalDate;
-
 public class PreSaleContract {
     private String company_name;
     private int cvr;
@@ -15,6 +13,7 @@ public class PreSaleContract {
     private String delivery_location;
     private int price;
     private int max_km;
+    private boolean car_Delivered;
 
     public PreSaleContract() {
     }
@@ -115,6 +114,14 @@ public class PreSaleContract {
         this.max_km = max_km;
     }
 
+    public boolean isCar_Delivered() {
+        return car_Delivered;
+    }
+
+    public void setCar_Delivered(boolean car_Delivered) {
+        this.car_Delivered = car_Delivered;
+    }
+
     @Override
     public String toString() {
         return "PreSaleContract{" +
@@ -132,4 +139,6 @@ public class PreSaleContract {
                 ", max_km=" + max_km +
                 '}';
     }
+
+
 }
