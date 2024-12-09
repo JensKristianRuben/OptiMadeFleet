@@ -6,6 +6,8 @@ import com.example.optimatefleet.repository.DamageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,7 @@ public class DamageReportService {
         return mileage_over_limit * 0.75;
     }
 
-    public DamageReport findDamageReportByID(String license_plate)    {
+    public DamageReport findDamageReportByLicense_plate(String license_plate)    {
         List<DamageReport> damageReportList = damageReportRepository.listOfDamageReports(license_plate);
         DamageReport damageReportToReturn = null;
 
@@ -57,5 +59,17 @@ public class DamageReportService {
         }
 
         return damageReportToReturn;
+    }
+
+    public Map<String, String> mapOfDescriptionAndPrice (String license_plate)  {
+        Map<String, String> mapOfDescriptionAndPrice = new HashMap<>();
+        DamageReport damageReport = findDamageReportByLicense_plate(license_plate);
+        String[] description = damageReport.getDescription().split(" ");
+
+        for(int i = 0; i < description.length; i+=2) {
+            mapOfDescriptionAndPrice.put(description[i], description[i+1]);
+        }
+
+        return mapOfDescriptionAndPrice;
     }
 }

@@ -35,12 +35,12 @@ public class DamageReportController {
 
     @GetMapping("DamageReportPagePost/{license_plate}/{sortBy}")
     public String damageReportPagePost(Model model, @PathVariable String license_plate, @PathVariable String sortBy) {
-        System.out.println(damageReportService.findDamageReportByID(license_plate));
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         model.addAttribute("carToGetDamageReport", carService.findCarByLicensePlate(license_plate));
         model.addAttribute(sortBy);
         model.addAttribute("carsList", carsList);
-        model.addAttribute("damageReport", damageReportService.findDamageReportByID(license_plate));
+        model.addAttribute("damageReport", damageReportService.findDamageReportByLicense_plate(license_plate));
+        model.addAttribute("listOfDamages", damageReportService.mapOfDescriptionAndPrice(license_plate));
 
 
         return "DamageReportPage";
