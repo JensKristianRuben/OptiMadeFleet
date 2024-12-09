@@ -13,7 +13,7 @@
     <a class="NavBarLink" href="#">
         <img src="/images/logo.png">
     </a>
-    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
 </div>
@@ -27,7 +27,7 @@
                     <select class="selectSortDropdown" name="sortBy" onchange="this.form.submit()">
                         <option value="allCars" th:selected="${sortBy == 'allCars'}">Alle biler</option>
                         <option value="available" th:selected="${sortBy == 'available'}">Klar</option>
-                        <option value="rented" th:selected="${sortBy == 'rented'}">Udlejet</option>
+                        <option value="rentet" th:selected="${sortBy == 'rentet'}">Udlejet</option>
                         <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
                         <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til fakturering</option>
                     </select>
