@@ -102,10 +102,10 @@ public class CarService {
                     }
                 }
                 return allAvailableCars;
-            case "rented":
+            case "rentet":
                 List<Car> allRentedCars = new ArrayList<>();
                 for (Car element : listOfCars){
-                    if (element.getCar_status().equals("rented")){
+                    if (element.getCar_status().equals("rentet")){
                         allRentedCars.add(element);
                     }
                 }
@@ -126,6 +126,14 @@ public class CarService {
                     }
                 }
                 return allUnder_repairCars;
+            case "dilevered":
+                List<Car> allDilevered_cars = new ArrayList<>();
+                for (Car element : listOfCars){
+                    if (element.getCar_status().equals("delivered")){
+                        allDilevered_cars.add(element);
+                    }
+                }
+                return allDilevered_cars;
             default:
                 return listOfCars;
         }

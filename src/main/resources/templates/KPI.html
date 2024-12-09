@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPI</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/DataRegister.css">
+    <link rel="stylesheet" href="/KPI.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+</head>
+<body>
+<div class="NavBar">
+    <a class="NavBarLink" href="#">
+        <img src="/images/logo.png">
+    </a>
+    <a class="NavBarLink" href="/KPI">KPI</a>
+    <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
+    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+</div>
+
+<div class="outerContainer">
+    <div class="innerContainer">
+        <div class="headerLeftContainer">
+            <div class="headerLeftDiv">
+                <h3>Biler</h3>
+                <form action="/KPI" method="get">
+                    <select class="selectSortDropdown" name="sortBy" onchange="this.form.submit()">
+                        <option value="allCars" th:selected="${sortBy == 'allCars'}">Alle biler</option>
+                        <option value="available" th:selected="${sortBy == 'available'}">Klar</option>
+                        <option value="rentet" th:selected="${sortBy == 'rentet'}">Udlejet</option>
+                        <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
+                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til
+                            fakturering
+                        </option>
+                        <option value="dilevered" th:selected="${sortBy == 'dilevered'}">Leveret til køber</option>
+                    </select>
+                </form>
+            </div>
+            <a class="createCarHeader" href="/CreateCarAndCarModel">+</a>
+        </div>
+        <div class="leftSide">
+            <a th:href="@{/UpdateCarAndCarModel/{licensePlate}(licensePlate=${car.license_plate})}"
+               th:each="car : ${carsList}" class="carElement">
+                <div>
+                    <span th:text="${car.license_plate}"></span>
+                    <span th:text="${car.carModel.make}"></span>
+                    <span th:text="${car.car_model_name}"></span>
+                    <span th:text="${car.year_of_manufactoring}"></span>
+                    <span th:text="${car.color}"></span>
+                </div>
+                <span th:text="${car.getCar_statusString()}"></span>
+                <span th:text="${car.isIs_pre_soldString()}"></span>
+                <span th:text="${car.carModel.price_a_month} + ' kr.'"></span>
+            </a>
+        </div>
+
+    </div>
+    <div class="innerContainer">
+        <div class="headerRightContainer">
+            <h3>KPI'er</h3>
+            <a class="createHeader" href="/CreateRentContract">+</a>
+        </div>
+        <div class="rightSide">
+            <div class="KPIelement">
+                <p>Samlet antal biler i beholdning: <span th:text="${allCarsCount}"></span></p>
+            </div>
+            <div class="KPIelement">
+                <p>Antal udlejede biler: <span th:text="${rentedCarsCount}"></span></p>
+            </div>
+
+            <div class="KPIelement">
+                <p>Samlet lejeindtægt i indeværende måned: </p>
+            </div>
+        </div>
+        <div class="headerRightContainer">
+            <h3>Alarmer</h3>
+            <a class="createHeader" href="/CreatePreSaleContract">+</a>
+        </div>
+        <div class="rightSide">
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
