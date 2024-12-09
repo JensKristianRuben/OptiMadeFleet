@@ -2,8 +2,11 @@ package com.example.optimatefleet.repository;
 
 import com.example.optimatefleet.model.DamageReport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class DamageReportRepository {
@@ -16,7 +19,7 @@ public class DamageReportRepository {
         String damage_description_sql = "INSERT INTO damage_description (description) VALUES (?)";
 
         jdbcTemplate.update(damage_description_sql,
-                damageReport.getDamage_desciption()
+                damageReport.getDescription()
                 );
 
         //Hiver det nye damage_id der er blevet auto_incrementet ud
@@ -40,5 +43,14 @@ public class DamageReportRepository {
                 damage_id,
                 damageReport.getMileage_over_limit()
             );
+    }
+
+    public List<DamageReport> listOfDamageReports (String license_plate)    {
+        String sql = "SELECT license_plate, description, damage_price, mileage_over_limit "+
+                "FROM damage_report dr " +
+                "JOIN damage_description dd ON dr.damage_id = dd.damage_id "+
+                "JOIN damage_price dp ON dr.damage_id = dp.damage_id";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(DamageReport.class));
     }
 }

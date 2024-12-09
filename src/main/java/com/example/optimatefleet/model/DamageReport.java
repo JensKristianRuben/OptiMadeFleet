@@ -2,18 +2,18 @@ package com.example.optimatefleet.model;
 
 public class DamageReport {
     private String license_plate;
-    private String damage_desciption;
+    private String description;
     private int damage_price;
     private int mileage_over_limit;
 
     public DamageReport(){}
 
-    public String getDamage_desciption() {
-        return damage_desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDamage_desciption(String damage_desciption) {
-        this.damage_desciption = damage_desciption;
+    public void setDescription(String damage_description) {
+        this.description = damage_description;
     }
 
     public int getDamage_price() {
@@ -45,7 +45,7 @@ public class DamageReport {
     public String toString() {
         return "DamageReport{" +
                 "license_plate='" + license_plate + '\'' +
-                ", damage_desciption='" + damage_desciption + '\'' +
+                ", damage_description='" + description + '\'' +
                 ", damage_price=" + damage_price +
                 ", mileage_over_limit=" + mileage_over_limit +
                 '}';

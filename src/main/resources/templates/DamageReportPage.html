@@ -26,7 +26,9 @@
                 <form action="/DamageReportPage" method="get">
                     <select class="selectSortDropdown" name="sortBy" onchange="this.form.submit()">
                         <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
-                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til fakturering</option>
+                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til
+                            fakturering
+                        </option>
                     </select>
                 </form>
             </div>
@@ -43,92 +45,130 @@
                 </div>
                 <span th:text="${car.getCar_statusString()}"></span>
                 <span th:text="${car.isIs_pre_soldString()}"></span>
-                <span th:text="${car.carModel.price_a_month} + ' kr.'"></span>
+                <span th:text="${car.calculateMonthlyPrice()} + ' kr.'"></span>
             </a>
         </div>
     </div>
     <div class="innerContainer">
         <div class="headerLeftContainer">
             <div class="headerLeftDiv">
-                <h3>Skadesrapportering</h3>
+                <h3>Skaderapportering</h3>
             </div>
         </div>
         <div class="rightSide">
-<!--            Der skal laves 2 if statements alt efter hvilken status bilen har-->
-            <div th:if="${carToGetDamageReport != null}" class="rightSideDiv">
-                <div class="carElementJustForShow">
-                    <span th:text="${carToGetDamageReport.license_plate}"></span>
-                    <span th:text="${carToGetDamageReport.carModel.make}"></span>
-                    <span th:text="${carToGetDamageReport.car_model_name}"></span>
-                    <span th:text="${carToGetDamageReport.year_of_manufactoring}"></span>
-                    <span th:text="${carToGetDamageReport.color}"></span>
+<!--            Dette er "Returneret" skaderapportering-->
+            <div th:if="${carToGetDamageReport != null}" class="rightSideDiv" >
+                <div th:if="${carToGetDamageReport.car_status == 'returned'}" style="height: 95%">
+                    <div class="carElementJustForShow">
+                        <span th:text="${carToGetDamageReport.license_plate}"></span>
+                        <span th:text="${carToGetDamageReport.carModel.make}"></span>
+                        <span th:text="${carToGetDamageReport.car_model_name}"></span>
+                        <span th:text="${carToGetDamageReport.year_of_manufactoring}"></span>
+                        <span th:text="${carToGetDamageReport.color}"></span>
+                    </div>
+                    <form action="/saveDamageReport" method="post"
+                          style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; width: 100%">
+                        <input hidden="hidden" type="text" name="license_plate"
+                               th:value="${carToGetDamageReport.license_plate}">
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Skade</label>
+                                <input type="text" name="damage1">
+                            </div>
+                            <div>
+                                <label>Pris</label>
+                                <input type="text" name="price1">
+                            </div>
+                        </div>
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Skade</label>
+                                <input type="text" name="damage2">
+                            </div>
+                            <div>
+                                <label>Pris</label>
+                                <input type="text" name="price2">
+                            </div>
+                        </div>
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Skade</label>
+                                <input type="text" name="damage3">
+                            </div>
+                            <div>
+                                <label>Pris</label>
+                                <input type="text" name="price3">
+                            </div>
+                        </div>
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Skade</label>
+                                <input type="text" name="damage4">
+                            </div>
+                            <div>
+                                <label>Pris</label>
+                                <input type="text" name="price4">
+                            </div>
+                        </div>
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Skade</label>
+                                <input type="text" name="damage5">
+                            </div>
+                            <div>
+                                <label>Pris</label>
+                                <input type="text" name="price5">
+                            </div>
+                        </div>
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Overkørte km.</label>
+                                <input type="number" name="mileage_over_limit" max="2147483647"
+                                       title="Må maximalt være 10 cifre">
+                            </div>
+                            <div>
+                                <button class="saveButton" style="margin-top: 20px;">Gem</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <form action="/saveDamageReport" method="post"
-                      style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; width: 100%">
-                    <input hidden="hidden" type="text" name="license_plate" th:value="${carToGetDamageReport.license_plate}">
-                    <div class="damageReportDiv">
-                        <div>
-                            <label>Skade</label>
-                            <input type="text" name="damage1">
-                        </div>
-                        <div>
-                            <label>Pris</label>
-                            <input type="text" name="price1">
-                        </div>
+<!--                Dette er "klar til fakturering" skadesrapportering-->
+                <div th:if="${carToGetDamageReport.car_status == 'ready_for_invoice'}" style="height: 95%">
+                    <div class="carElementJustForShow">
+                        <span th:text="${carToGetDamageReport.license_plate}"></span>
+                        <span th:text="${carToGetDamageReport.carModel.make}"></span>
+                        <span th:text="${carToGetDamageReport.car_model_name}"></span>
+                        <span th:text="${carToGetDamageReport.year_of_manufactoring}"></span>
+                        <span th:text="${carToGetDamageReport.color}"></span>
                     </div>
-                    <div class="damageReportDiv">
-                        <div>
-                            <label>Skade</label>
-                            <input type="text" name="damage2">
+                    <form action="/saveDamageReport" method="post"
+                          style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; width: 100%">
+                        <input hidden="hidden" type="text" name="license_plate"
+                               th:value="${carToGetDamageReport.license_plate}">
+                        <div class="damageReportDiv">
+                            <div>
+                                <label>Skade</label>
+                                <input type="text" th:text="${damageReport.description}">
+                            </div>
+                            <div>
+                                <label>Pris</label>
+                                <input type="text" name="price1">
+                            </div>
+                            <div>
+                                <label>Overkørte km.</label>
+                                <input type="number" name="mileage_over_limit" max="2147483647"
+                                       title="Må maximalt være 10 cifre">
+                            </div>
+                            <div>
+                                <button class="saveButton" style="margin-top: 20px;">Gem</button>
+                            </div>
                         </div>
-                        <div>
-                            <label>Pris</label>
-                            <input type="text" name="price2">
-                        </div>
-                    </div>
-                    <div class="damageReportDiv">
-                        <div>
-                            <label>Skade</label>
-                            <input type="text" name="damage3">
-                        </div>
-                        <div>
-                            <label>Pris</label>
-                            <input type="text" name="price3">
-                        </div>
-                    </div>
-                    <div class="damageReportDiv">
-                        <div>
-                            <label>Skade</label>
-                            <input type="text" name="damage4">
-                        </div>
-                        <div>
-                            <label>Pris</label>
-                            <input type="text" name="price4">
-                        </div>
-                    </div>
-                    <div class="damageReportDiv">
-                        <div>
-                            <label>Skade</label>
-                            <input type="text" name="damage5">
-                        </div>
-                        <div>
-                            <label>Pris</label>
-                            <input type="text" name="price5">
-                        </div>
-                    </div>
-                    <div class="damageReportDiv" >
-                        <div>
-                            <label>Overkørte km.</label>
-                            <input type="number" name="mileage_over_limit" max="2147483647" title="Må maximalt være 10 cifre">
-                        </div>
-                        <div>
-                            <button class="saveButton" style="margin-top: 20px;">Gem</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 
