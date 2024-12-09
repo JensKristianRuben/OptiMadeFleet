@@ -5,8 +5,8 @@ public class Car {
     String car_model_name;                  // Is only to match data when fetching from DB
     CarModel carModel;
     private String vin_number;
-    private double original_price;
-    private double registration_tax_pr_month;
+    private int original_price;
+    private double registration_tax;
     private CarStatus car_status;
     private int odometer;
     private DamageReport damageReport;
@@ -17,13 +17,13 @@ public class Car {
     private int year_of_manufactoring;
     private String color;
 
-    public Car(String license_plate, String car_model_name, CarModel carModel, String vin_number, double original_price, double registration_tax_pr_month, CarStatus car_status, int odometer, boolean is_pre_sold, int sale_price, int year_of_manufactoring, String color) {
+    public Car(String license_plate, String car_model_name, CarModel carModel, String vin_number, int original_price, double registration_tax, CarStatus car_status, int odometer, boolean is_pre_sold, int sale_price, int year_of_manufactoring, String color) {
         this.license_plate = license_plate;
         this.car_model_name = car_model_name;
         this.carModel = carModel;
         this.vin_number = vin_number;
         this.original_price = original_price;
-        this.registration_tax_pr_month = registration_tax_pr_month;
+        this.registration_tax = registration_tax;
         this.car_status = car_status;
         this.odometer = odometer;
         this.is_pre_sold = is_pre_sold;
@@ -97,20 +97,20 @@ public class Car {
         this.vin_number = vin_number;
     }
 
-    public double getOriginal_price() {
+    public int getOriginal_price() {
         return original_price;
     }
 
-    public void setOriginal_price(double original_price) {
+    public void setOriginal_price(int original_price) {
         this.original_price = original_price;
     }
 
-    public double getRegistration_tax_pr_month() {
-        return registration_tax_pr_month;
+    public double getRegistration_tax() {
+        return registration_tax;
     }
 
-    public void setRegistration_tax_pr_month(double registration_tax_pr_month) {
-        this.registration_tax_pr_month = registration_tax_pr_month;
+    public void setRegistration_tax(double registration_tax) {
+        this.registration_tax = registration_tax;
     }
 
     public int getOdometer() {
@@ -184,6 +184,34 @@ public class Car {
         ready_for_invoice,
         delivered
     }
+//Returnere registreringsafgiften pr. måned for en given bil ud fra hvilke af de 3 prisklasser bilen ligger i.
+    public double calculateMonthlyRegistrationTax ()    {
+        double monthlyRegistrationTax = 0;
+        original_price += calculateVAT(original_price);
+
+        if(original_price <= Constants.FIRST_THRESH_HOLD)  {
+            monthlyRegistrationTax = original_price * Constants.FIRST_TRESH_HOLD_PERCENT;
+        }else if(original_price > Constants.FIRST_THRESH_HOLD && original_price <= Constants.SECOND_THRESH_HOLD)    {
+            double firstThreshHold = Constants.FIRST_THRESH_HOLD * Constants.FIRST_TRESH_HOLD_PERCENT;
+            double secondThreshHold = (original_price - Constants.FIRST_THRESH_HOLD) * Constants.SECOND_TRESH_HOLD_PERCENT;
+            monthlyRegistrationTax = firstThreshHold + secondThreshHold;
+        }else if(original_price > Constants.SECOND_THRESH_HOLD)    {
+            double firstThreshHold = Constants.FIRST_THRESH_HOLD * Constants.FIRST_TRESH_HOLD_PERCENT;
+            double secondThreshHold = (Constants.SECOND_THRESH_HOLD - Constants.FIRST_THRESH_HOLD) * Constants.SECOND_TRESH_HOLD_PERCENT;
+            double thirdThreshHold = (original_price - Constants.SECOND_THRESH_HOLD) * Constants.THIRD_TRESH_HOLD_PERCENT;
+            monthlyRegistrationTax = firstThreshHold + secondThreshHold + thirdThreshHold;
+        }
+
+        return monthlyRegistrationTax;
+    }
+//VAT står for Value Added Tax'
+    public double calculateVAT(int purchasePrice)   {
+        return purchasePrice * Constants.VAT;
+    }
+
+    public double calculateMonthlyPrice()    {
+        return original_price + calculateMonthlyRegistrationTax();
+    }
 
     @Override
     public String toString() {
@@ -193,7 +221,7 @@ public class Car {
                 ", carModel=" + carModel +
                 ", vin_number='" + vin_number + '\'' +
                 ", original_price=" + original_price +
-                ", registration_tax_pr_month=" + registration_tax_pr_month +
+                ", registration_tax=" + registration_tax +
                 ", car_status=" + car_status +
                 ", odometer=" + odometer +
                 ", damageReport=" + damageReport +

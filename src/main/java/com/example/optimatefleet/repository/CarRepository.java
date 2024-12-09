@@ -16,14 +16,13 @@ public class CarRepository {
 
     public void createNewCarModel (CarModel carModel) {
         String sql = "INSERT INTO car_model (car_model_name, average_rental_time_in_months, " +
-                "price_a_month, engine_size, seat_count, door_count, horsepower, make, " +
+                "engine_size, seat_count, door_count, horsepower, make, " +
                 "body_type, gear_type, fuel_type) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
                 carModel.getCar_model_name(),
                 carModel.getAverage_rental_time_in_months(),
-                carModel.getPrice_a_month(),
                 carModel.getEngine_size(),
                 carModel.getSeat_count(),
                 carModel.getDoor_count(),
@@ -37,7 +36,7 @@ public class CarRepository {
 
     public void createNewCar (Car car) {
         String sql = "INSERT INTO car (license_plate, car_model_name, vin_number, original_price, " +
-                "registration_tax_pr_month, car_status, odometer, is_pre_sold, " +
+                "registration_tax, car_status, odometer, is_pre_sold, " +
                 "sale_price, alert_damages_not_fixed, year_of_manufactoring, color)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -46,7 +45,7 @@ public class CarRepository {
                 car.getCarModel().getCar_model_name(),
                 car.getVin_number(),
                 car.getOriginal_price(),
-                car.getRegistration_tax_pr_month(),
+                car.getRegistration_tax(),
                 car.getCar_status(),
                 car.getOdometer(),
                 car.isIs_pre_sold(),
@@ -82,7 +81,7 @@ public class CarRepository {
 
     public void updateCar (Car car) {
         String sql = "UPDATE car SET license_plate = ?, car_model_name = ?, vin_number = ?, original_price = ?, " +
-                "registration_tax_pr_month = ?, car_status = ?, odometer = ?, is_pre_sold = ?, " +
+                "registration_tax = ?, car_status = ?, odometer = ?, is_pre_sold = ?, " +
                 "sale_price = ?, alert_damages_not_fixed = ?, year_of_manufactoring = ?, color = ? " +
                 "WHERE license_plate = ?";
 
@@ -91,7 +90,7 @@ public class CarRepository {
                 car.getCar_model_name(),
                 car.getVin_number(),
                 car.getOriginal_price(),
-                car.getRegistration_tax_pr_month(),
+                car.getRegistration_tax(),
                 car.getCar_status(),
                 car.getOdometer(),
                 car.isIs_pre_sold(),

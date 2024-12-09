@@ -102,10 +102,10 @@ public class CarService {
                     }
                 }
                 return allAvailableCars;
-            case "rented":
+            case "rentet":
                 List<Car> allRentedCars = new ArrayList<>();
                 for (Car element : listOfCars){
-                    if (element.getCar_status().equals("rented")){
+                    if (element.getCar_status().equals("rentet")){
                         allRentedCars.add(element);
                     }
                 }
