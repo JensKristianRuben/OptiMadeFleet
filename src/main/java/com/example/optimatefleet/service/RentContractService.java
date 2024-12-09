@@ -1,6 +1,8 @@
 package com.example.optimatefleet.service;
 
+import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.RentContract;
+import com.example.optimatefleet.repository.CarRepository;
 import com.example.optimatefleet.repository.RentContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ public class RentContractService {
 
     @Autowired
     RentContractRepository rentContractRepository;
+    @Autowired
+    CarRepository carRepository;
 
     public void createRentContract(RentContract rentContract) {
         String rentContractTpye = rentContract.getRent_contract_type();
@@ -54,5 +58,17 @@ public class RentContractService {
 
     public void updateRentContract(RentContract rentContract) {
         rentContractRepository.updateRentContract(rentContract);
+    }
+
+    public int calculateMonthlyIncome(){
+        List<Car> listOfCars = carRepository.fetchAllCars();
+        int monthlyContractIncome = 0;
+
+        for (Car element : listOfCars){
+            if (element.getCar_status().equals("rentet")){
+                monthlyContractIncome += element.calculateMonthlyPrice();
+            }
+        }
+        return monthlyContractIncome;
     }
 }

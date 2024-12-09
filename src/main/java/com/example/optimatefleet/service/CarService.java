@@ -56,6 +56,17 @@ public class CarService {
         }
         return listOfCarsNotSold;
     }
+    public List<Car> fetchAllCarsWithSoldStatus(){
+        List<Car> listOfCars = fetchAllCars();
+        List<Car> listOfCarsNotSold = new ArrayList<>();
+
+        for (Car element : listOfCars){
+            if (element.isIs_pre_sold() && !element.getCar_status().equals("delivered")){
+                listOfCarsNotSold.add(element);
+            }
+        }
+        return listOfCarsNotSold;
+    }
     public void updateCarStatusToRented(String licensePlate) {
         List<Car> listOfCars = carRepository.fetchAllCars();
         Car car = null;

@@ -38,7 +38,6 @@
                     </select>
                 </form>
             </div>
-            <a class="createCarHeader" href="/CreateCarAndCarModel">+</a>
         </div>
         <div class="leftSide">
             <a th:href="@{/UpdateCarAndCarModel/{licensePlate}(licensePlate=${car.license_plate})}"
@@ -52,31 +51,41 @@
                 </div>
                 <span th:text="${car.getCar_statusString()}"></span>
                 <span th:text="${car.isIs_pre_soldString()}"></span>
-                <span th:text="${car.carModel.price_a_month} + ' kr.'"></span>
+                <span th:text="${car.calculateMonthlyPrice()} + ' kr.'"></span>
             </a>
         </div>
 
     </div>
     <div class="innerContainer">
         <div class="headerRightContainer">
-            <h3>KPI'er</h3>
-            <a class="createHeader" href="/CreateRentContract">+</a>
+            <h3 class="header">KPI'er</h3>
         </div>
         <div class="rightSide">
             <div class="KPIelement">
-                <p>Samlet antal biler i beholdning: <span th:text="${allCarsCount}"></span></p>
+                <p>Samlet antal biler i beholdning: <span th:text="${allCarsCount}"></span> stk.</p>
             </div>
             <div class="KPIelement">
-                <p>Antal udlejede biler: <span th:text="${rentedCarsCount}"></span></p>
+                <p>Antal udlejede biler: <span th:text="${rentedCarsCount}"></span> stk.</p>
+            </div>
+            <div class="KPIelement">
+                <p>Solgte biler i indeværende år: <span th:text="${soldCarsCount}"></span> stk.</p>
+            </div>
+            <div class="KPIelement">
+                <p>Biler med forhåndsaftale: <span th:text="${preSoldCars}" ></span> stk.</p>
+            </div>
+            <div class="KPIelement">
+                <p>Biler uden forhåndskontrakt: <span th:text="${notPreSoldCars}" ></span> stk.</p>
             </div>
 
             <div class="KPIelement">
-                <p>Samlet lejeindtægt i indeværende måned: </p>
+                <p>Månedlig lejeindtægter: <span th:text="${monthlyContractIncome}"></span> Kr.</p>
+            </div>
+            <div class="KPIelement">
+                <p>solgte biler sum: <span th:text="${soldCarsSum}"></span> Kr.</p>
             </div>
         </div>
         <div class="headerRightContainer">
-            <h3>Alarmer</h3>
-            <a class="createHeader" href="/CreatePreSaleContract">+</a>
+            <h3 class="header">Alarmer</h3>
         </div>
         <div class="rightSide">
 

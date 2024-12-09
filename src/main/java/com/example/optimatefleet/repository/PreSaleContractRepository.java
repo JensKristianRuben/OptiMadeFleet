@@ -47,8 +47,8 @@ public class PreSaleContractRepository {
 
         jdbcTemplate.update(sqlBuyer, preSaleContract.getCvr(), preSaleContract.getCompany_name(), preSaleContract.getCompany_phonenumber(), preSaleContract.getEmail(), addressID);
 
-        String sqlPreSaleContract = "INSERT INTO pre_sale_contract(cvr, license_plate, delivery_location, price, max_km) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sqlPreSaleContract, preSaleContract.getCvr(), preSaleContract.getLicense_plate(), preSaleContract.getDelivery_location(), preSaleContract.getPrice(), preSaleContract.getMax_km());
+        String sqlPreSaleContract = "INSERT INTO pre_sale_contract(cvr, license_plate, delivery_location, price, max_km, car_delivered) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sqlPreSaleContract, preSaleContract.getCvr(), preSaleContract.getLicense_plate(), preSaleContract.getDelivery_location(), preSaleContract.getPrice(), preSaleContract.getMax_km(), preSaleContract.isCar_Delivered());
 
     }
 
@@ -132,5 +132,9 @@ public class PreSaleContractRepository {
                 preSaleContract.getMax_km(),
                 preSaleContract.getLicense_plate()
         );
+    }
+    public void updatePreSaleContractToDilevered(String licensePlate){
+        String updateDileveredSql = "UPDATE pre_sale_contract SET car_delivered = 1 WHERE license_plate = ?";
+        jdbcTemplate.update(updateDileveredSql, licensePlate);
     }
 }
