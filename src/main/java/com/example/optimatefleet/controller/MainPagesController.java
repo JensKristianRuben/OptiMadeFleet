@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+
 @Controller
 public class MainPagesController {
     @Autowired
@@ -28,19 +29,44 @@ public class MainPagesController {
         List<RentContract> rentContractList = rentContractService.showAllRentContracts();
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         List<PreSaleContract> preSaleContracts = preSaleContractService.fetchAllPreSaleContracts();
-        model.addAttribute("sortBy",sortBy);
+        model.addAttribute("sortBy", sortBy);
         model.addAttribute("carsList", carsList);
         model.addAttribute("rentContracts", rentContractList);
         model.addAttribute("preSaleContracts", preSaleContracts);
         return "DataRegister";
     }
 
-    @GetMapping("DamageReportPage")
+    @GetMapping("/DamageReportPage")
     public String damageReportPage(Model model, @RequestParam(defaultValue = "returned") String sortBy) {
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
-        model.addAttribute("sortBy",sortBy);
+        model.addAttribute("sortBy", sortBy);
         model.addAttribute("carsList", carsList);
 
         return "DamageReportPage";
+    }
+
+    @GetMapping("/KPI")
+    public String KPI(Model model, @RequestParam(defaultValue = "allCars") String sortBy) {
+        List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
+        int allCarsCount = carService.fetchAllCars().size();
+        int rentedCarsCount = carService.fetchAllCarsAndSortByParam("rentet").size();
+        int soldCarsCount = carService.fetchAllCarsAndSortByParam("dilevered").size();
+        int monthlyContractIncome = rentContractService.calculateMonthlyIncome();
+        int preSoldCars = carService.fetchAllCarsWithSoldStatus().size();
+        int notPreSoldCars = carService.fetchAllCarsWithNotSoldStatus().size();
+        int soldCarsSum = preSaleContractService.soldCarsIncome();
+
+
+
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("carsList", carsList);
+        model.addAttribute("allCarsCount", allCarsCount);
+        model.addAttribute("rentedCarsCount", rentedCarsCount);
+        model.addAttribute("soldCarsCount", soldCarsCount);
+        model.addAttribute("preSoldCars", preSoldCars);
+        model.addAttribute("notPreSoldCars", notPreSoldCars);
+        model.addAttribute("monthlyContractIncome", monthlyContractIncome);
+        model.addAttribute("soldCarsSum", soldCarsSum);
+        return "KPI";
     }
 }

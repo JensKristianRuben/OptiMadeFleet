@@ -1,0 +1,13 @@
+.headerRightContainer{
+    margin-right: 620px;
+}
+.KPIelement p{
+    color: white;
+}
+.KPIelement span {
+    font-weight: bold;
+    color: #47b2e1;
+}
+.KPIelement{
+    border-bottom: 3px solid #9a9a9a;
+}
