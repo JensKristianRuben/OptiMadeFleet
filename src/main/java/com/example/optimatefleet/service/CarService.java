@@ -137,7 +137,7 @@ public class CarService {
                     }
                 }
                 return allUnder_repairCars;
-            case "dilevered":
+            case "delivered":
                 List<Car> allDilevered_cars = new ArrayList<>();
                 for (Car element : listOfCars){
                     if (element.getCar_status().equals("delivered")){
@@ -192,6 +192,19 @@ public class CarService {
             if (element.getLicense_plate().equals(licensePlate)) {
                 car = element;
                 car.setCar_status(Car.CarStatus.ready_for_invoice);
+                break;
+            }
+        }
+        carRepository.updateCar(car);
+    }
+
+    public void updateCarStatusReturned(String licensePlate){
+        List<Car> listOfCars = carRepository.fetchAllCars();
+        Car car = null;
+        for (Car element : listOfCars) {
+            if (element.getLicense_plate().equals(licensePlate)) {
+                car = element;
+                car.setCar_status(Car.CarStatus.returned);
                 break;
             }
         }

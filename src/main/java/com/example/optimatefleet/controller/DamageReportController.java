@@ -41,13 +41,19 @@ public class DamageReportController {
         model.addAttribute("carsList", carsList);
         if (sortBy.equals("ready_for_invoice")) {
             model.addAttribute("damageReport", damageReportService.findDamageReportByLicense_plate(license_plate));
-            model.addAttribute("listOfDamages", damageReportService.mapOfDescriptionAndPrice(license_plate));
+            model.addAttribute("listOfDamages", damageReportService.getMapOfDescriptionAndPrice(license_plate));
+            model.addAttribute("sumOfDamages", damageReportService.calculateSumOfDamages(license_plate));
+            model.addAttribute("mileage_over_limit_price", damageReportService.calculateMileage_over_limitPrice(damageReportService.findDamageReportByLicense_plate(license_plate).getMileage_over_limit()));
+            System.out.println(damageReportService.calculateSumOfDamages(license_plate));
         }
         return "DamageReportPage";
     }
 
     @PostMapping("deleteDamageReport")
     public String deleteDamageReport(@RequestParam String license_plate) {
-        return "redirect:/DamageReportPagePost/" + license_plate + "/returned";
+        damageReportService.deleteDamageReport(license_plate);
+        carService.updateCarStatusReturned(license_plate);
+        String sortBy = "returned";
+        return "redirect:/DamageReportPagePost/" + license_plate + "/" + sortBy;
     }
 }

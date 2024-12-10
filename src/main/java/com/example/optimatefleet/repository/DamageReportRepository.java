@@ -45,12 +45,30 @@ public class DamageReportRepository {
             );
     }
 
-    public List<DamageReport> listOfDamageReports (String license_plate)    {
+    public List<DamageReport> getListOfDamageReports()    {
         String sql = "SELECT license_plate, description, damage_price, mileage_over_limit "+
                 "FROM damage_report dr " +
                 "JOIN damage_description dd ON dr.damage_id = dd.damage_id "+
                 "JOIN damage_price dp ON dr.damage_id = dp.damage_id";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(DamageReport.class));
+    }
+
+    public void deleteDamageReport(String license_plate)    {
+        String getDamage_idSql = "SELECT damage_id FROM damage_report WHERE license_plate = ?";
+
+        int damage_id = jdbcTemplate.queryForObject(getDamage_idSql, Integer.class, license_plate);
+
+        String deleteDamageReportSql = "DELETE FROM damage_report WHERE license_plate = ?";
+
+        jdbcTemplate.update(deleteDamageReportSql, license_plate);
+
+        String deleteDamage_priceSql = "DELETE FROM damage_price WHERE damage_id = ?";
+
+        jdbcTemplate.update(deleteDamage_priceSql, damage_id);
+
+        String deleteDamage_desciptionSql = "DELETE FROM damage_description WHERE damage_id = ?";
+
+        jdbcTemplate.update(deleteDamage_desciptionSql, damage_id);
     }
 }

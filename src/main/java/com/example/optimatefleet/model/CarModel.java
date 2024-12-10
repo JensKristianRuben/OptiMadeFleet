@@ -133,7 +133,7 @@ public class CarModel {
         Ford,
         Mercedes,
         Mercedes_Benz,
-        Bmw,
+        BMW,
         Audi,
         Volvo,
         Mazda,

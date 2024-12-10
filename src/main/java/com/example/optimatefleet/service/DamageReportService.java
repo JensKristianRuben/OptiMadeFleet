@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -49,7 +48,7 @@ public class DamageReportService {
     }
 
     public DamageReport findDamageReportByLicense_plate(String license_plate)    {
-        List<DamageReport> damageReportList = damageReportRepository.listOfDamageReports(license_plate);
+        List<DamageReport> damageReportList = damageReportRepository.getListOfDamageReports();
         DamageReport damageReportToReturn = null;
 
         for(DamageReport damageReport : damageReportList) {
@@ -61,7 +60,7 @@ public class DamageReportService {
         return damageReportToReturn;
     }
 
-    public Map<String, String> mapOfDescriptionAndPrice (String license_plate)  {
+    public Map<String, String> getMapOfDescriptionAndPrice(String license_plate)  {
         Map<String, String> mapOfDescriptionAndPrice = new HashMap<>();
         DamageReport damageReport = findDamageReportByLicense_plate(license_plate);
         String[] description = damageReport.getDescription().split(" ");
@@ -71,5 +70,22 @@ public class DamageReportService {
         }
 
         return mapOfDescriptionAndPrice;
+    }
+
+    public void deleteDamageReport(String license_plate)    {
+        damageReportRepository.deleteDamageReport(license_plate);
+    }
+
+    public int calculateSumOfDamages (String license_plate) {
+        Map<String, String> damageList = getMapOfDescriptionAndPrice(license_plate);
+        int sum = 0;
+
+        for(String description : damageList.values()) {
+            if(description != null) {
+                sum += Integer.parseInt(description);
+            }
+        }
+
+        return sum;
     }
 }

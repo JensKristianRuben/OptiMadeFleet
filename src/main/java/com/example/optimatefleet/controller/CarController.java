@@ -48,7 +48,6 @@ public class CarController {
 
     @PostMapping("UpdateCar")
     public String updateCar(@ModelAttribute Car car) {
-        System.out.println(car);
         carService.updateCar(car);
         return "redirect:/DataRegister";
     }
