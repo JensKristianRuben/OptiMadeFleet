@@ -139,29 +139,29 @@
                         <span th:text="${carToGetDamageReport.year_of_manufactoring}"></span>
                         <span th:text="${carToGetDamageReport.color}"></span>
                     </div>
-                    <form action="/saveDamageReport" method="post"
+                    <form action="/deleteDamageReport" method="post"
                           style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; width: 100%">
                         <input hidden="hidden" type="text" name="license_plate"
                                th:value="${carToGetDamageReport.license_plate}">
 
-                        <div class="damageReportDiv">
+                        <div class="damageReportDivReadyForInvoice">
                             <div th:each="element : ${listOfDamages}" style="display: flex; flex-direction: column">
-                                <div>
+                                <div style="margin-top: 5%">
                                     <label>Skade</label>
-                                    <input type="text" th:value="${element.getKey()}" readonly>
+                                    <label style="margin-left: 35%">Pris</label>
                                 </div>
                                 <div>
-                                    <label>Pris</label>
+                                    <input type="text" th:value="${element.getKey()}" readonly>
                                     <input type="text" th:value="${element.getValue()}" readonly>
                                 </div>
                             </div>
-                            <div>
+                            <div style="margin-top: 5%">
                                 <label>Overkørte km.</label>
                                 <input type="number" th:value="${damageReport.mileage_over_limit}" max="2147483647"
                                        title="Må maximalt være 10 cifre" readonly>
                             </div>
-                            <div>
-                                <button class="saveButton" style="margin-top: 20px;">Gem</button>
+                            <div style="align-self: center">
+                                <button class="deleteButton" style="margin-top: 20px;">Opret ny</button>
                             </div>
                         </div>
                     </form>
