@@ -23,8 +23,10 @@ public class RentContract {
     private String pickup_location;
     private String return_location;
     private String rent_contract_type;
+    private boolean contract_terminated;
 
-    public RentContract() {}
+    public RentContract() {
+    }
 
     public String getRenter_first_name() {
         return renter_first_name;
@@ -162,6 +164,14 @@ public class RentContract {
         this.rent_contract_type = rent_contract_type;
     }
 
+    public boolean isContract_terminated() {
+        return contract_terminated;
+    }
+
+    public void setContract_terminated(boolean contract_terminated) {
+        this.contract_terminated = contract_terminated;
+    }
+
     @Override
     public String toString() {
         return "RentalInfo{" +
@@ -183,5 +193,6 @@ public class RentContract {
                 ", return_location='" + return_location + '\'' +
                 '}';
     }
+
 
 }

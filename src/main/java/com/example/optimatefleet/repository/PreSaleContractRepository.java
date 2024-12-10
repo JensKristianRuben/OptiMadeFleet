@@ -42,13 +42,17 @@ public class PreSaleContractRepository {
                     preSaleContract.getStreet_name(), preSaleContract.getStreet_number()}, Integer.class);
         }
 
+        String sqlBuyerCheck = "SELECT COUNT(*) FROM buyer WHERE cvr = ?";
+        int buyerCount = jdbcTemplate.queryForObject(sqlBuyerCheck, Integer.class, preSaleContract.getCvr());
 
-        String sqlBuyer = "INSERT INTO buyer(cvr, company_name, company_phonenumber, email, address_id) VALUES (?, ?, ?, ?, ?)";
+        if (cityCount == 0) {
+            String sqlBuyer = "INSERT INTO buyer(cvr, company_name, company_phonenumber, email, address_id) VALUES (?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sqlBuyer, preSaleContract.getCvr(), preSaleContract.getCompany_name(), preSaleContract.getCompany_phonenumber(), preSaleContract.getEmail(), addressID);
+        }
 
-        jdbcTemplate.update(sqlBuyer, preSaleContract.getCvr(), preSaleContract.getCompany_name(), preSaleContract.getCompany_phonenumber(), preSaleContract.getEmail(), addressID);
 
         String sqlPreSaleContract = "INSERT INTO pre_sale_contract(cvr, license_plate, delivery_location, price, max_km, car_delivered) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sqlPreSaleContract, preSaleContract.getCvr(), preSaleContract.getLicense_plate(), preSaleContract.getDelivery_location(), preSaleContract.getPrice(), preSaleContract.getMax_km(), preSaleContract.isCar_Delivered());
+        jdbcTemplate.update(sqlPreSaleContract, preSaleContract.getCvr(), preSaleContract.getLicense_plate(), preSaleContract.getDelivery_location(), preSaleContract.getPrice(), preSaleContract.getMax_km(), preSaleContract.isCar_delivered());
 
     }
 
@@ -58,6 +62,7 @@ public class PreSaleContractRepository {
                 "    pre_sale_contract.delivery_location, \n" +
                 "    pre_sale_contract.price, \n" +
                 "    pre_sale_contract.max_km,\n" +
+                "    pre_sale_contract.car_delivered,\n" +
                 "    buyer.company_name,\n" +
                 "    buyer.company_phonenumber,\n" +
                 "    buyer.email,\n" +
@@ -67,30 +72,18 @@ public class PreSaleContractRepository {
                 "    city.city_name,\n" +
                 "    address.zip_code\n" +
                 "FROM pre_sale_contract\n" +
-                "INNER JOIN buyer ON pre_sale_contract.cvr = buyer.cvr\n" +
-                "INNER JOIN address ON buyer.address_id = address.address_id\n" +
-                "INNER JOIN city ON address.zip_code = city.zip_code;";
+                "JOIN buyer ON pre_sale_contract.cvr = buyer.cvr\n" +
+                "JOIN address ON buyer.address_id = address.address_id\n" +
+                "JOIN city ON address.zip_code = city.zip_code;";
 
         return jdbcTemplate.query(fetchSql, new BeanPropertyRowMapper<>(PreSaleContract.class));
     }
 
     public void deletePreSaleContract(String licensePlate) {
-        String getCvrSql = "SELECT cvr FROM pre_sale_contract WHERE license_plate = ?";
-
-        Integer cvr = jdbcTemplate.queryForObject(getCvrSql, Integer.class, licensePlate);
-
-        String getAddressIdSql = "SELECT address_id FROM buyer WHERE cvr = ?";
-
-        Integer addressId = jdbcTemplate.queryForObject(getAddressIdSql, Integer.class, cvr);
 
         String deletePreSaleContractSql = "DELETE FROM pre_sale_contract WHERE license_plate = ?";
         jdbcTemplate.update(deletePreSaleContractSql, licensePlate);
 
-        String deleteBuyerSql = "DELETE FROM buyer WHERE cvr = ?";
-        jdbcTemplate.update(deleteBuyerSql, cvr);
-
-        String deleteAddressSql = "DELETE FROM address WHERE address_id = ?";
-        jdbcTemplate.update(deleteAddressSql, addressId);
     }
 
     public void updatePreSaleContract(PreSaleContract preSaleContract) {
@@ -133,7 +126,8 @@ public class PreSaleContractRepository {
                 preSaleContract.getLicense_plate()
         );
     }
-    public void updatePreSaleContractToDilevered(String licensePlate){
+
+    public void updatePreSaleContractToDilevered(String licensePlate) {
         String updateDileveredSql = "UPDATE pre_sale_contract SET car_delivered = 1 WHERE license_plate = ?";
         jdbcTemplate.update(updateDileveredSql, licensePlate);
     }
