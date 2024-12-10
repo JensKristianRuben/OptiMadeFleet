@@ -3,6 +3,7 @@ package com.example.optimatefleet.controller;
 import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.DamageReportService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,10 @@ public class DamageReportController {
     }
 
     @GetMapping("DamageReportPagePost/{license_plate}/{sortBy}")
-    public String damageReportPagePost(Model model, @PathVariable String license_plate, @PathVariable String sortBy) {
+    public String damageReportPagePost(Model model, @PathVariable String license_plate, @PathVariable String sortBy, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         model.addAttribute("carToGetDamageReport", carService.findCarByLicensePlate(license_plate));
         model.addAttribute(sortBy);

@@ -3,6 +3,7 @@ package com.example.optimatefleet.controller;
 import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.CarModel;
 import com.example.optimatefleet.service.CarService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,10 @@ public class CarController {
     private CarService carService;
 
     @GetMapping("CreateCarAndCarModel")
-    public String createCar(Model model) {
+    public String createCar(Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         model.addAttribute("car_models", carService.fethAllCarModels());
         return "CreateCarAndCarModel";
     }

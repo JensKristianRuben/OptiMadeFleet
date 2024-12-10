@@ -6,6 +6,7 @@ import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.PreSaleContractService;
 import com.example.optimatefleet.service.RentContractService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,10 @@ public class MainPagesController {
     PreSaleContractService preSaleContractService;
 
     @GetMapping("/DataRegister")
-    public String dataRegisterPage(Model model, @RequestParam(defaultValue = "allCars") String sortBy) {
+    public String dataRegisterPage(Model model, @RequestParam(defaultValue = "allCars") String sortBy, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         List<RentContract> rentContractList = rentContractService.fethAllOngoingRentContracts();
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         List<PreSaleContract> preSaleContracts = preSaleContractService.fetchAllOngoingPreSaleContracts();
@@ -37,7 +41,10 @@ public class MainPagesController {
     }
 
     @GetMapping("/DamageReportPage")
-    public String damageReportPage(Model model, @RequestParam(defaultValue = "returned") String sortBy) {
+    public String damageReportPage(Model model, @RequestParam(defaultValue = "returned") String sortBy, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("carsList", carsList);
@@ -46,7 +53,10 @@ public class MainPagesController {
     }
 
     @GetMapping("/KPI")
-    public String KPI(Model model, @RequestParam(defaultValue = "allCars") String sortBy) {
+    public String KPI(Model model, @RequestParam(defaultValue = "allCars") String sortBy, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         int allCarsCount = carService.fetchAllCars().size();
         int rentedCarsCount = carService.fetchAllCarsAndSortByParam("rentet").size();
