@@ -64,7 +64,8 @@
                th:value="${rentContract.getDate_of_birth()}">
 
         <label for="driversLicenseNumber">Kørekortnummer</label>
-        <input id="driversLicenseNumber" type="number" name="drivers_license_number" min="10000000" max="99999999" required
+        <input id="driversLicenseNumber" type="number" name="drivers_license_number" min="10000000" max="99999999"
+               required
                th:value="${rentContract.getDrivers_license_number()}">
     </div>
 
@@ -83,7 +84,8 @@
         <label for="rentContractType">Abonnomentstype</label>
         <select id="rentContractType" name="rent_contract_type">
             <option value="" hidden selected></option>
-            <option value="unlimited" th:Selected="${rentContract.getRent_contract_type() == 'unlimited'}" >Unlimited</option>
+            <option value="unlimited" th:Selected="${rentContract.getRent_contract_type() == 'unlimited'}">Unlimited
+            </option>
             <option value="limited" th:Selected="${rentContract.getRent_contract_type() == 'limited'}">Limited</option>
         </select>
 
@@ -91,9 +93,8 @@
         <input id="rentalStartDate" type="date" name="rental_start_date" min="2000-01-01" max="2300-12-31" required
                th:value="${rentContract.getRental_start_date()}">
 
-        <label for="rentalEndDate">Slut dato</label>
-        <input id="rentalEndDate" type="date" name="rental_end_date" min="2000-01-01" max="2300-12-31" required
-               th:value="${rentContract.getRental_end_date()}">
+        <label for="rentalEndDate">Kontrakt udløber</label>
+        <p id="rentalEndDate" th:text="${rentContract.getRental_end_date()}" th:value="${rentContract.getRental_end_date()}"></p>
 
         <label for="pickupLocation">Afhentningssted</label>
         <input id="pickupLocation" type="text" name="pickup_location" required
@@ -104,8 +105,21 @@
                th:value="${rentContract.getReturn_location()}">
 
         <button class="saveButton" type="submit" formaction="/updateRentContract">Opdater</button>
-        <button class="deleteButton" type="submit" th:formaction="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
-            onclick="confirmDelete()">Slet</button>
+
+        <label>Vælg årsag ved sletning</label>
+        <select id="deleteReason" name="deleteReason">
+            <option value="" hidden selected>Vælg årsag</option>
+            <option value="mistake">Fejloprettet</option>
+            <option value="rentPeriodEnded">Endt lejeperiode</option>
+        </select>
+
+        <label for="rentalTerminated">Ændre slut dato (kun ved endt lejeperiode)</label>
+        <input id="rentalTerminated" type="date" name="rental_end_date" min="2000-01-01" max="2300-12-31" th:value="${rentContract.getRental_end_date()}">
+
+        <button class="deleteButton" type="submit"
+                th:formaction="@{/deleteRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
+                onclick="confirmDelete()">Slet
+        </button>
 
     </div>
 

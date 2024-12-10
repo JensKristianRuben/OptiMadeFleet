@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +31,6 @@ public class RentContractService {
             rentalEndDate = rentalStartDate.plusMonths(36);
         }
 
-        System.out.println(rentalEndDate);
-
         rentContract.setRental_end_date(rentalEndDate);
         rentContractRepository.createRentContract(rentContract);
     }
@@ -38,6 +38,41 @@ public class RentContractService {
     public List<RentContract> showAllRentContracts() {
 
         return rentContractRepository.fetchAllRentContracts();
+    }
+    public List<RentContract> fethAllOngoingRentContracts(){
+        List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
+        List<RentContract> ongoingContractList = new ArrayList<>();
+
+        for (RentContract element : rentContractList){
+            if (!element.isContract_terminated()){
+                ongoingContractList.add(element);
+            }
+        }
+        return ongoingContractList;
+    }
+    public double calculateAverageRentalTime(){
+        List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
+
+        int months = 0;
+        int counter = 0;
+
+        for (RentContract element : rentContractList){
+            if (element.isContract_terminated()){
+
+                LocalDate startDate = element.getRental_start_date();
+                LocalDate endDate = element.getRental_end_date();
+
+                int monthsBetweenStartDateAndEndDate = (int) ChronoUnit.MONTHS.between(startDate, endDate);
+
+                months += monthsBetweenStartDateAndEndDate;
+                counter++;
+            }
+        }
+        if (counter > 0){
+            return (double) months / counter;
+        }else {
+            return 0.0;
+        }
     }
 
     public RentContract findContractByLicensePlate(String licensePlate) {
@@ -66,7 +101,7 @@ public class RentContractService {
 
         for (Car element : listOfCars){
             if (element.getCar_status().equals("rentet")){
-                monthlyContractIncome += element.calculateMonthlyPrice();
+                monthlyContractIncome += (int) element.calculateMonthlyPrice();
             }
         }
         return monthlyContractIncome;

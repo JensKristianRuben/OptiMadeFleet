@@ -7,6 +7,7 @@ import com.example.optimatefleet.repository.PreSaleContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,6 +36,21 @@ public class PreSaleContractService {
         return preSaleContract;
     }
 
+    public List<PreSaleContract> fetchAllOngoingPreSaleContracts() {
+        List<PreSaleContract> PreSaleContractList = fetchAllPreSaleContracts();
+        List<Car> listOfCars = carRepository.fetchAllCars();
+        List<PreSaleContract> ongoingPreSaleContractList = new ArrayList<>();
+        for (PreSaleContract preSaleelement : PreSaleContractList) {
+            for (Car carElement : listOfCars) {
+                if (preSaleelement.getLicense_plate().equals(carElement.getLicense_plate()) && !carElement.getCar_status().equals("delivered")) {
+                    ongoingPreSaleContractList.add(preSaleelement);
+                }
+            }
+        }
+
+        return ongoingPreSaleContractList;
+    }
+
     public void deletePreSaleContract(String licensePlate) {
         preSaleContractRepository.deletePreSaleContract(licensePlate);
     }
@@ -42,21 +58,19 @@ public class PreSaleContractService {
     public void updatePreSaleContract(PreSaleContract preSaleContract) {
         preSaleContractRepository.updatePreSaleContract(preSaleContract);
     }
-    public void updatePreSaleContractToDilevered(String licensePlate){
+
+    public void updatePreSaleContractToDilevered(String licensePlate) {
         preSaleContractRepository.updatePreSaleContractToDilevered(licensePlate);
     }
 
     public int soldCarsIncome() {
-        List<Car> listOfCars = carRepository.fetchAllCars();
         List<PreSaleContract> preSaleContractList = fetchAllPreSaleContracts();
         int soldCarsSum = 0;
 
         for (PreSaleContract preSaleelement : preSaleContractList) {
-            for (Car carElement : listOfCars) {
-                if (preSaleelement.getLicense_plate().equals(carElement.getLicense_plate()) && carElement.getCar_status().equals("delivered")) {
-
-                    soldCarsSum += preSaleelement.getPrice();
-                }
+            System.out.println(preSaleelement);
+            if (preSaleelement.isCar_delivered()) {
+                soldCarsSum += preSaleelement.getPrice();
             }
         }
         return soldCarsSum;

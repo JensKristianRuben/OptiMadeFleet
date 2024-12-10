@@ -18,7 +18,7 @@ public class CarRepository {
         String sql = "INSERT INTO car_model (car_model_name, average_rental_time_in_months, " +
                 "engine_size, seat_count, door_count, horsepower, make, " +
                 "body_type, gear_type, fuel_type) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
                 carModel.getCar_model_name(),

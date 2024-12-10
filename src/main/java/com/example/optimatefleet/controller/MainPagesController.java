@@ -26,9 +26,9 @@ public class MainPagesController {
 
     @GetMapping("/DataRegister")
     public String dataRegisterPage(Model model, @RequestParam(defaultValue = "allCars") String sortBy) {
-        List<RentContract> rentContractList = rentContractService.showAllRentContracts();
+        List<RentContract> rentContractList = rentContractService.fethAllOngoingRentContracts();
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
-        List<PreSaleContract> preSaleContracts = preSaleContractService.fetchAllPreSaleContracts();
+        List<PreSaleContract> preSaleContracts = preSaleContractService.fetchAllOngoingPreSaleContracts();
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("carsList", carsList);
         model.addAttribute("rentContracts", rentContractList);
@@ -55,6 +55,8 @@ public class MainPagesController {
         int preSoldCars = carService.fetchAllCarsWithSoldStatus().size();
         int notPreSoldCars = carService.fetchAllCarsWithNotSoldStatus().size();
         int soldCarsSum = preSaleContractService.soldCarsIncome();
+        double averageRentTime = rentContractService.calculateAverageRentalTime();
+        System.out.println(averageRentTime);
 
 
 
@@ -67,6 +69,7 @@ public class MainPagesController {
         model.addAttribute("notPreSoldCars", notPreSoldCars);
         model.addAttribute("monthlyContractIncome", monthlyContractIncome);
         model.addAttribute("soldCarsSum", soldCarsSum);
+        model.addAttribute("averageRentTime", averageRentTime);
         return "KPI";
     }
 }

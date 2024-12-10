@@ -5,7 +5,7 @@ body{
     margin-top: 50px;
     background-color: #454545;
     width: 800px;
-    height: 550px;
+    height: 700px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -18,7 +18,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 530px;
+    height: 650px;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: center;
@@ -28,7 +28,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 530px;
+    height: 700px;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: center;
@@ -37,6 +37,7 @@ body{
 label{
     color: #999999;
     align-self: flex-start;
+    margin-top: 7px;
 }
 input{
     width: 70%;

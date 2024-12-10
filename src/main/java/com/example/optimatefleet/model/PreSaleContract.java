@@ -13,7 +13,7 @@ public class PreSaleContract {
     private String delivery_location;
     private int price;
     private int max_km;
-    private boolean car_Delivered;
+    private boolean car_delivered;
 
     public PreSaleContract() {
     }
@@ -114,12 +114,12 @@ public class PreSaleContract {
         this.max_km = max_km;
     }
 
-    public boolean isCar_Delivered() {
-        return car_Delivered;
+    public boolean isCar_delivered() {
+        return car_delivered;
     }
 
-    public void setCar_Delivered(boolean car_Delivered) {
-        this.car_Delivered = car_Delivered;
+    public void setCar_delivered(boolean car_delivered) {
+        this.car_delivered = car_delivered;
     }
 
     @Override

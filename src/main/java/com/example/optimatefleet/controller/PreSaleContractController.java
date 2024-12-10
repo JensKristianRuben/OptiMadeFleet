@@ -27,7 +27,7 @@ public class PreSaleContractController {
 
     @PostMapping("/CreatePreSaleContract")
     public String createPreSaleContract(@ModelAttribute PreSaleContract preSaleContract) {
-        preSaleContract.setCar_Delivered(false);
+        preSaleContract.setCar_delivered(false);
         preSaleContractService.createPreSaleContract(preSaleContract);
         carService.updateCarStatusToSold(preSaleContract.getLicense_plate());
         return "redirect:/DataRegister";

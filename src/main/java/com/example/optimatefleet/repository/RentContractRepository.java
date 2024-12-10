@@ -2,6 +2,7 @@ package com.example.optimatefleet.repository;
 
 import com.example.optimatefleet.model.RentContract;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -26,27 +27,46 @@ public class RentContractRepository {
             jdbcTemplate.update(sqlCity, rentContract.getZip_code(), rentContract.getCity_name());
         }
 
-        String sqlAddress = "INSERT INTO address(zip_code, street_name, street_number) VALUES (?, ?, ?)";
+        String sqlAddressCheck = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
+        Integer addressID;
 
-        jdbcTemplate.update(sqlAddress, rentContract.getZip_code(), rentContract.getStreet_name(), rentContract.getStreet_number());
+        try {
+            addressID = jdbcTemplate.queryForObject(
+                    sqlAddressCheck,
+                    new Object[]{rentContract.getZip_code(), rentContract.getStreet_name(), rentContract.getStreet_number()},
+                    Integer.class
+            );
+        } catch (EmptyResultDataAccessException e) {
 
-        String getAddressId = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
+            String sqlAddress = "INSERT INTO address(zip_code, street_name, street_number) VALUES (?, ?, ?)";
+            jdbcTemplate.update(sqlAddress, rentContract.getZip_code(), rentContract.getStreet_name(), rentContract.getStreet_number());
 
-        int addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{rentContract.getZip_code(),
-                rentContract.getStreet_name(), rentContract.getStreet_number()}, Integer.class
-        );
+            addressID = jdbcTemplate.queryForObject(
+                    sqlAddressCheck,
+                    new Object[]{rentContract.getZip_code(), rentContract.getStreet_name(), rentContract.getStreet_number()},
+                    Integer.class
+            );
+        }
+        String sqlRenterCheck = "SELECT drivers_license_number FROM renter WHERE drivers_license_number = ?";
+        String driversLicenseNumber = null;
+        try {
+            driversLicenseNumber = jdbcTemplate.queryForObject(sqlRenterCheck,
+                    new Object[]{rentContract.getDrivers_license_number()},
+                    String.class);
 
-        String sqlRenter = "INSERT INTO renter (drivers_license_number, renter_first_name, renter_last_name," +
-                " address_id, renter_phonenumber, email, date_of_birth) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        jdbcTemplate.update(sqlRenter, rentContract.getDrivers_license_number(), rentContract.getRenter_first_name(), rentContract.getRenter_last_name(),
-                addressID, rentContract.getRenter_phonenumber(), rentContract.getEmail(), rentContract.getDate_of_birth());
+        }catch (EmptyResultDataAccessException e){
+            String sqlRenter = "INSERT INTO renter (drivers_license_number, renter_first_name, renter_last_name," +
+                    " address_id, renter_phonenumber, email, date_of_birth) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sqlRenter, rentContract.getDrivers_license_number(), rentContract.getRenter_first_name(),
+                    rentContract.getRenter_last_name(), addressID, rentContract.getRenter_phonenumber(),
+                    rentContract.getEmail(), rentContract.getDate_of_birth());
+        }
 
         String sqlRentContract = "INSERT INTO rent_contract (drivers_license_number, license_plate, rental_start_date, " +
-                "rental_end_date, pickup_location, return_location, max_km, rent_contract_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "rental_end_date, pickup_location, return_location, max_km, rent_contract_type, contract_terminated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sqlRentContract, rentContract.getDrivers_license_number(), rentContract.getLicense_plate(), rentContract.getRental_start_date(), rentContract.getRental_end_date(),
-                rentContract.getPickup_location(), rentContract.getReturn_location(), rentContract.getMax_km(), rentContract.getRent_contract_type());
+                rentContract.getPickup_location(), rentContract.getReturn_location(), rentContract.getMax_km(), rentContract.getRent_contract_type(), rentContract.isContract_terminated());
     }
 
     public List<RentContract> fetchAllRentContracts() {
@@ -57,7 +77,8 @@ public class RentContractRepository {
                 "    rent_contract.pickup_location, \n" +
                 "    rent_contract.return_location, \n" +
                 "    rent_contract.max_km, " +
-                "    rent_contract.rent_contract_type, " +
+                "    rent_contract.rent_contract_type," +
+                "    rent_contract.contract_terminated, " +
                 "    renter.drivers_license_number,\n" +
                 "    renter.renter_first_name,\n" +
                 "    renter.renter_last_name,\n" +
@@ -79,24 +100,10 @@ public class RentContractRepository {
 
     }
 
-    @Transactional //usikkert om det gør noget uden konfiq
     public void deleteByLicensePlate(String licensePlate) {
-
-        String getDriversLicenseSql = "SELECT drivers_license_number FROM rent_contract WHERE license_plate = ?";
-        Integer driversLicenseNumber = jdbcTemplate.queryForObject(getDriversLicenseSql, Integer.class, licensePlate);
-
-        String getAddressIdSql = "SELECT address_id FROM renter WHERE drivers_license_number = ?";
-        Integer addressId = jdbcTemplate.queryForObject(getAddressIdSql, Integer.class, driversLicenseNumber);
 
         String deleteRentContractSql = "DELETE FROM rent_contract WHERE license_plate = ?";
         jdbcTemplate.update(deleteRentContractSql, licensePlate);
-
-        String deleteRenterSql = "DELETE FROM renter WHERE drivers_license_number = ?";
-        jdbcTemplate.update(deleteRenterSql, driversLicenseNumber);
-
-        String deleteAddressSql = "DELETE FROM address WHERE address_id = ?";
-        jdbcTemplate.update(deleteAddressSql, addressId);
-
     }
 
     public void updateRentContract(RentContract rentContract){
@@ -130,8 +137,9 @@ public class RentContractRepository {
                 "    rental_end_date = ?, " +
                 "    pickup_location = ?, " +
                 "    return_location = ?, " +
-                "    rent_contract_type = ? " +
-                "WHERE drivers_license_number = ?";
+                "    rent_contract_type = ?," +
+                "    contract_terminated = ? " +
+                "WHERE license_plate = ?";
 
         jdbcTemplate.update(updateRentContract,
                 rentContract.getLicense_plate(),
@@ -141,8 +149,8 @@ public class RentContractRepository {
                 rentContract.getPickup_location(),
                 rentContract.getReturn_location(),
                 rentContract.getRent_contract_type(),
-                rentContract.getDrivers_license_number());
-
+                rentContract.isContract_terminated(),
+                rentContract.getLicense_plate());
     }
 
 }
