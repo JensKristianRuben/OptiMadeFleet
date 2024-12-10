@@ -50,13 +50,12 @@ public class MainPagesController {
         List<Car> carsList = carService.fetchAllCarsAndSortByParam(sortBy);
         int allCarsCount = carService.fetchAllCars().size();
         int rentedCarsCount = carService.fetchAllCarsAndSortByParam("rentet").size();
-        int soldCarsCount = carService.fetchAllCarsAndSortByParam("dilevered").size();
+        int soldCarsCount = carService.fetchAllCarsAndSortByParam("delivered").size();
         int monthlyContractIncome = rentContractService.calculateMonthlyIncome();
         int preSoldCars = carService.fetchAllCarsWithSoldStatus().size();
         int notPreSoldCars = carService.fetchAllCarsWithNotSoldStatus().size();
         int soldCarsSum = preSaleContractService.soldCarsIncome();
         double averageRentTime = rentContractService.calculateAverageRentalTime();
-        System.out.println(averageRentTime);
 
 
 
