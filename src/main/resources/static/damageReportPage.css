@@ -154,6 +154,12 @@ h3{
     margin-top: auto;
 }
 
+.damageReportDivReadyForInvoice{
+    display: flex;
+    flex-direction: column;
+    height: 95%;
+}
+
 input{
     width: 185px;
     height: 25px;
