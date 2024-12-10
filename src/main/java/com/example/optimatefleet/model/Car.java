@@ -187,7 +187,7 @@ public class Car {
 //Returnere registreringsafgiften pr. måned for en given bil ud fra hvilke af de 3 prisklasser bilen ligger i.
     public double calculateMonthlyRegistrationTax ()    {
         double monthlyRegistrationTax = 0;
-        original_price += calculateVAT(original_price);
+        original_price += calculateVAT();
 
         if(original_price <= Constants.FIRST_THRESH_HOLD)  {
             monthlyRegistrationTax = original_price * Constants.FIRST_TRESH_HOLD_PERCENT;
@@ -205,8 +205,8 @@ public class Car {
         return monthlyRegistrationTax;
     }
 //VAT står for Value Added Tax'
-    public double calculateVAT(int purchasePrice)   {
-        return purchasePrice * Constants.VAT;
+    public double calculateVAT()   {
+        return original_price * Constants.VAT;
     }
 
     public double calculateMonthlyPrice()    {
