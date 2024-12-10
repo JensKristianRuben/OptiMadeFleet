@@ -4,6 +4,7 @@ import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.RentContractService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,10 @@ public class RentContractController {
     CarService carService;
 
     @GetMapping("/CreateRentContract")
-    public String createRentContract(Model model) {
+    public String createRentContract(Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         model.addAttribute("cars", carService.fecthAllCarWithAvailableStatus());
         return "CreateRentContract";
     }
@@ -34,7 +38,10 @@ public class RentContractController {
     }
 
     @GetMapping("/ShowRentContract/{licensePlate}")
-    public String showRentContract(@PathVariable String licensePlate, Model model) {
+    public String showRentContract(@PathVariable String licensePlate, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         RentContract rentContract = rentContractService.findContractByLicensePlate(licensePlate);
         model.addAttribute("rentContract", rentContract);
         return "EditRentContract";

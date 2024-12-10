@@ -4,6 +4,7 @@ import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.PreSaleContract;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.PreSaleContractService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,10 @@ public class PreSaleContractController {
     PreSaleContractService preSaleContractService;
 
     @GetMapping("/CreatePreSaleContract")
-    public String createPreSaleContract(Model model) {
+    public String createPreSaleContract(Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
         List<Car> listOfCarsNotSold = carService.fetchAllCarsWithNotSoldStatus();
         model.addAttribute("cars", listOfCarsNotSold);
         return "CreatePreSaleContract";
