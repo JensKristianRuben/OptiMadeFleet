@@ -5,6 +5,8 @@
     <title>Create car and car model</title>
     <link rel="stylesheet" href="/CreateCar.css">
     <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 
@@ -12,9 +14,9 @@
     <a class="NavBarLink" href="/KPI">
         <img src="/images/logo.png">
     </a>
-    <a class="NavBarLink" href="#">KPI</a>
+    <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
-    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+    <a class="NavBarLinkChosen" href="/DataRegister">Dataregistrering</a>
     <a class="NavBarLink" href="/logout">Log ud</a>
 </div>
 
@@ -82,8 +84,8 @@
         </select>
         <label>Model navn</label>
         <input type="text" name="car_model_name" required>
-        <label>Den månedlige udlejningspris</label>
-        <input type="number" name="price_a_month" max="99999999" title="Må maximalt være 10 cifre" step="0.01" required>
+<!--        <label>Den månedlige udlejningspris</label>-->
+<!--        <input type="number" name="price_a_month" max="99999999" title="Må maximalt være 10 cifre" step="0.01" required>-->
         <label>Karrosseri</label>
         <select name="body_type" required>
             <option value="" hidden selected></option>
@@ -118,18 +120,18 @@
             <option value="hybrid">Hybrid</option>
         </select>
         <label>Antal sæder</label>
-        <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+        <div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 80%">
             <input type="radio" id="twoSeats" name="seat_count" value="2" required>
             <label style="margin-left: 5px; margin-right: 20px" for="twoSeats">2</label>
             <input type="radio" id="fourSeats" name="seat_count" value="4" required>
-            <label style="margin-left: 5px; margin-right: 20px" for="fourSeats">4</label>
+            <label style="margin-left: 5px; margin-right: 20px; " for="fourSeats">4</label>
             <input type="radio" id="fiveSeats" name="seat_count" value="5" required>
             <label style="margin-left: 5px; margin-right: 20px" for="fiveSeats">5</label>
             <input type="radio" id="eightSeats" name="seat_count" value="8" required>
             <label style="margin-left: 5px; margin-right: 20px" for="eightSeats">8</label>
         </div>
         <label>Antal døre</label>
-        <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+        <div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 80%">
             <input type="radio" id="threeDoors" name="door_count" value="3" required>
             <label style="margin-left: 5px; margin-right: 20px" for="threeDoors">3</label>
             <input type="radio" id="fourDoors" name="door_count" value="4" required>
