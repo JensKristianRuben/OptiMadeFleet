@@ -1,6 +1,7 @@
 package com.example.optimatefleet.controller;
 
 import com.example.optimatefleet.model.Car;
+import com.example.optimatefleet.model.CarModel;
 import com.example.optimatefleet.model.PreSaleContract;
 import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainPagesController {
@@ -66,6 +68,7 @@ public class MainPagesController {
         int notPreSoldCars = carService.fetchAllCarsWithNotSoldStatus().size();
         int soldCarsSum = preSaleContractService.soldCarsIncome();
         double averageRentTime = rentContractService.calculateAverageRentalTime();
+        Map<CarModel, Integer> lowStockCarModels = carService.fetchAllCarsWithLowStock();
 
 
 
@@ -79,6 +82,7 @@ public class MainPagesController {
         model.addAttribute("monthlyContractIncome", monthlyContractIncome);
         model.addAttribute("soldCarsSum", soldCarsSum);
         model.addAttribute("averageRentTime", averageRentTime);
+        model.addAttribute("lowStockCarModels", lowStockCarModels);
         return "KPI";
     }
 }

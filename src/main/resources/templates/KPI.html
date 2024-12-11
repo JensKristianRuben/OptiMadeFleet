@@ -50,9 +50,9 @@
                     <span th:text="${car.year_of_manufactoring}"></span>
                     <span th:text="${car.color}"></span>
                 </div>
-                <span th:text="${car.getCar_statusString()}"></span>
+                <span>Status: <span style="color: #47b2e1" th:text="${car.getCar_statusString()}"></span></span>
                 <span th:text="${car.isIs_pre_soldString()}"></span>
-                <span th:text="${car.calculateMonthlyPrice()} + ' kr.'"></span>
+                <span>md. udlejningspris:  <span style="color: #47b2e1" th:text="${car.calculateMonthlyPrice()}"> </span><span> kr.</span></span>
             </a>
         </div>
 
@@ -88,11 +88,18 @@
                 <p>Gennemsnitlig lejetid: <span th:text="${averageRentTime}"></span> mdr.</p>
             </div>
         </div>
+
         <div class="headerRightContainer">
             <h3 class="header">Alarmer</h3>
         </div>
         <div class="rightSide">
-
+            <div class="KPIelement" th:each="entry : ${lowStockCarModels}">
+                <p>
+                    <span style="color: white; font-weight: normal; border: none" th:text="${entry.key.Make} + ' ' "></span>
+                    <span style="color: white; font-weight: normal; border: none" th:text="${entry.key.car_model_name} + ':' "></span>
+                    <span th:text="${entry.Value} + ' '"></span>stk.
+                </p>
+            </div>
         </div>
 
     </div>
