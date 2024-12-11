@@ -216,6 +216,7 @@ public class CarService {
     public Map<CarModel, Integer> fetchAllCarsWithLowStock() {
         List<Car> cars = fetchAllCarsAndSortByParam("available");
         Map<String, Integer> carModelsCounter = new HashMap<>();
+        List<CarModel> carModels = carRepository.fetchAllCarModels();
 
         for (Car element : cars){
             if(carModelsCounter.containsKey(element.getCar_model_name()))  {
@@ -233,17 +234,23 @@ public class CarService {
             }
         }
 
+        for (CarModel carModel : carModels) {
+            if (!carModelsCounter.containsKey(carModel.getCar_model_name())) {
+                lowStockCarModels.put(carModel, 0);
+            }
+        }
+
         return lowStockCarModels;
     }
 
-    public List<CarModel> fetchListOfCarModelsByCarModelNames (List<String> carModelNames)    {
-        List<CarModel> carModels = new ArrayList<>();
-
-        for (String carModelName : carModelNames) {
-            carModels.add(carRepository.fetchModelByModelName(carModelName));
-        }
-
-        return carModels;
-    }
+//    public List<CarModel> fetchListOfCarModelsByCarModelNames (List<String> carModelNames)    {
+//        List<CarModel> carModels = new ArrayList<>();
+//
+//        for (String carModelName : carModelNames) {
+//            carModels.add(carRepository.fetchModelByModelName(carModelName));
+//        }
+//
+//        return carModels;
+//    }
 }
 

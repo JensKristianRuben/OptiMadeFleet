@@ -12,4 +12,6 @@
 .KPIelement{
     border-bottom: 3px solid #9a9a9a;
     width: 300px;
+    margin-left: 4%;
+    /*for at venstreorientere elementerne*/
 }
