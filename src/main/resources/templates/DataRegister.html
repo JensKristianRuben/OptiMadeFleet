@@ -15,7 +15,7 @@
     </a>
     <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
-    <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
+    <a class="NavBarLinkChosen" href="/DataRegister">Dataregistrering</a>
     <a class="NavBarLink" href="/logout">Log ud</a>
 </div>
 
@@ -46,9 +46,9 @@
                         <span th:text="${car.year_of_manufactoring}"></span>
                         <span th:text="${car.color}"></span>
                     </div>
-                        <span th:text="${car.getCar_statusString()}"></span>
+                        <span>Status: <span style="color: #47b2e1" th:text="${car.getCar_statusString()}"></span></span>
                         <span th:text="${car.isIs_pre_soldString()}"></span>
-                        <span th:text="${car.calculateMonthlyPrice()} + ' kr.'"></span>
+                        <span>md. udlejningspris:  <span style="color: #47b2e1" th:text="${car.calculateMonthlyPrice()}"> </span><span> kr.</span></span>
                 </a>
         </div>
 

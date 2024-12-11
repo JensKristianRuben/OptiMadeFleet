@@ -45,7 +45,6 @@ body{
     cursor: pointer;
 }
 
-
 .NavBar{
     background-color: transparent;
     display: flex;
@@ -55,7 +54,10 @@ body{
     height: 60px;
     position: fixed;
     top: 0;
-    border-bottom: 2px solid #454545;
+    background: linear-gradient(to right, transparent, #47b2e1, #47b2e1, transparent);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 90% 2px;
 }
 .NavBarLink{
     text-decoration: none;
@@ -65,6 +67,18 @@ body{
 }
 .NavBarLink:hover{
     color: #024360;
+}
+
+.NavBarLinkChosen{
+    text-decoration: none;
+    font-size: 25px;
+    color: #024360;
+    transition: color 0.2s;
+    font-weight: bold;
+    border-bottom: solid black;
+}
+.NavBarLinkChosen:hover{
+    color: #47b2e1;
 }
 
 .loginForm{
