@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CarService {
@@ -24,7 +26,7 @@ public class CarService {
     }
 
     public List<CarModel> fethAllCarModels() {
-        return carRepository.fethAllCarModels();
+        return carRepository.fetchAllCarModels();
     }
     public List<Car> fetchAllCars(){
         return carRepository.fetchAllCars();
@@ -209,6 +211,39 @@ public class CarService {
             }
         }
         carRepository.updateCar(car);
+    }
+
+    public Map<CarModel, Integer> fetchAllCarsWithLowStock() {
+        List<Car> cars = fetchAllCarsAndSortByParam("available");
+        Map<String, Integer> carModelsCounter = new HashMap<>();
+
+        for (Car element : cars){
+            if(carModelsCounter.containsKey(element.getCar_model_name()))  {
+                carModelsCounter.put(element.getCar_model_name(), carModelsCounter.get(element.getCar_model_name()) + 1);
+            } else {
+                carModelsCounter.put(element.getCar_model_name(), 1);
+            }
+        }
+
+        Map<CarModel, Integer> lowStockCarModels = new HashMap<>();
+
+        for (Map.Entry<String, Integer> entry : carModelsCounter.entrySet()) {
+            if(entry.getValue() < 2) {
+                lowStockCarModels.put(carRepository.fetchModelByModelName(entry.getKey()), entry.getValue());
+            }
+        }
+
+        return lowStockCarModels;
+    }
+
+    public List<CarModel> fetchListOfCarModelsByCarModelNames (List<String> carModelNames)    {
+        List<CarModel> carModels = new ArrayList<>();
+
+        for (String carModelName : carModelNames) {
+            carModels.add(carRepository.fetchModelByModelName(carModelName));
+        }
+
+        return carModels;
     }
 }
 

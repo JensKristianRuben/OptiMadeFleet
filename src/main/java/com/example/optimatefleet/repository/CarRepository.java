@@ -56,7 +56,7 @@ public class CarRepository {
                 );
     }
 
-    public List<CarModel> fethAllCarModels()  {
+    public List<CarModel> fetchAllCarModels()  {
         return jdbcTemplate.query("SELECT * FROM car_model", new BeanPropertyRowMapper<>(CarModel.class));
     }
 
@@ -67,7 +67,7 @@ public class CarRepository {
     public List<Car> fetchAllCars() {
         //Tag med til eksamen? - Kompleks kode
         List<Car> carsList = jdbcTemplate.query("SELECT * FROM car", new BeanPropertyRowMapper<>(Car.class));
-        List<CarModel> carModelList = fethAllCarModels();
+        List<CarModel> carModelList = fetchAllCarModels();
 
         for(Car car : carsList){
             for(CarModel carModel : carModelList){
