@@ -11,11 +11,15 @@
 
 <form action="/login" method="post" class="loginForm">
     <img src="/images/logoMedHvid.png">
-    <label for="userName">BRUGERNAVN</label>
+    <label for="userName" class="loginLabel">BRUGERNAVN</label>
     <input type="text" id="userName" name="username" class="loginInput">
 
-    <label for="password">KODEORD</label>
+    <label for="password" class="loginLabel">ADGANGSKODE</label>
     <input type="password" id="password" name="password" class="loginInput">
+
+    <div th:if="${failedLogin}" style="color: #d30000;">
+        <p th:text="${failedLogin}"></p>
+    </div>
 
     <button type="submit" class="loginButton">LOGIN</button>
 
