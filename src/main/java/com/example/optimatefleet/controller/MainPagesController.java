@@ -53,7 +53,7 @@ public class MainPagesController {
     }
 
     @GetMapping("/KPI")
-    public String KPI(Model model, @RequestParam(defaultValue = "allCars") String sortBy, HttpSession session) {
+    public String KPIPage(Model model, @RequestParam(defaultValue = "allCars") String sortBy, HttpSession session) {
         if (session.getAttribute("user") == null) {
             return "redirect:/";
         }
