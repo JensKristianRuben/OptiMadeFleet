@@ -50,9 +50,10 @@
                     <span th:text="${car.year_of_manufactoring}"></span>
                     <span th:text="${car.color}"></span>
                 </div>
-                <span>Status: <span style="color: #47b2e1" th:text="${car.getCar_statusString()}"></span></span>
+                <span>Status: <span class="highlightedText" th:text="${car.getCar_statusString()}"></span></span>
                 <span th:text="${car.isIs_pre_soldString()}"></span>
-                <span>md. udlejningspris:  <span style="color: #47b2e1" th:text="${car.calculateMonthlyPrice()}"> </span><span> kr.</span></span>
+                <span>md. udlejningspris:  <span class="highlightedText"
+                                                 th:text="${car.calculateMonthlyPrice()}"> </span><span> kr.</span></span>
             </a>
         </div>
 

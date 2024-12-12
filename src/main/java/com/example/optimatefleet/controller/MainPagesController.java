@@ -1,9 +1,6 @@
 package com.example.optimatefleet.controller;
 
-import com.example.optimatefleet.model.Car;
-import com.example.optimatefleet.model.CarModel;
-import com.example.optimatefleet.model.PreSaleContract;
-import com.example.optimatefleet.model.RentContract;
+import com.example.optimatefleet.model.*;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.PreSaleContractService;
 import com.example.optimatefleet.service.RentContractService;
@@ -26,6 +23,8 @@ public class MainPagesController {
     RentContractService rentContractService;
     @Autowired
     PreSaleContractService preSaleContractService;
+    @Autowired
+    Utility utilityService;
 
     @GetMapping("/DataRegister")
     public String dataRegisterPage(Model model, @RequestParam(defaultValue = "allCars") String sortBy, HttpSession session) {
@@ -67,7 +66,7 @@ public class MainPagesController {
         int preSoldCars = carService.fetchAllCarsWithSoldStatus().size();
         int notPreSoldCars = carService.fetchAllCarsWithNotSoldStatus().size();
         int soldCarsSum = preSaleContractService.soldCarsIncome();
-        double averageRentTime = rentContractService.calculateAverageRentalTime();
+        Number averageRentTime = utilityService.roundNumber(rentContractService.calculateAverageRentalTime());
         Map<CarModel, Integer> lowStockCarModels = carService.fetchAllCarsWithLowStock();
 
 
