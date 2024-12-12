@@ -1,5 +1,7 @@
 package com.example.optimatefleet.model;
 
+import java.text.DecimalFormat;
+
 public class Car {
     private String license_plate;
     String car_model_name;                  // Is only to match data when fetching from DB

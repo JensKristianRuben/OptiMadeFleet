@@ -44,9 +44,10 @@
                     <span th:text="${car.year_of_manufactoring}"></span>
                     <span th:text="${car.color}"></span>
                 </div>
-                <span th:text="${car.getCar_statusString()}"></span>
+                <span>Status: <span class="highlightedText" th:text="${car.getCar_statusString()}"></span></span>
                 <span th:text="${car.isIs_pre_soldString()}"></span>
-                <span th:text="${car.calculateMonthlyPrice()} + ' kr.'"></span>
+                <span>md. udlejningspris:  <span class="highlightedText"
+                                                 th:text="${utilityService.roundNumber(car.calculateMonthlyPrice())}"> </span><span> kr.</span></span>
             </a>
         </div>
     </div>
@@ -155,7 +156,7 @@
                                 </div>
                                 <div>
                                     <input type="text" th:value="${element.getKey()}" readonly>
-                                    <input type="text" th:value="${element.getValue()} + ' kr.'" readonly>
+                                    <input type="text" th:value="${utilityService.roundNumber(element.getValue())} + ' kr.'" readonly>
                                 </div>
                             </div>
                             <div th:if="${mileage_over_limit_price != 0}" style="margin-top: 9%">
@@ -165,7 +166,7 @@
                             <div th:if="${mileage_over_limit_price != 0}">
                                 <input type="number" th:value="${damageReport.mileage_over_limit}" readonly>
                                 <input type="text"
-                                       th:value="${(mileage_over_limit_price) % 1 == 0 ? (mileage_over_limit_price).intValue() : mileage_over_limit_price} + ' kr.'"
+                                       th:value="${(mileage_over_limit_price)} + ' kr.'"
                                        readonly>
                             </div>
                             <div style="margin-top: 9%">
@@ -173,15 +174,12 @@
                             </div>
                             <div style="display: flex; flex-direction: row">
                                 <input type="text"
-                                       th:value="${(sumOfDamages + mileage_over_limit_price) % 1 == 0 ? (sumOfDamages + mileage_over_limit_price).intValue() : sumOfDamages + mileage_over_limit_price} + ' kr.'"
+                                       th:value="${(utilityService.roundNumber(sumOfDamages + mileage_over_limit_price))} + ' kr.'"
                                        readonly>
-
                                 <div>
-                                    <button class="deleteButton" style="margin-left:3%;">Opret ny</button>
+                                    <button class="deleteButton" style="margin-left:3%;">Slet</button>
                                 </div>
                             </div>
-
-
                         </div>
                     </form>
                 </div>

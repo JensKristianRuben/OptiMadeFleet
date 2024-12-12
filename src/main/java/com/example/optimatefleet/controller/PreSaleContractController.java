@@ -61,7 +61,6 @@ public class PreSaleContractController {
 
     @PostMapping("/UpdatePreSaleContract")
     public String updatePreSaleContract(@ModelAttribute PreSaleContract preSaleContract){
-        System.out.println(preSaleContract);
         preSaleContractService.updatePreSaleContract(preSaleContract);
         return "redirect:/DataRegister";
     }

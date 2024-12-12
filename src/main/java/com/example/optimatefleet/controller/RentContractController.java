@@ -55,6 +55,7 @@ public class RentContractController {
             return "redirect:/DataRegister";
         } else if (deleteReason.equals("rentPeriodEnded")) {
             rentContract.setContract_terminated(true);
+            carService.updateCarStatusReturned(rentContract.getLicense_plate());
             rentContractService.updateRentContract(rentContract);
             return "redirect:/DataRegister";
         } else {
