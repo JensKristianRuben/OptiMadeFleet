@@ -37,6 +37,19 @@ html, body{
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.1);
 }
 
+.leftSide::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leftSide::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+}
+
+.leftSide::-webkit-scrollbar-track {
+    background: white;
+}
+
 .rightSide{
     background-color: #454545;
     width: 700px;
@@ -112,7 +125,7 @@ h3{
     color: white;
     transition: background-color 0.2s;
 }
-.createHeader{
+.createHeader, .createHeaderTop{
     background-color: #454545;
     text-decoration: none;
     height: 35px;
@@ -127,7 +140,10 @@ h3{
     color: white;
     transition: background-color 0.2s;
 }
-.createCarHeader:hover, .createHeader:hover {
+.createHeaderTop{
+    margin-left: 550px;
+}
+.createCarHeader:hover, .createHeader:hover, .createHeaderTop:hover {
     background-color: #47b2e1;
     box-shadow: 0 4px 10px rgba(71, 178, 225, 0.5);
     transform: scale(1.02);

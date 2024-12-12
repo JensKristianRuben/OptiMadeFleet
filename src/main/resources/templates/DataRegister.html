@@ -30,33 +30,36 @@
                         <option value="available" th:selected="${sortBy == 'available'}">Klar</option>
                         <option value="rentet" th:selected="${sortBy == 'rentet'}">Udlejet</option>
                         <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
-                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til fakturering</option>
+                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til
+                            fakturering
+                        </option>
                     </select>
                 </form>
             </div>
             <a class="createCarHeader" href="/CreateCarAndCarModel">+</a>
         </div>
         <div class="leftSide">
-                <a th:href="@{/UpdateCarAndCarModel/{licensePlate}(licensePlate=${car.license_plate})}"
-                   th:each="car : ${carsList}" class="carElement">
-                    <div>
-                        <span th:text="${car.license_plate}"></span>
-                        <span th:text="${car.carModel.make}"></span>
-                        <span th:text="${car.car_model_name}"></span>
-                        <span th:text="${car.year_of_manufactoring}"></span>
-                        <span th:text="${car.color}"></span>
-                    </div>
-                        <span>Status: <span style="color: #47b2e1" th:text="${car.getCar_statusString()}"></span></span>
-                        <span th:text="${car.isIs_pre_soldString()}"></span>
-                        <span>md. udlejningspris:  <span style="color: #47b2e1" th:text="${car.calculateMonthlyPrice()}"> </span><span> kr.</span></span>
-                </a>
+            <a th:href="@{/UpdateCarAndCarModel/{licensePlate}(licensePlate=${car.license_plate})}"
+               th:each="car : ${carsList}" class="carElement">
+                <div>
+                    <span th:text="${car.license_plate}"></span>
+                    <span th:text="${car.carModel.make}"></span>
+                    <span th:text="${car.car_model_name}"></span>
+                    <span th:text="${car.year_of_manufactoring}"></span>
+                    <span th:text="${car.color}"></span>
+                </div>
+                <span>Status: <span style="color: #47b2e1" th:text="${car.getCar_statusString()}"></span></span>
+                <span th:text="${car.isIs_pre_soldString()}"></span>
+                <span>md. udlejningspris:  <span style="color: #47b2e1"
+                                                 th:text="${car.calculateMonthlyPrice()}"> </span><span> kr.</span></span>
+            </a>
         </div>
 
     </div>
     <div class="innerContainer">
         <div class="headerRightContainer">
             <h3>Lejeaftaler</h3>
-            <a class="createHeader" href="/CreateRentContract">+</a>
+            <a class="createHeaderTop" href="/CreateRentContract">+</a>
         </div>
         <div class="rightSide">
             <a th:href="@{/ShowRentContract/{licensePlate}(licensePlate=${rentContract.license_plate})}"
@@ -71,18 +74,14 @@
             <a class="createHeader" href="/CreatePreSaleContract">+</a>
         </div>
         <div class="rightSide">
-        <a th:href="@{/updatePreSaleContract/{licensePlate}(licensePlate=${preSaleContract.getLicense_plate()})}"
-        th:each="preSaleContract : ${preSaleContracts}" class="rentContractElement">
-            <span th:text="${preSaleContract.getCompany_name()}"></span>
-            <span th:text="${preSaleContract.getLicense_plate()}"></span>
-            <span th:text="${preSaleContract.getPrice() + ' kr.'}"></span>
-        </a>
+            <a th:href="@{/updatePreSaleContract/{licensePlate}(licensePlate=${preSaleContract.getLicense_plate()})}"
+               th:each="preSaleContract : ${preSaleContracts}" class="rentContractElement">
+                <span th:text="${preSaleContract.getCompany_name()}"></span>
+                <span th:text="${preSaleContract.getLicense_plate()}"></span>
+                <span th:text="${preSaleContract.getPrice() + ' kr.'}"></span>
+            </a>
         </div>
-
     </div>
-
-
 </div>
-
 </body>
 </html>
