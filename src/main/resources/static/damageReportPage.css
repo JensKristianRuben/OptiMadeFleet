@@ -110,6 +110,15 @@ h3{
     background-color: #47b2e1; /* vi skal aftale en endelig blå farve farve */
 }
 
+.highlightedText{
+    color: #47b2e1;
+}
+
+.carElement:hover .highlightedText{
+    color: white;
+    transition: color 0.2s ease;
+}
+
 .carElementJustForShow{
     width: 85%;
     height: 25px;
@@ -183,3 +192,4 @@ label{
     color: #999999;
     align-self: flex-start;
 }
+

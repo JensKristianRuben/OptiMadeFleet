@@ -1,6 +1,7 @@
 package com.example.optimatefleet.controller;
 
 import com.example.optimatefleet.model.Car;
+import com.example.optimatefleet.model.Utility;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.DamageReportService;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +25,9 @@ public class DamageReportController {
     @Autowired
     DamageReportService damageReportService;
 
+    @Autowired
+    Utility utilityService;
+
     @PostMapping("saveDamageReport") //Funktionaliteten skal måske ligges i service laget
     public String saveDamageReport(@RequestParam Map<String, String> param, @RequestParam int mileage_over_limit, @RequestParam String license_plate) {
         Car car = carService.findCarByLicensePlate(license_plate);
@@ -43,12 +47,12 @@ public class DamageReportController {
         model.addAttribute("carToGetDamageReport", carService.findCarByLicensePlate(license_plate));
         model.addAttribute(sortBy);
         model.addAttribute("carsList", carsList);
+        model.addAttribute("utilityService", utilityService);
         if (sortBy.equals("ready_for_invoice")) {
             model.addAttribute("damageReport", damageReportService.findDamageReportByLicense_plate(license_plate));
             model.addAttribute("listOfDamages", damageReportService.getMapOfDescriptionAndPrice(license_plate));
-            model.addAttribute("sumOfDamages", damageReportService.calculateSumOfDamages(license_plate));
-            model.addAttribute("mileage_over_limit_price", damageReportService.calculateMileage_over_limitPrice(damageReportService.findDamageReportByLicense_plate(license_plate).getMileage_over_limit()));
-            System.out.println(damageReportService.calculateSumOfDamages(license_plate));
+            model.addAttribute("sumOfDamages",utilityService.roundNumber(damageReportService.calculateSumOfDamages(license_plate)));
+            model.addAttribute("mileage_over_limit_price", utilityService.roundNumber(damageReportService.calculateMileage_over_limitPrice(damageReportService.findDamageReportByLicense_plate(license_plate).getMileage_over_limit())));
         }
         return "DamageReportPage";
     }

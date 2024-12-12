@@ -242,15 +242,5 @@ public class CarService {
 
         return lowStockCarModels;
     }
-
-//    public List<CarModel> fetchListOfCarModelsByCarModelNames (List<String> carModelNames)    {
-//        List<CarModel> carModels = new ArrayList<>();
-//
-//        for (String carModelName : carModelNames) {
-//            carModels.add(carRepository.fetchModelByModelName(carModelName));
-//        }
-//
-//        return carModels;
-//    }
 }
 
