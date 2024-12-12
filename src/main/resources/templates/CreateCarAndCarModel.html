@@ -11,7 +11,7 @@
 <body>
 
 <div class="NavBar">
-    <a class="NavBarLink" href="/KPI">
+    <a class="NavBarLink" href="#">
         <img src="/images/logo.png">
     </a>
     <a class="NavBarLink" href="/KPI">KPI</a>
@@ -28,8 +28,8 @@
         <label>Nummerplade</label>
         <input type="text" name="license_plate" pattern="^[a-zA-Z]{2}\d{5}$"
                title="Skal have 2 bogstaver efterfulgt af 5 tal (AB12345)" required>
-      
-      <label>Vælg model</label>
+
+        <label>Vælg model</label>
         <select name="car_model_name" required>
             <option value="" hidden selected></option>
             <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}"
@@ -84,8 +84,8 @@
         </select>
         <label>Model navn</label>
         <input type="text" name="car_model_name" required>
-<!--        <label>Den månedlige udlejningspris</label>-->
-<!--        <input type="number" name="price_a_month" max="99999999" title="Må maximalt være 10 cifre" step="0.01" required>-->
+        <!--        <label>Den månedlige udlejningspris</label>-->
+        <!--        <input type="number" name="price_a_month" max="99999999" title="Må maximalt være 10 cifre" step="0.01" required>-->
         <label>Karrosseri</label>
         <select name="body_type" required>
             <option value="" hidden selected></option>
