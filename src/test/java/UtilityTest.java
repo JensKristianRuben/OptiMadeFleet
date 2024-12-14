@@ -11,8 +11,8 @@ public class UtilityTest {
 
         double number = 1.00;
 
-        Number result = utility.roundNumber(number);
-        assertThat(result).isEqualTo(1);
+        String result = utility.roundNumber(number);
+        assertThat(Double.parseDouble(result)).isEqualTo(1);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class UtilityTest {
 
         double number = 1.50;
 
-        Number result = utility.roundNumber(number);
-        assertThat(result).isEqualTo(1.50);
+        String result = utility.roundNumber(number);
+        assertThat(Double.parseDouble(result)).isEqualTo(1.50);
     }
 }
