@@ -47,7 +47,7 @@
                 <span>Status: <span class="highlightedText" th:text="${car.getCar_statusString()}"></span></span>
                 <span th:text="${car.isIs_pre_soldString()}"></span>
                 <span>md. udlejningspris:  <span class="highlightedText"
-                                                 th:text="${utilityService.roundNumber(car.calculateMonthlyPrice())}"> </span><span> kr.</span></span>
+                                                 th:text="${(car.calculateMonthlyPrice())}"> </span><span> kr.</span></span>
             </a>
         </div>
     </div>
@@ -174,7 +174,7 @@
                             </div>
                             <div style="display: flex; flex-direction: row">
                                 <input type="text"
-                                       th:value="${(utilityService.roundNumber(sumOfDamages + mileage_over_limit_price))} + ' kr.'"
+                                       th:value="${sumPlusMileage_Over_limit} + ' kr.'"
                                        readonly>
                                 <div>
                                     <button class="deleteButton" style="margin-left:3%;">Slet</button>

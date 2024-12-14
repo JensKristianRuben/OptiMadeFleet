@@ -1,6 +1,5 @@
 package com.example.optimatefleet.controller;
 
-import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.RentContractService;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class RentContractController {
@@ -47,11 +44,11 @@ public class RentContractController {
         return "EditRentContract";
     }
 
-    @PostMapping("/deleteRentContract/{licensePlate}")
+    @PostMapping("/deleteRentContract/{licensePlate}") //Pathvariable bruges ikke, skal den?
     public String deleteRentContract(@ModelAttribute RentContract rentContract, @RequestParam("deleteReason") String deleteReason) {
 
         if (deleteReason.equals("mistake")) {
-            rentContractService.deleteByLicensePlate(rentContract.getLicense_plate());
+            rentContractService.deleteRentContractByLicensePlate(rentContract.getLicense_plate());
             return "redirect:/DataRegister";
         } else if (deleteReason.equals("rentPeriodEnded")) {
             rentContract.setContract_terminated(true);

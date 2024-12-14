@@ -127,7 +127,7 @@ public class PreSaleContractRepository {
         );
     }
 
-    public void updatePreSaleContractToDilevered(String licensePlate) {
+    public void updatePreSaleContractToDelivered(String licensePlate) {
         String updateDileveredSql = "UPDATE pre_sale_contract SET car_delivered = 1 WHERE license_plate = ?";
         jdbcTemplate.update(updateDileveredSql, licensePlate);
     }

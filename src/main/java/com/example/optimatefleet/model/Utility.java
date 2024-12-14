@@ -2,15 +2,18 @@ package com.example.optimatefleet.model;
 
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 @Service
 public class Utility {
 
-    public Number roundNumber (double number)    {
-        if(number % 1 == 0)    {
-            return (int) number;
-        }else {
-            return Math.round(number * 100.0) / 100.0;
-        }
+    public String roundNumber (double number)    {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+        decimalFormat.setDecimalFormatSymbols(symbols);
 
+        return decimalFormat.format(number);
     }
 }

@@ -35,11 +35,7 @@ public class RentContractService {
         rentContractRepository.createRentContract(rentContract);
     }
 
-    public List<RentContract> showAllRentContracts() {
-
-        return rentContractRepository.fetchAllRentContracts();
-    }
-    public List<RentContract> fethAllOngoingRentContracts(){
+    public List<RentContract> fetchAllOngoingRentContracts(){
         List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
         List<RentContract> ongoingContractList = new ArrayList<>();
 
@@ -87,8 +83,8 @@ public class RentContractService {
         return rentContract;
     }
 
-    public void deleteByLicensePlate(String licensePlate) {
-        rentContractRepository.deleteByLicensePlate(licensePlate);
+    public void deleteRentContractByLicensePlate(String licensePlate) {
+        rentContractRepository.deleteRentContractByLicensePlate(licensePlate);
     }
 
     public void updateRentContract(RentContract rentContract) {
@@ -101,7 +97,7 @@ public class RentContractService {
 
         for (Car element : listOfCars){
             if (element.getCar_status().equals("rentet")){
-                monthlyContractIncome += (int) element.calculateMonthlyPrice();
+                monthlyContractIncome += (int) Double.parseDouble(element.calculateMonthlyPrice());
             }
         }
         return monthlyContractIncome;
