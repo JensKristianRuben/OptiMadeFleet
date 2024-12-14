@@ -11,7 +11,6 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     border-radius: 3%;
-    /*Border-radius med 20px giver en mere afrundet kant - Mads*/
     padding: 10px;
 }
 .renterContainer{

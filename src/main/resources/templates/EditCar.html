@@ -24,10 +24,10 @@
   <form action="/UpdateCar" method="post" class="createForm">
     <h2>Bil</h2>
     <!-- Dette er for den enkelte bil -->
-    <label>License plate</label>
+    <label>Nummerplade</label>
     <input type="text" name="license_plate" th:value="${car.license_plate}" pattern="^[a-zA-Z]{2}\d{5}$"
            title="Skal have 2 bogstaver efterfulgt af 5 tal (AB12345)" required>
-    <label>Choose model</label>
+    <label>Model</label>
     <select name="car_model_name" required>
       <option value="" hidden selected>Select model</option>
       <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}" th:selected="${car_model.car_model_name == car.car_model_name}"></option>
@@ -37,9 +37,9 @@
     <label>Indkøbsprisen</label>
     <input type="number" name="original_price" th:value="${car.original_price}" max="2147483647" required>
     <label>Registrerings afgift</label>
-    <input type="number" name="registration_tax" th:value="${car.registration_tax}" max="2147483647" readonly>
+    <input type="number" name="registration_tax" th:value="${util.roundNumber(car.registration_tax)}" max="2147483647" readonly>
       <label>Fuld pris</label>
-      <input type="number" name="full_price" th:value="${car.registration_tax} + ${car.original_price}" max="2147483647" readonly>
+      <input type="number" name="full_price" th:value="${fullPriceOfCar}" max="2147483647" readonly>
     <label>Bilens status</label>
     <select name="car_status" required>
 <!--      Husk at ret så der ikke står typen i klassen men faktisk hvad der skal stå. f.eks. "klar"-->
@@ -75,7 +75,7 @@
     <p th:text="${car.carModel.car_model_name}"></p>
     <label>Karrosseri</label>
     <p th:text="${car.carModel.body_type}"></p>
-    <label>Motor størrelse (Liter) (Undlad ved elbil)</label>
+    <label>Motor størrelse (Liter)</label>
     <p th:text="${car.carModel.engine_size}"></p>
     <label>Gearkasse</label>
     <p th:text="${car.carModel.gear_type}"></p>

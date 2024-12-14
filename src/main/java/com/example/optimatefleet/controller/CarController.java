@@ -28,7 +28,7 @@ public class CarController {
 
     @PostMapping("CreateCarAndCarModel")
     public String createCar(@ModelAttribute Car car, @RequestParam("car_model_name") String car_model_name) {
-        car.setRegistration_tax(car.calculateMonthlyRegistrationTax());
+        car.setRegistration_tax(car.calculateRegistrationTax());
 
         if(carService.findCarByLicensePlate(car.getLicense_plate()) != null){
             return "redirect:/CreateCarAndCarModel";
@@ -48,8 +48,12 @@ public class CarController {
     @GetMapping("UpdateCarAndCarModel/{license_plate}") 
     public String updateCarAndCarModel(Model model, @PathVariable String license_plate) {
         //Husk at map dataregister html siden til denne controller
-        model.addAttribute("car", carService.findCarByLicensePlate(license_plate));
+        Car car = carService.findCarByLicensePlate(license_plate);
+        double fullPriceOfCar = car.calculateRegistrationTax() + car.getOriginal_price();
+        model.addAttribute("util", utilityService);
+        model.addAttribute("car", car);
         model.addAttribute("car_models", carService.fethAllCarModels());
+        model.addAttribute("fullPriceOfCar", utilityService.roundNumber(fullPriceOfCar));
         return "EditCar";
     }
 
