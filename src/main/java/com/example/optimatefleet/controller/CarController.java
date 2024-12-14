@@ -2,6 +2,7 @@ package com.example.optimatefleet.controller;
 
 import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.CarModel;
+import com.example.optimatefleet.model.Utility;
 import com.example.optimatefleet.service.CarService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class CarController {
     @Autowired
     private CarService carService;
+    @Autowired
+    private Utility utilityService;
 
     @GetMapping("CreateCarAndCarModel")
     public String createCar(Model model, HttpSession session) {

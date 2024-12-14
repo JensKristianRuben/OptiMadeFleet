@@ -60,7 +60,7 @@ public class PreSaleContractService {
     }
 
     public void updatePreSaleContractToDilevered(String licensePlate) {
-        preSaleContractRepository.updatePreSaleContractToDilevered(licensePlate);
+        preSaleContractRepository.updatePreSaleContractToDelivered(licensePlate);
     }
 
     public int soldCarsIncome() {

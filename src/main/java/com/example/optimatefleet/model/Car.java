@@ -211,8 +211,9 @@ public class Car {
         return original_price * Constants.VAT;
     }
 
-    public double calculateMonthlyPrice()    {
-        return Math.round((original_price + calculateMonthlyRegistrationTax()) * Constants.MONTHLY_EARNINGS_PERCENT * 100) / 100.0;
+    public String calculateMonthlyPrice()    {
+        Utility utility = new Utility();
+        return utility.roundNumber((original_price + calculateMonthlyRegistrationTax()) * Constants.MONTHLY_EARNINGS_PERCENT);
     }
 
     @Override

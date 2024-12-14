@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -100,7 +99,7 @@ public class RentContractRepository {
 
     }
 
-    public void deleteByLicensePlate(String licensePlate) {
+    public void deleteRentContractByLicensePlate(String licensePlate) {
 
         String deleteRentContractSql = "DELETE FROM rent_contract WHERE license_plate = ?";
         jdbcTemplate.update(deleteRentContractSql, licensePlate);

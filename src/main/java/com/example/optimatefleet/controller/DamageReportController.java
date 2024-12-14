@@ -49,10 +49,12 @@ public class DamageReportController {
         model.addAttribute("carsList", carsList);
         model.addAttribute("utilityService", utilityService);
         if (sortBy.equals("ready_for_invoice")) {
+            double sumPlusMileage_Over_limit = damageReportService.calculateSumOfDamages(license_plate) + damageReportService.calculateMileage_over_limitPrice(damageReportService.findDamageReportByLicense_plate(license_plate).getMileage_over_limit());
             model.addAttribute("damageReport", damageReportService.findDamageReportByLicense_plate(license_plate));
             model.addAttribute("listOfDamages", damageReportService.getMapOfDescriptionAndPrice(license_plate));
             model.addAttribute("sumOfDamages",utilityService.roundNumber(damageReportService.calculateSumOfDamages(license_plate)));
             model.addAttribute("mileage_over_limit_price", utilityService.roundNumber(damageReportService.calculateMileage_over_limitPrice(damageReportService.findDamageReportByLicense_plate(license_plate).getMileage_over_limit())));
+            model.addAttribute("sumPlusMileage_Over_limit", utilityService.roundNumber(sumPlusMileage_Over_limit));
         }
         return "DamageReportPage";
     }
