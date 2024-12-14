@@ -11,6 +11,5 @@ public class Utility {
         }else {
             return Math.round(number * 100.0) / 100.0;
         }
-
     }
 }
