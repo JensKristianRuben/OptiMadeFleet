@@ -19,7 +19,7 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: '17'
           distribution: 'microsoft'
 
       - name: Build with Maven
@@ -37,22 +37,13 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-  
+      
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A7657F0F6FAC46B48EE697BCA5EC9986 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A6D442ABE7D546D6B02C836E88C875A7 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9E8545DCE7A941B89C379C2E6E69F5C1 }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -60,4 +51,4 @@ jobs:
           app-name: 'OptiMadeFleet'
           slot-name: 'Production'
           package: '*.jar'
-          
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_76A88A17D2324B0585B9F99C7AAC07A4 }}
