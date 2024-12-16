@@ -9,6 +9,19 @@ body{
     font-family: Montserrat, Arial, serif;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
 .saveButton {
     margin-bottom: 30px;
     background-color: transparent;
@@ -44,7 +57,6 @@ body{
     color: white;
     cursor: pointer;
 }
-
 
 .NavBar{
     background-color: transparent;

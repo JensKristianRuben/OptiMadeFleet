@@ -11,9 +11,7 @@
 </head>
 <body>
 <div class="NavBar">
-    <a class="NavBarLink" href="#">
-        <img  src="/images/logo.png">
-    </a>
+    <img src="/images/logo.png" alt="OptiMadeFleet logo">
     <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLinkChosen" href="/DataRegister">Dataregistrering</a>
@@ -22,7 +20,7 @@
 <form class="createForm" method="post">
 
     <div class="renterContainer">
-        <h3>Kundeinformation</h3>
+        <h3>Kunde information</h3>
 
         <label for="renterFirstName">Fornavn</label>
         <input id="renterFirstName" type="text" name="renter_first_name" required
@@ -32,7 +30,7 @@
         <input id="renterLastName" type="text" name="renter_last_name" required
                th:value="${rentContract.getRenter_last_name()}">
 
-        <label for="streetName">Addresse</label>
+        <label for="streetName">Adresse (vejnavn)</label>
         <input id="streetName" type="text" name="street_name" required
                th:value="${rentContract.getStreet_name()}">
 
@@ -71,18 +69,23 @@
     </div>
 
     <div class="carContainer">
-        <h3>Bilinformation</h3>
+        <h3>Bil information</h3>
 
         <label for="licensePlate">Bil</label>
         <p id="licensePlate" th:text="${rentContract.getLicense_plate()}"></p>
         <input name="license_plate" th:value="${rentContract.getLicense_plate()}" hidden>
 
-        <label for="maxKm">Maks kilometer</label>
+        <label for="maxKm">Maks kilometer (månedligt)</label>
         <input id="maxKm" type="number" name="max_km" min="0" max="2147483647" required
                th:value="${rentContract.getMax_km()}">
 
-        <h3>Kontraktinformation</h3>
-        <label for="rentContractType">Abonnomentstype</label>
+<!--        <label for="fullPrice">Pris månedlig</label>-->
+<!--        <input id="fullPrice" type="text" name="max_km" min="0" max="2147483647" readonly-->
+<!--               th:value="${car.calculateMonthlyPrice()}">-->
+<!--        Jeg kan ikke smide den her på uden at ødelægge hele boksen... Tror det er fordi der er brugt rows og ikke space-evenly.-->
+
+        <h3>Kontrakt information</h3>
+        <label for="rentContractType">Abonnementstype</label>
         <select id="rentContractType" name="rent_contract_type">
             <option value="" hidden selected></option>
             <option value="unlimited" th:Selected="${rentContract.getRent_contract_type() == 'unlimited'}">Unlimited
@@ -98,12 +101,16 @@
         <p id="rentalEndDate" th:text="${rentContract.getRental_end_date()}" th:value="${rentContract.getRental_end_date()}"></p>
 
         <label for="pickupLocation">Afhentningssted</label>
-        <input id="pickupLocation" type="text" name="pickup_location" required
-               th:value="${rentContract.getPickup_location()}">
+        <select id="pickupLocation" name="pickup_location" required>
+            <option value="bilabonnement" th:selected="${rentContract.getPickup_location()} == 'bilabonnement'">Bilabonnement</option>
+            <option value="ds-biler" th:selected="${rentContract.getPickup_location()} == 'ds-biler'">DS-Biler</option>
+        </select>
 
         <label for="returnLocation">Afleveringssted</label>
-        <input id="returnLocation" type="text" name="return_location" required
-               th:value="${rentContract.getReturn_location()}">
+        <select id="returnLocation" name="return_location" required>
+            <option value="bilabonnement" th:selected="${rentContract.getReturn_location()} == 'bilabonnement'">Bilabonnement</option>
+            <option value="FDM-station" th:selected="${rentContract.getReturn_location()} == 'FDM-station'">FDM-station</option>
+        </select>
 
         <button class="saveButton" type="submit" formaction="/updateRentContract">Opdater</button>
 
@@ -114,7 +121,7 @@
             <option value="rentPeriodEnded">Endt lejeperiode</option>
         </select>
 
-        <label for="rentalTerminated">Ændre slut dato (kun ved endt lejeperiode)</label>
+        <label for="rentalTerminated">Tilpas slut dato (kun ved endt lejeperiode)</label>
         <input id="rentalTerminated" type="date" name="rental_end_date" min="2000-01-01" max="2300-12-31" th:value="${rentContract.getRental_end_date()}">
 
         <button class="deleteButton" type="submit"

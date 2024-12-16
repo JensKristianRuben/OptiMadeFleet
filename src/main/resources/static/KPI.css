@@ -15,3 +15,8 @@
     margin-left: 4%;
     /*for at venstreorientere elementerne*/
 }
+
+h3{
+    margin-top: 60px;
+    border-bottom: solid #999999;
+}

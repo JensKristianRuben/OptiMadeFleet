@@ -10,9 +10,7 @@
 </head>
 <body>
 <div class="NavBar">
-    <a class="NavBarLink" href="#">
-        <img  src="/images/logo.png">
-    </a>
+    <img src="/images/logo.png" alt="OptiMadeFleet logo">
     <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLinkChosen" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
@@ -61,7 +59,7 @@
             <!--            Dette er "Returneret" skaderapportering-->
             <div th:if="${carToGetDamageReport != null}" class="rightSideDiv">
                 <div th:if="${carToGetDamageReport.car_status == 'returned'}" style="height: 95%;">
-                    <div class="carElementJustForShow" style="width: 95%">
+                    <div class="carElementJustForShow" style="width: 95%; display: flex; justify-content: space-evenly">
                         <span th:text="${carToGetDamageReport.license_plate}"></span>
                         <span th:text="${carToGetDamageReport.carModel.make}"></span>
                         <span th:text="${carToGetDamageReport.car_model_name}"></span>

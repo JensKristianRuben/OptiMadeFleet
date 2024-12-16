@@ -11,6 +11,7 @@ public class Utility {
 
     public String roundNumber (double number)    {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        //Sætter formatet af decimalFormart til at være med "." og ikke ",". Dette er vigtigt til parsing tilbage til double.
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
         decimalFormat.setDecimalFormatSymbols(symbols);
 

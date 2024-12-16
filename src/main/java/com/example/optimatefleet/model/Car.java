@@ -1,7 +1,5 @@
 package com.example.optimatefleet.model;
 
-import java.text.DecimalFormat;
-
 public class Car {
     private String license_plate;
     String car_model_name;                  // Is only to match data when fetching from DB
@@ -187,7 +185,7 @@ public class Car {
         delivered
     }
 //Returnere registreringsafgiften pr. måned for en given bil ud fra hvilke af de 3 prisklasser bilen ligger i.
-    public double calculateMonthlyRegistrationTax ()    {
+    public double calculateRegistrationTax()    {
         double monthlyRegistrationTax = 0;
         original_price += calculateVAT();
 
@@ -213,7 +211,7 @@ public class Car {
 
     public String calculateMonthlyPrice()    {
         Utility utility = new Utility();
-        return utility.roundNumber((original_price + calculateMonthlyRegistrationTax()) * Constants.MONTHLY_EARNINGS_PERCENT);
+        return utility.roundNumber((original_price + calculateRegistrationTax()) * Constants.MONTHLY_EARNINGS_PERCENT);
     }
 
     @Override

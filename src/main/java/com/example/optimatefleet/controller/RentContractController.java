@@ -1,5 +1,6 @@
 package com.example.optimatefleet.controller;
 
+import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.RentContract;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.RentContractService;
@@ -40,7 +41,9 @@ public class RentContractController {
             return "redirect:/";
         }
         RentContract rentContract = rentContractService.findContractByLicensePlate(licensePlate);
+        Car car = carService.findCarByLicensePlate(licensePlate);
         model.addAttribute("rentContract", rentContract);
+        model.addAttribute("car", car);
         return "EditRentContract";
     }
 
