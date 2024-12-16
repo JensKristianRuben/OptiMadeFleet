@@ -11,9 +11,7 @@
 <body>
 
 <div class="NavBar">
-    <a class="NavBarLink" href="#">
-        <img  src="/images/logo.png">
-    </a>
+    <img src="/images/logo.png" alt="OptiMadeFleet logo">
     <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLinkChosen" href="/DataRegister">Dataregistrering</a>
@@ -36,24 +34,17 @@
             <label for="streetNumber">Gadenummer</label>
             <input id="streetNumber" type="number" name="street_number" max="999" min="1" required>
 
-
-
             <label for="zipCode">Postnummer</label>
             <input id="zipCode" type="number" name="zip_code" max="9990" min="1000" required>
 
-
             <label for="cityName">By</label>
             <input id="cityName" type="text" name="city_name" required>
-
-
 
             <label for="renterPhoneNumber">Telefonnummer</label>
             <input id="renterPhoneNumber" type="text" name="renter_phonenumber" pattern="^[0-9]{8}$" maxlength="8" required>
 
             <label for="email">Email</label>
             <input id="email" type="email" name="email" required>
-
-
 
             <label for="dateOfBirth">Fødselsdato</label>
             <input id="dateOfBirth" type="date" name="date_of_birth" min="1900-01-01" max="3000-12-31" required>
@@ -85,9 +76,8 @@
             <option value="limited">Limited</option>
         </select>
 
-        <label for="rentalStartDate">Start dato</label>
+        <label for="rentalStartDate">Start dato (Slut dato sættes automatisk)</label>
         <input id="rentalStartDate" type="date" name="rental_start_date"  min="2000-01-01" max="2300-12-31" required>
-
 
         <label for="pickupLocation">Afhentningssted</label>
         <select id="pickupLocation" name="pickup_location" required>
@@ -95,7 +85,6 @@
             <option value="bilabonnement">Bilabonnement</option>
             <option value="ds-biler">DS biler</option>
         </select>
-
 
         <label for="returnLocation">Afleveringssted</label>
         <select id="returnLocation" name="return_location" required>

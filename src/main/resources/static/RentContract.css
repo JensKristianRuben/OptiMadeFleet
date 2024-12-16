@@ -1,6 +1,7 @@
 body{
     font-size: 12px;
 }
+/*Fejlen med font størrelse ligger her, men fjernes den smadres css af hele siden denne font størrelse bruges.*/
 .createForm{
     margin-top: 50px;
     background-color: #454545;

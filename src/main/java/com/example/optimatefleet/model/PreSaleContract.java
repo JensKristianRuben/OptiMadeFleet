@@ -122,6 +122,10 @@ public class PreSaleContract {
         this.car_delivered = car_delivered;
     }
 
+    public double calculatePriceToEuro()    {
+        return price / 7.45;
+    }
+
     @Override
     public String toString() {
         return "PreSaleContract{" +

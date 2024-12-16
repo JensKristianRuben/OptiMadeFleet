@@ -40,7 +40,10 @@ public class CarModel {
         this.gear_type = gear_type;
         this.fuel_type = fuel_type;
     }
-    public CarModel()   {}
+
+    public CarModel() {
+    }
+
     public String getCar_model_name() {
         return car_model_name;
     }
@@ -121,7 +124,29 @@ public class CarModel {
         this.fuel_type = fuel_type;
     }
 
-    private enum Make{
+    public String getFuel_TypeString() {
+        if (fuel_type == Fuel_type.petrol) {
+            return "Benzin";
+        } else if (fuel_type == Fuel_type.diesel) {
+            return "Diesel";
+        } else if (fuel_type == Fuel_type.electricity)  {
+            return "El";
+        } else  {
+            return "Hybrid";
+        }
+    }
+
+    public String getGear_typeString() {
+        if (gear_type == Gear_type.manual) {
+            return "Manuel";
+        } else if (gear_type == Gear_type.automatic) {
+            return "Automatisk";
+        } else {
+            return "El";
+        }
+    }
+
+    private enum Make {
         Tesla,
         Volkswagen,
         Peugot,
@@ -140,9 +165,11 @@ public class CarModel {
         Nissan,
         Polestar,
         Fiat
-    };
+    }
 
-    private enum Body_type{
+    ;
+
+    private enum Body_type {
         Hatchback,
         SUV,
         Sedan,
@@ -154,15 +181,17 @@ public class CarModel {
         Minivan,
         Roadster,
         Pickup
-    };
+    }
 
-    private enum Gear_type{
+    ;
+
+    private enum Gear_type {
         manual,
         automatic,
         electric_gear
     }
 
-    private enum Fuel_type{
+    private enum Fuel_type {
         petrol,
         diesel,
         electricity,

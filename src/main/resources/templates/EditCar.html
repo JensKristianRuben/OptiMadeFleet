@@ -11,9 +11,7 @@
 <body>
 
 <div class="NavBar">
-    <a class="NavBarLink" href="#">
-        <img  src="/images/logo.png">
-    </a>
+    <img src="/images/logo.png" alt="OptiMadeFleet logo">
   <a class="NavBarLink" href="/KPI">KPI</a>
   <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
   <a class="NavBarLinkChosen" href="/DataRegister">Dataregistrering</a>
@@ -78,9 +76,9 @@
     <label>Motor størrelse (Liter)</label>
     <p th:text="${car.carModel.engine_size}"></p>
     <label>Gearkasse</label>
-    <p th:text="${car.carModel.gear_type}"></p>
+    <p th:text="${car.carModel.getGear_typeString}"></p>
     <label>Brændstof</label>
-    <p th:text="${car.carModel.fuel_type}"></p>
+    <p th:text="${car.carModel.getFuel_TypeString}"></p>
     <label>Antal sæder</label>
     <p th:text="${car.carModel.seat_count}"></p>
     <label>Antal døre</label>

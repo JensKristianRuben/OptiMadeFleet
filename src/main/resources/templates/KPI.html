@@ -12,9 +12,7 @@
 </head>
 <body>
 <div class="NavBar">
-    <a class="NavBarLink" href="#">
-        <img  src="/images/logo.png">
-    </a>
+    <img src="/images/logo.png" alt="OptiMadeFleet logo">
     <a class="NavBarLinkChosen" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLink" href="/DataRegister">Dataregistrering</a>
@@ -32,9 +30,7 @@
                         <option value="available" th:selected="${sortBy == 'available'}">Klar</option>
                         <option value="rentet" th:selected="${sortBy == 'rentet'}">Udlejet</option>
                         <option value="returned" th:selected="${sortBy == 'returned'}">Returneret</option>
-                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til
-                            fakturering
-                        </option>
+                        <option value="ready_for_invoice" th:selected="${sortBy == 'ready_for_invoice'}">Klar til fakturering</option>
                         <option value="delivered" th:selected="${sortBy == 'delivered'}">Leveret til køber</option>
                     </select>
                 </form>

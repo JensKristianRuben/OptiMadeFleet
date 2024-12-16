@@ -11,9 +11,7 @@
 </head>
 <body>
 <div class="NavBar">
-    <a class="NavBarLink" href="#">
-        <img  src="/images/logo.png">
-    </a>
+    <img src="/images/logo.png" alt="OptiMadeFleet logo">
     <a class="NavBarLink" href="/KPI">KPI</a>
     <a class="NavBarLink" href="/DamageReportPage">Skadesrapport</a>
     <a class="NavBarLinkChosen" href="/DataRegister">Dataregistrering</a>
@@ -22,7 +20,7 @@
 <form class="createForm" method="post">
 
     <div class="renterContainer">
-        <h3>køberinformation</h3>
+        <h3>Køberinformation</h3>
 
         <label for="companyName">Virksomhedsnavn: </label>
         <input id="companyName" type="text" name="company_name" required
@@ -76,9 +74,11 @@
         <input id="delivery_location" type="text" name="delivery_location" required
             th:value="${preSaleContract.getDelivery_location()}">
 
-        <label for="price">Pris: </label>
+        <label for="price">Pris Dkk: </label>
         <input id="price" type="number" name="price" min="0" max="2147483647"
             th:value="${preSaleContract.getPrice()}">
+        <label for="price">Pris Euro: </label>
+        <input id="priceEuro" type="text" name="priceEuro" th:value="${priceInEuro}" readonly>
 
 
         <button class="saveButton" type="submit" formaction="/UpdatePreSaleContract">Opdater</button>

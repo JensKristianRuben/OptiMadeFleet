@@ -112,6 +112,7 @@ h3{
 
 .highlightedText{
     color: #47b2e1;
+    border-bottom: solid #47b2e1;
 }
 
 .carElement:hover .highlightedText{
@@ -191,5 +192,10 @@ input:focus{
 label{
     color: #999999;
     align-self: flex-start;
+}
+
+h3{
+    margin-top: 60px;
+    border-bottom: solid #999999;
 }
 

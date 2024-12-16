@@ -2,6 +2,7 @@ package com.example.optimatefleet.controller;
 
 import com.example.optimatefleet.model.Car;
 import com.example.optimatefleet.model.PreSaleContract;
+import com.example.optimatefleet.model.Utility;
 import com.example.optimatefleet.service.CarService;
 import com.example.optimatefleet.service.PreSaleContractService;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,8 @@ public class PreSaleContractController {
     CarService carService;
     @Autowired
     PreSaleContractService preSaleContractService;
+    @Autowired
+    Utility utilityService;
 
     @GetMapping("/CreatePreSaleContract")
     public String createPreSaleContract(Model model, HttpSession session) {
@@ -40,7 +43,9 @@ public class PreSaleContractController {
     @GetMapping("/updatePreSaleContract/{licensePlate}")
     public String updatePreSaleContract(@PathVariable String licensePlate, Model model) {
         PreSaleContract preSaleContract = preSaleContractService.findPreSaleContractByLicensePlate(licensePlate);
+        String priceInEuro = utilityService.roundNumber(preSaleContract.calculatePriceToEuro());
         model.addAttribute("preSaleContract", preSaleContract);
+        model.addAttribute("priceInEuro", priceInEuro);
         return "EditPreSaleContract";
     }
 
