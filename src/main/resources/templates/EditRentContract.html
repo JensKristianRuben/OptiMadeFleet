@@ -5,7 +5,7 @@
     <title>Leje kontrakt</title>
     <link rel="stylesheet" href="/RentContract.css">
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/ShowRentContract.css">
+    <link rel="stylesheet" href="/EditRentContract.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
 </head>
@@ -79,10 +79,9 @@
         <input id="maxKm" type="number" name="max_km" min="0" max="2147483647" required
                th:value="${rentContract.getMax_km()}">
 
-<!--        <label for="fullPrice">Pris månedlig</label>-->
-<!--        <input id="fullPrice" type="text" name="max_km" min="0" max="2147483647" readonly-->
-<!--               th:value="${car.calculateMonthlyPrice()}">-->
-<!--        Jeg kan ikke smide den her på uden at ødelægge hele boksen... Tror det er fordi der er brugt rows og ikke space-evenly.-->
+        <label for="fullPrice">Pris månedlig</label>
+        <input id="fullPrice" type="text" name="price" min="0" max="2147483647" readonly
+               th:value="${car.calculateMonthlyPrice()} + ' kr.'">
 
         <h3>Kontrakt information</h3>
         <label for="rentContractType">Abonnementstype</label>

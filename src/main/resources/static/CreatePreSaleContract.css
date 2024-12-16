@@ -25,6 +25,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 400px;
 }
 .buttonContainer{
@@ -36,6 +37,7 @@ label{
     color: #999999;
     align-self: flex-start;
     margin-top: 15px;
+    margin-left: 60px;
 }
 input{
     width: 70%;
@@ -68,6 +70,7 @@ option{
 }
 h2{
     color: white;
+    margin-left: 50px;
 }
 .saveButton{
     margin-top: 20px;
