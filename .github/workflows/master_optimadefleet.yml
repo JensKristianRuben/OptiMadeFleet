@@ -25,9 +25,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
         env:
-          URL: ${{ secrets.DATABASE_URL }}
-          USERNAME: ${{ secrets.DATABASE_USERNAME }}
-          PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          URL: ${{ secrets.DB_URL }}
+          USERNAME: ${{ secrets.DB_USERNAME }}
+          PASSWORD: ${{ secrets.DB_PASSWORD }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
