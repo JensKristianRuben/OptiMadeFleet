@@ -30,7 +30,7 @@
       <option value="" hidden selected>Select model</option>
       <option th:each="car_model : ${car_models}" th:value="${car_model.car_model_name}" th:text="${car_model.make} + ' ' + ${car_model.car_model_name}" th:selected="${car_model.car_model_name == car.car_model_name}"></option>
     </select>
-    <label>Stel nummer</label>
+    <label>Stel nummer (17 cifre)</label>
     <input type="text" name="vin_number" th:value="${car.vin_number}" pattern="^\d{17}$" title="Skal være 17 tal" required>
     <label>Indkøbsprisen</label>
     <input type="number" name="original_price" th:value="${car.original_price}" max="2147483647" required>
@@ -53,9 +53,6 @@
       <option value="true" th:selected="${car.is_pre_sold} == true">Solgt</option>
       <option value="false" th:selected="${car.is_pre_sold == false}">Ikke solgt</option>
     </select>
-    <label>Salgspris (Kan undlades)</label>
-    <!--        Skal kunnes nulles-->
-    <input type="number" name="sale_price" th:value="${car.sale_price}">
     <label>Produktionsår</label>
     <input type="number" name="year_of_manufactoring" th:value="${car.year_of_manufactoring}" min="1886" max="9999" title="Skal være 4 cifret (YYYY)" required>
     <label>Farve</label>
