@@ -24,10 +24,6 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-        env:
-          URL: ${{ secrets.DB_URL }}
-          USERNAME: ${{ secrets.DB_USERNAME }}
-          PASSWORD: ${{ secrets.DB_PASSWORD }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -55,4 +51,4 @@ jobs:
           app-name: 'OptiMadeFleet'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_76A88A17D2324B0585B9F99C7AAC07A4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_580E8ED038134D71A868EA594E371973 }}
