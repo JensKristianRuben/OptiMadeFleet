@@ -18,21 +18,27 @@ public class RentContractRepository {
     JdbcTemplate jdbcTemplate;
 
     public void createRentContract(RentContract rentContract) {
+        //Tæller records der har samme zip_code som parametre
         String sqlCheckCity = "SELECT COUNT(*) FROM city WHERE zip_code = ?";
         int cityCount = jdbcTemplate.queryForObject(sqlCheckCity, Integer.class, rentContract.getZip_code());
 
+        //Indsætter record hvis cityCount er det samme som 0
         if (cityCount == 0) {
             String sqlCity = "INSERT INTO city(zip_code, city_name) VALUES (?, ?)";
             jdbcTemplate.update(sqlCity, rentContract.getZip_code(), rentContract.getCity_name());
         }
 
+        //Henter address_id udfra parametre
         String sqlAddressCheck = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
         Integer addressID;
 
+        //prøver at hente addressID - hvis den fejler går den i cathc blokken og opretter en record
         try {
             addressID = jdbcTemplate.queryForObject(
                     sqlAddressCheck,
-                    new Object[]{rentContract.getZip_code(), rentContract.getStreet_name(), rentContract.getStreet_number()},
+                    new Object[]{rentContract.getZip_code(),
+                            rentContract.getStreet_name(),
+                            rentContract.getStreet_number()},
                     Integer.class
             );
         } catch (EmptyResultDataAccessException e) {
@@ -42,12 +48,17 @@ public class RentContractRepository {
 
             addressID = jdbcTemplate.queryForObject(
                     sqlAddressCheck,
-                    new Object[]{rentContract.getZip_code(), rentContract.getStreet_name(), rentContract.getStreet_number()},
+                    new Object[]{rentContract.getZip_code(),
+                            rentContract.getStreet_name(),
+                            rentContract.getStreet_number()},
                     Integer.class
             );
         }
+        //Henter kørekortnummer
         String sqlRenterCheck = "SELECT drivers_license_number FROM renter WHERE drivers_license_number = ?";
         String driversLicenseNumber = null;
+
+        //prøver at hente kørekortnummer - hvis den fejler går den i catch blokken og opretter en record
         try {
             driversLicenseNumber = jdbcTemplate.queryForObject(sqlRenterCheck,
                     new Object[]{rentContract.getDrivers_license_number()},
@@ -60,7 +71,7 @@ public class RentContractRepository {
                     rentContract.getRenter_last_name(), addressID, rentContract.getRenter_phonenumber(),
                     rentContract.getEmail(), rentContract.getDate_of_birth());
         }
-
+        //Indsætter record uden at tjekke
         String sqlRentContract = "INSERT INTO rent_contract (drivers_license_number, license_plate, rental_start_date, " +
                 "rental_end_date, pickup_location, return_location, max_km, rent_contract_type, contract_terminated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 

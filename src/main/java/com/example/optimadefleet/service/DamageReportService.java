@@ -59,7 +59,7 @@ public class DamageReportService {
 
         return damageReportToReturn;
     }
-
+    // Henter skadesbeskrivelser og tilhørende priser i en map udfra nummerplade.
     public Map<String, String> getMapOfDescriptionAndPrice(String license_plate)  {
         Map<String, String> mapOfDescriptionAndPrice = new HashMap<>();
         DamageReport damageReport = findDamageReportByLicense_plate(license_plate);

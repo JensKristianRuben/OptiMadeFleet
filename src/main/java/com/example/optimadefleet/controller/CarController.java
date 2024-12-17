@@ -47,7 +47,6 @@ public class CarController {
 
     @GetMapping("UpdateCarAndCarModel/{license_plate}") 
     public String updateCarAndCarModel(Model model, @PathVariable String license_plate) {
-        //Husk at map dataregister html siden til denne controller
         Car car = carService.findCarByLicensePlate(license_plate);
         double fullPriceOfCar = car.calculateRegistrationTax() + car.getOriginal_price();
         model.addAttribute("util", utilityService);
@@ -68,6 +67,4 @@ public class CarController {
         carService.DeleteCarFromDB(license_plate);
         return "redirect:/DataRegister";
     }
-
-    //test//
 }

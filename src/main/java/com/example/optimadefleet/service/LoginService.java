@@ -14,7 +14,6 @@ public class LoginService {
 
     public Login fetchAndFindLoginDetails(String user_name){
         List<Login> loginList = loginRepository.fetchAndFindLoginDetails(user_name);
-        System.out.println(loginList.size());
          Login login = null;
 
          for (Login element : loginList){

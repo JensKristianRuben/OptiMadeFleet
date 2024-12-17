@@ -33,7 +33,7 @@ public class CarService {
     }
 
     //Bruger listen af bilen og tjekker hvilke biler der er ledige og tilføjer dem til en ny liste.
-    public List<Car> fecthAllCarWithAvailableStatus(){ //rename til "cars" og stavefejl i "fetch"
+    public List<Car> fetchAllCarsWithAvailableStatus(){
         List<Car> listOfCars = fetchAllCars();
         List<Car> allAvailableCars = new ArrayList<>();
         System.out.println(listOfCars);
@@ -103,6 +103,7 @@ public class CarService {
         carRepository.DeleteCarFromDB(license_plate);
     }
 
+    //Returnere en liste af biler udfra hvilket parametre den her med
     public List<Car> fetchAllCarsAndSortByParam(String sortBy){
         List<Car> listOfCars = carRepository.fetchAllCars();
 
@@ -213,6 +214,7 @@ public class CarService {
         carRepository.updateCar(car);
     }
 
+    // Henter bilmodeller der er mindre end 2 og returnerer en map med disse modeller og deres antal i beholdning.
     public Map<CarModel, Integer> fetchAllCarsWithLowStock() {
         List<Car> cars = fetchAllCarsAndSortByParam("available");
         Map<String, Integer> carModelsCounter = new HashMap<>();

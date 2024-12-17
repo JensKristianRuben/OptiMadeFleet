@@ -68,8 +68,6 @@ public class MainPagesController {
         String averageRentTime = utilityService.roundNumber(rentContractService.calculateAverageRentalTime());
         Map<CarModel, Integer> lowStockCarModels = carService.fetchAllCarsWithLowStock();
 
-
-
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("carsList", carsList);
         model.addAttribute("allCarsCount", allCarsCount);

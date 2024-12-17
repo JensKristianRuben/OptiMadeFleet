@@ -51,11 +51,11 @@ public class PreSaleContractController {
 
     @PostMapping("/deletePreSaleContract/{licensePlate}")
     public String deletePreSaleContract(@PathVariable String licensePlate, @RequestParam("deleteReason") String deleteReason) {
-        if ("mistake".equals(deleteReason)) { // skal slette kontrakten og rette bilen til ikke solgt status
+        if ("mistake".equals(deleteReason)) {
             preSaleContractService.deletePreSaleContract(licensePlate);
             carService.updateCarStatusToNotSold(licensePlate);
             return "redirect:/DataRegister";
-        } else if ("sold".equals(deleteReason)) { // skal slette kontrakten og sætte bilen status til leveret
+        } else if ("sold".equals(deleteReason)) {
             preSaleContractService.updatePreSaleContractToDilevered(licensePlate);
             carService.updateCarStatusToDelivered(licensePlate);
             return "redirect:/DataRegister";

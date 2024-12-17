@@ -184,7 +184,7 @@ public class Car {
         ready_for_invoice,
         delivered
     }
-//Returnere registreringsafgiften pr. måned for en given bil ud fra hvilke af de 3 prisklasser bilen ligger i.
+//Returnere registreringsafgiften pr. måned for en given bil ud fra hvilke af de 3 grænseværdier bilens pris ligger i.
     public double calculateRegistrationTax()    {
         double monthlyRegistrationTax = 0;
 

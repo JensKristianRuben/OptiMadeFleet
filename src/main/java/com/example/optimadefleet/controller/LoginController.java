@@ -20,6 +20,7 @@ public class LoginController {
         return "index";
     }
 
+    //Vær opmærksom på ikke at slette tjekket på alle de getmappings som indeholder det.
     @PostMapping("/login")
     public String login(@RequestParam("username") String user_name, @RequestParam("password") String user_password, HttpSession session, Model model) {
         Login login = loginService.fetchAndFindLoginDetails(user_name);

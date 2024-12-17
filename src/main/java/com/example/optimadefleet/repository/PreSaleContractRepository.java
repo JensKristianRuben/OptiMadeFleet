@@ -15,19 +15,23 @@ public class PreSaleContractRepository {
     JdbcTemplate jdbcTemplate;
 
     public void createPreSaleContract(PreSaleContract preSaleContract) {
+        //Tæller records med samme zip_code som parametre
         String sqlCheckCity = "SELECT COUNT(*) FROM city WHERE zip_code = ?";
         int cityCount = jdbcTemplate.queryForObject(sqlCheckCity, Integer.class, preSaleContract.getZip_code());
 
+        //tjekker med if statement, hvis true opretter den en record
         if (cityCount == 0) {
             String sqlCity = "INSERT INTO city(zip_code, city_name) VALUES (?, ?)";
             jdbcTemplate.update(sqlCity, preSaleContract.getZip_code(), preSaleContract.getCity_name());
         }
 
+        //tæller records med samme zip_code, street_name og street_number som parametre
         String sqlCheckAddress = "SELECT COUNT(*) FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
         int addressCount = jdbcTemplate.queryForObject(sqlCheckAddress, Integer.class,
                 preSaleContract.getZip_code(), preSaleContract.getStreet_name(), preSaleContract.getStreet_number());
 
         int addressID;
+        //opretter record og henter dets ID
         if (addressCount == 0) {
 
             String sqlAddress = "INSERT INTO address(zip_code, street_name, street_number) VALUES (?, ?, ?)";
@@ -37,20 +41,22 @@ public class PreSaleContractRepository {
             addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{preSaleContract.getZip_code(),
                     preSaleContract.getStreet_name(), preSaleContract.getStreet_number()}, Integer.class);
         } else {
+            //Henter kun ID
             String getAddressId = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
             addressID = jdbcTemplate.queryForObject(getAddressId, new Object[]{preSaleContract.getZip_code(),
                     preSaleContract.getStreet_name(), preSaleContract.getStreet_number()}, Integer.class);
         }
-
+        //Tæller records med samme cvr som parametre
         String sqlBuyerCheck = "SELECT COUNT(*) FROM buyer WHERE cvr = ?";
         int buyerCount = jdbcTemplate.queryForObject(sqlBuyerCheck, Integer.class, preSaleContract.getCvr());
 
+        //Indsætter record hvis cityCount er det samme som 0
         if (cityCount == 0) {
             String sqlBuyer = "INSERT INTO buyer(cvr, company_name, company_phonenumber, email, address_id) VALUES (?, ?, ?, ?, ?)";
             jdbcTemplate.update(sqlBuyer, preSaleContract.getCvr(), preSaleContract.getCompany_name(), preSaleContract.getCompany_phonenumber(), preSaleContract.getEmail(), addressID);
         }
 
-
+        //Indsætte record uden tjek
         String sqlPreSaleContract = "INSERT INTO pre_sale_contract(cvr, license_plate, delivery_location, price, max_km, car_delivered) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sqlPreSaleContract, preSaleContract.getCvr(), preSaleContract.getLicense_plate(), preSaleContract.getDelivery_location(), preSaleContract.getPrice(), preSaleContract.getMax_km(), preSaleContract.isCar_delivered());
 

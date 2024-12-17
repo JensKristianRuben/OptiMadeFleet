@@ -35,7 +35,8 @@ public class PreSaleContractService {
         }
         return preSaleContract;
     }
-
+    //Looper gennem PreSaleContractList og finder de kontrakter der har samme nummerplade som i bil listen
+    //Hvis der er match og bil statussen ikke er leveret returneres listen af igangværende kontrakter.
     public List<PreSaleContract> fetchAllOngoingPreSaleContracts() {
         List<PreSaleContract> PreSaleContractList = fetchAllPreSaleContracts();
         List<Car> listOfCars = carRepository.fetchAllCars();
@@ -68,7 +69,6 @@ public class PreSaleContractService {
         int soldCarsSum = 0;
 
         for (PreSaleContract preSaleelement : preSaleContractList) {
-            System.out.println(preSaleelement);
             if (preSaleelement.isCar_delivered()) {
                 soldCarsSum += preSaleelement.getPrice();
             }

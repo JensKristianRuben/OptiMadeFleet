@@ -23,7 +23,7 @@ public class RentContractController {
         if (session.getAttribute("user") == null) {
             return "redirect:/";
         }
-        model.addAttribute("cars", carService.fecthAllCarWithAvailableStatus());
+        model.addAttribute("cars", carService.fetchAllCarsWithAvailableStatus());
         return "CreateRentContract";
     }
 
@@ -47,7 +47,7 @@ public class RentContractController {
         return "EditRentContract";
     }
 
-    @PostMapping("/deleteRentContract/{licensePlate}") //Pathvariable bruges ikke, skal den?
+    @PostMapping("/deleteRentContract/{licensePlate}")
     public String deleteRentContract(@ModelAttribute RentContract rentContract, @RequestParam("deleteReason") String deleteReason) {
 
         if (deleteReason.equals("mistake")) {

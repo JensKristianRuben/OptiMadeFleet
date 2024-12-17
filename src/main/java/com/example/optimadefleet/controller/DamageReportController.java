@@ -28,7 +28,7 @@ public class DamageReportController {
     @Autowired
     Utility utilityService;
 
-    @PostMapping("saveDamageReport") //Funktionaliteten skal måske ligges i service laget
+    @PostMapping("saveDamageReport")
     public String saveDamageReport(@RequestParam Map<String, String> param, @RequestParam int mileage_over_limit, @RequestParam String license_plate) {
         Car car = carService.findCarByLicensePlate(license_plate);
         carService.updateCarStatusToReady_for_invoice(license_plate);

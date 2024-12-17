@@ -20,6 +20,7 @@ public class RentContractService {
     @Autowired
     CarRepository carRepository;
 
+    //Opretter lejekontrakt og sætter slut datoen udfra rentContractType
     public void createRentContract(RentContract rentContract) {
         String rentContractTpye = rentContract.getRent_contract_type();
         LocalDate rentalStartDate = rentContract.getRental_start_date();
@@ -35,6 +36,7 @@ public class RentContractService {
         rentContractRepository.createRentContract(rentContract);
     }
 
+    //Henter alle ikke afsluttede kontrakter
     public List<RentContract> fetchAllOngoingRentContracts(){
         List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
         List<RentContract> ongoingContractList = new ArrayList<>();
@@ -46,6 +48,8 @@ public class RentContractService {
         }
         return ongoingContractList;
     }
+    //Bruger ChronoUnit.MONTHS.between til at udregne forskellen mellem startDate og endDate
+    //Tilføjer det til en cumulativ sum og returnere gennemsnittet hvis der er data at bruge
     public double calculateAverageRentalTime(){
         List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
 
@@ -91,6 +95,7 @@ public class RentContractService {
         rentContractRepository.updateRentContract(rentContract);
     }
 
+    //Looper igennem listOfCars og tilføjer calculateMonthlyPrice til en cumulativ sum og returnere den
     public int calculateMonthlyIncome(){
         List<Car> listOfCars = carRepository.fetchAllCars();
         int monthlyContractIncome = 0;

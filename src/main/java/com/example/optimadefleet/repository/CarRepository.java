@@ -60,12 +60,12 @@ public class CarRepository {
         return jdbcTemplate.query("SELECT * FROM car_model", new BeanPropertyRowMapper<>(CarModel.class));
     }
 
-    public CarModel fetchModelByModelName(String car_model_name) { //Skal laves om så det sker i servicelaget
+    public CarModel fetchModelByModelName(String car_model_name) {
         return jdbcTemplate.queryForObject("SELECT * FROM car_model WHERE car_model_name=?",  new Object[]{car_model_name},new BeanPropertyRowMapper<>(CarModel.class));
     }
 
+    //Looper igennem carsList og sætter carModel på tilhørende bil
     public List<Car> fetchAllCars() {
-        //Tag med til eksamen? - Kompleks kode
         List<Car> carsList = jdbcTemplate.query("SELECT * FROM car", new BeanPropertyRowMapper<>(Car.class));
         List<CarModel> carModelList = fetchAllCarModels();
 
