@@ -50,8 +50,8 @@ public class PreSaleContractRepository {
         String sqlBuyerCheck = "SELECT COUNT(*) FROM buyer WHERE cvr = ?";
         int buyerCount = jdbcTemplate.queryForObject(sqlBuyerCheck, Integer.class, preSaleContract.getCvr());
 
-        //Indsætter record hvis cityCount er det samme som 0
-        if (cityCount == 0) {
+        //Indsætter record hvis buyerCount er det samme som 0
+        if (buyerCount == 0) {
             String sqlBuyer = "INSERT INTO buyer(cvr, company_name, company_phonenumber, email, address_id) VALUES (?, ?, ?, ?, ?)";
             jdbcTemplate.update(sqlBuyer, preSaleContract.getCvr(), preSaleContract.getCompany_name(), preSaleContract.getCompany_phonenumber(), preSaleContract.getEmail(), addressID);
         }
