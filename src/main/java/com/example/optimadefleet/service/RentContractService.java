@@ -49,7 +49,7 @@ public class RentContractService {
         return ongoingContractList;
     }
     //Bruger ChronoUnit.MONTHS.between til at udregne forskellen mellem startDate og endDate
-    //Tilføjer det til en cumulativ sum og returnere gennemsnittet hvis der er data at bruge
+    //Tilføjer det til en cumulative sum og returnere gennemsnittet hvis der er data at bruge
     public double calculateAverageRentalTime(){
         List<RentContract> rentContractList = rentContractRepository.fetchAllRentContracts();
 
@@ -95,7 +95,7 @@ public class RentContractService {
         rentContractRepository.updateRentContract(rentContract);
     }
 
-    //Looper igennem listOfCars og tilføjer calculateMonthlyPrice til en cumulativ sum og returnere den
+    //Looper igennem listOfCars og tilføjer calculateMonthlyPrice til en cumulative sum og returnere den
     public int calculateMonthlyIncome(){
         List<Car> listOfCars = carRepository.fetchAllCars();
         int monthlyContractIncome = 0;

@@ -62,7 +62,6 @@ public class Car {
         if (car_status == CarStatus.returned) {
             return "Returneret";
         }
-        //Hedder under repair, burde have et andet navn.
         if (car_status == CarStatus.ready_for_invoice) {
             return "Klar til fakturering";
         }
@@ -203,7 +202,7 @@ public class Car {
 
         return monthlyRegistrationTax;
     }
-//VAT står for Value Added Tax'
+//VAT står for Value Added Tax
     public double calculateVAT()   {
         return original_price * Constants.VAT;
     }

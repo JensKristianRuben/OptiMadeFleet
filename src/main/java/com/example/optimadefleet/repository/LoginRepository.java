@@ -14,7 +14,6 @@ public class LoginRepository {
     JdbcTemplate jdbctemplate;
 
     public List<Login> fetchAndFindLoginDetails(String user_name){
-        System.out.println(user_name);
         String sqlUserName = "SELECT * FROM login WHERE user_name = ?";
 
         return jdbctemplate.query(sqlUserName, new BeanPropertyRowMapper<>(Login.class), user_name);

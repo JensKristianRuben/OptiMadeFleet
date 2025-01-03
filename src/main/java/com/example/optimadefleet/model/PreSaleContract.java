@@ -15,8 +15,7 @@ public class PreSaleContract {
     private int max_km;
     private boolean car_delivered;
 
-    public PreSaleContract() {
-    }
+    public PreSaleContract() {}
 
     public String getCompany_name() {
         return company_name;
@@ -143,6 +142,4 @@ public class PreSaleContract {
                 ", max_km=" + max_km +
                 '}';
     }
-
-
 }
