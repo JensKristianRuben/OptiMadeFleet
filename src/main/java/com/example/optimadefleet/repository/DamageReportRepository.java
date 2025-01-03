@@ -15,7 +15,7 @@ public class DamageReportRepository {
     JdbcTemplate jdbcTemplate;
 
     public void createDamageReport (DamageReport damageReport) {
-        //Gemmer damage_desciption i databasen
+        //Gemmer damage_description i databasen
         String damage_description_sql = "INSERT INTO damage_description (description) VALUES (?)";
 
         jdbcTemplate.update(damage_description_sql,

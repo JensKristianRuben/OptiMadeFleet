@@ -32,7 +32,7 @@ public class RentContractRepository {
         String sqlAddressCheck = "SELECT address_id FROM address WHERE zip_code = ? AND street_name = ? AND street_number = ?";
         Integer addressID;
 
-        //prøver at hente addressID - hvis den fejler går den i cathc blokken og opretter en record
+        //prøver at hente addressID - hvis den fejler går den i catch blokken og opretter en record
         try {
             addressID = jdbcTemplate.queryForObject(
                     sqlAddressCheck,
@@ -54,6 +54,7 @@ public class RentContractRepository {
                     Integer.class
             );
         }
+
         //Henter kørekortnummer
         String sqlRenterCheck = "SELECT drivers_license_number FROM renter WHERE drivers_license_number = ?";
         String driversLicenseNumber = null;
@@ -162,5 +163,4 @@ public class RentContractRepository {
                 rentContract.isContract_terminated(),
                 rentContract.getLicense_plate());
     }
-
 }

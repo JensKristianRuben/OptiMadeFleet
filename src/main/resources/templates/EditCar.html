@@ -40,7 +40,6 @@
       <input type="number" name="full_price" th:value="${fullPriceOfCar}" max="2147483647" readonly>
     <label>Bilens status</label>
     <select name="car_status" required>
-<!--      Husk at ret så der ikke står typen i klassen men faktisk hvad der skal stå. f.eks. "klar"-->
       <option value="available" th:selected="${car.getCar_status() == 'available'}">Klar</option>
       <option value="rentet" th:selected="${car.getCar_status() == 'rentet'}">Udlejet</option>
       <option value="returned" th:selected="${car.getCar_status() == 'returned'}">Returneret</option>

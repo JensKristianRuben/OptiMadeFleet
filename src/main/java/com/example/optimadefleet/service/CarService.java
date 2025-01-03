@@ -32,17 +32,15 @@ public class CarService {
         return carRepository.fetchAllCars();
     }
 
-    //Bruger listen af bilen og tjekker hvilke biler der er ledige og tilføjer dem til en ny liste.
+    //Bruger listen af biler og tjekker hvilke biler der er ledige og tilføjer dem til en ny liste.
     public List<Car> fetchAllCarsWithAvailableStatus(){
         List<Car> listOfCars = fetchAllCars();
         List<Car> allAvailableCars = new ArrayList<>();
-        System.out.println(listOfCars);
         for (Car element : listOfCars){
             if (element.getCar_status().equals(Car.CarStatus.available.toString())){
                 allAvailableCars.add(element);
             }
         }
-        System.out.println(allAvailableCars);
 
         return allAvailableCars;
     }
@@ -82,7 +80,6 @@ public class CarService {
         carRepository.updateCar(car);
     }
 
-
     public Car findCarByLicensePlate(String licensePlate) {
         List<Car> carsList = carRepository.fetchAllCars();
         Car car = null;
@@ -103,7 +100,7 @@ public class CarService {
         carRepository.DeleteCarFromDB(license_plate);
     }
 
-    //Returnere en liste af biler udfra hvilket parametre den her med
+    //Returnere en liste af biler ud fra hvilket parametre den har med
     public List<Car> fetchAllCarsAndSortByParam(String sortBy){
         List<Car> listOfCars = carRepository.fetchAllCars();
 
@@ -164,6 +161,7 @@ public class CarService {
         }
         carRepository.updateCar(car);
     }
+
     public void updateCarStatusToNotSold(String licensePlate){
         List<Car> listOfCars = fetchAllCars();
         Car car = null;
@@ -175,6 +173,7 @@ public class CarService {
         }
         carRepository.updateCar(car);
     }
+
     public void updateCarStatusToDelivered(String licensePlate){
         List<Car> listOfCars = carRepository.fetchAllCars();
         Car car = null;
@@ -214,7 +213,7 @@ public class CarService {
         carRepository.updateCar(car);
     }
 
-    // Henter bilmodeller der er mindre end 2 og returnerer en map med disse modeller og deres antal i beholdning.
+    // Henter bilmodeller der er mindre end 2 af og returnerer en map med disse modeller og deres antal i beholdning.
     public Map<CarModel, Integer> fetchAllCarsWithLowStock() {
         List<Car> cars = fetchAllCarsAndSortByParam("available");
         Map<String, Integer> carModelsCounter = new HashMap<>();
@@ -245,4 +244,3 @@ public class CarService {
         return lowStockCarModels;
     }
 }
-
